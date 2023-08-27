@@ -27,6 +27,13 @@
     color: #ffff;
     margin-bottom: 20px;
 }
+.CreateStock .sub-CreateStock form img{
+    width: 300px;
+    height: auto;
+    border: 3px solid #ffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 .CreateStock .sub-CreateStock form .gap-2{
     margin: 10px 0 20px 0;
 }

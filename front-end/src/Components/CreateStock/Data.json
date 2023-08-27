@@ -9,6 +9,20 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock categories/type",
+        "type": "text",
+        "onChange": "stockcategories"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock breed",
+        "type": "text",
+        "onChange": "stockbreed"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
         "placeholder": "Stock name",
         "type": "text",
         "onChange": "stockname"
@@ -20,13 +34,6 @@
         "type": "text-area",
         "onChange": "discription",
         "as": "textarea"
-    },
-    {
-        "area_label": "Default",
-        "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Categories",
-        "type": "text",
-        "onChange": "categories"
     },
     {
         "area_label": "Default",
@@ -45,9 +52,9 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Health condition",
+        "placeholder": "Stock health condition",
         "type": "text",
-        "onChange": "healthcondition"
+        "onChange": "stockhealthcondition"
     },
     {
         "area_label": "Default",

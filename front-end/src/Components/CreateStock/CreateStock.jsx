@@ -13,11 +13,12 @@ const CreateStock = () => {
   const [stockimage, stockimageFunc] = useState()
   const [stockname, stocknameFunc] = useState()
   const [discription, discriptionFunc] = useState()
-  const [categories, categoriesFunc] = useState()
+  const [stockcategories, stockcategoriesFunc] = useState()
   const [stockage, stockageFunc] = useState()
   const [stockweight, stockweightFunc] = useState()
-  const [healthcondition, healthconditionFunc] = useState()
+  const [stockhealthcondition, stockstockhealthconditionFunc] = useState()
   const [stockcolor, stockcolorFunc] = useState()
+  const [stockbreed, stockbreedFunc] = useState()
 
   const [loading, loadinfFunc] = useState(false)
   const [alert, alertFunc] = useState(NaN)
@@ -32,7 +33,7 @@ const CreateStock = () => {
                   aria-describedby={item.aria_describedby}
                   placeholder={item.placeholder}
                   type={item.type}
-                  onChange={(e) => onChangeFunc((e.target.value), item.onChange)}
+                  onChange={(e) => onChangeFunc((item.type === 'file'? URL.createObjectURL(e.target.files[0]) : e.target.value), item.onChange)}
               />
             </Col>
         )
@@ -48,8 +49,11 @@ const CreateStock = () => {
       else if(indicator === 'discription'){
         discriptionFunc(data)
       }
-      else if(indicator === 'categories'){
-        categoriesFunc(data)
+      else if(indicator === 'stockcategories'){
+        stockcategoriesFunc(data)
+      }
+      else if(indicator === 'stockbreed'){
+        stockbreedFunc(data)
       }
       else if(indicator === 'stockage'){
         stockageFunc(data)
@@ -57,8 +61,8 @@ const CreateStock = () => {
       else if(indicator === 'stockweight'){
         stockweightFunc(data)
       }
-      else if(indicator === 'healthcondition'){
-        healthconditionFunc(data)
+      else if(indicator === 'stockhealthcondition'){
+        stockstockhealthconditionFunc(data)
       }
       else if(indicator === 'stockcolor'){
         stockcolorFunc(data)
@@ -69,10 +73,10 @@ const CreateStock = () => {
       loadinfFunc(!loading)
 
       // form validation
-      if(!stockimage && !stockname && !discription && !categories && !stockage && !stockweight && !healthcondition && !stockcolor){
+      if(!stockimage && !stockname && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stockhealthcondition && !stockcolor){
         alertFunc(false)
       }
-      else if(!stockimage || !stockname || !discription || !categories || !stockage || !stockweight || !healthcondition || !stockcolor ){
+      else if(!stockimage || !stockname || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stockhealthcondition || !stockcolor ){
         alertFunc(false)
       }
       else if(stockage < 1 || stockweight < 1){
@@ -81,7 +85,7 @@ const CreateStock = () => {
       else if(stockage < 0 && stockweight < 0){
         alertFunc(false)
       }
-      else if(stockimage && stockname && discription && categories && stockage && stockweight && healthcondition && stockcolor){
+      else if(stockimage && stockname && discription && stockcategories && stockbreed && stockage && stockweight && stockhealthcondition && stockcolor){
         alertFunc(true)
       }
 
@@ -93,12 +97,12 @@ const CreateStock = () => {
       pupupFunc(false)
     }
 
-
   return (
     <div className='CreateStock'>
       <div className="sub-CreateStock">
         <form action="" className='g-col-2'>
           <h4>create stock</h4>
+            <img src={stockimage} alt="" style={{display: stockimage? 'block' : 'none'}} />
             <Row>
               {inputs}
             </Row>
