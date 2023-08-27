@@ -1,0 +1,59 @@
+[
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "upload stock image",
+        "type": "file",
+        "onChange": "stockimage"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock name",
+        "type": "text",
+        "onChange": "stockname"
+    },
+    {
+        "area_label": "with textrea",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Description",
+        "type": "text-area",
+        "onChange": "discription",
+        "as": "textarea"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Categories",
+        "type": "text",
+        "onChange": "categories"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock age",
+        "type": "number",
+        "onChange": "stockage"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock weight in turns",
+        "type": "number",
+        "onChange": "stockweight"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Health condition",
+        "type": "text",
+        "onChange": "healthcondition"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock color",
+        "type": "color",
+        "onChange": "stockcolor"
+    }
+]

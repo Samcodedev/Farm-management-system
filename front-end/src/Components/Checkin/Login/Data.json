@@ -1,0 +1,16 @@
+[
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "username",
+        "type": "text",
+        "onChange": "username"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "password",
+        "type": "password",
+        "onChange": "password"
+    }
+]
