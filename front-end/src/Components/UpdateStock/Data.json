@@ -69,5 +69,21 @@
         "placeholder": "Stock color",
         "type": "color",
         "onChange": "stockcolor"
+    },
+
+
+    {
+        "sale": [
+            "still under farmer's care",
+            "List for sale"
+        ],
+        "onChange": "list"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "List price ($)",
+        "type": "number",
+        "onChange": "stockprice"
     }
 ]

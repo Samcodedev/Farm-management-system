@@ -65,7 +65,7 @@ const Login = () => {
       <form action=''>
         <h4>Farm management system</h4>
         {inputs}
-        <Link to='/Forget-password'>Forget Password</Link>
+        <Link to='/ForgetPassword'>Forget Password</Link>
         <div className='d-grid gap-2'>
           <Button 
             variant={loading? 'secondary' : 'success'}

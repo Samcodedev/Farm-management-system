@@ -16,6 +16,7 @@ const CreateStock = () => {
   const [stockcategories, stockcategoriesFunc] = useState()
   const [stockage, stockageFunc] = useState()
   const [stockweight, stockweightFunc] = useState()
+  const [stocksize, stocksizeFunc] = useState()
   const [stockhealthcondition, stockstockhealthconditionFunc] = useState()
   const [stockcolor, stockcolorFunc] = useState()
   const [stockbreed, stockbreedFunc] = useState()
@@ -59,7 +60,10 @@ const CreateStock = () => {
         stockageFunc(data)
       }
       else if(indicator === 'stockweight'){
-        stockweightFunc(data)
+        stockweightFunc(data) 
+      }
+      else if(indicator === 'stocksize'){
+        stocksizeFunc(data)
       }
       else if(indicator === 'stockhealthcondition'){
         stockstockhealthconditionFunc(data)
@@ -73,19 +77,19 @@ const CreateStock = () => {
       loadinfFunc(!loading)
 
       // form validation
-      if(!stockimage && !stockname && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stockhealthcondition && !stockcolor){
+      if(!stockimage && !stockname && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stocksize && !stockhealthcondition && !stockcolor){
         alertFunc(false)
       }
-      else if(!stockimage || !stockname || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stockhealthcondition || !stockcolor ){
+      else if(!stockimage || !stockname || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stocksize || !stockhealthcondition || !stockcolor ){
         alertFunc(false)
-      }
+      } 
       else if(stockage < 1 || stockweight < 1){
         alertFunc(false)
       }
       else if(stockage < 0 && stockweight < 0){
         alertFunc(false)
       }
-      else if(stockimage && stockname && discription && stockcategories && stockbreed && stockage && stockweight && stockhealthcondition && stockcolor){
+      else if(stockimage && stockname && discription && stockcategories && stockbreed && stockage && stockweight && stocksize && stockhealthcondition && stockcolor){
         alertFunc(true)
       }
 

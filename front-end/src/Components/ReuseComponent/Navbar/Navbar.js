@@ -39,10 +39,11 @@ function Navication() {
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
                   <Nav.Link><Link to='/'>Dashboard</Link></Nav.Link>
-                  <Nav.Link><Link to='/'>Stock details</Link></Nav.Link>
+                  <Nav.Link><Link to='/Details'>Stock details</Link></Nav.Link>
                   <Nav.Link><Link to='/CreateStock'>Create Stock</Link></Nav.Link>
-                  <Nav.Link><Link to='/'>Cart</Link></Nav.Link>
-                  <Nav.Link href="#action2"><Link to='/Categories'>Products Categories</Link></Nav.Link>
+                  <Nav.Link><Link to='/UpdateStock'>Update Stock</Link></Nav.Link>
+                  <Nav.Link><Link to='/Cart'>Cart</Link></Nav.Link>
+                  <Nav.Link><Link to='/Categories'>Products Categories</Link></Nav.Link>
                   <Nav.Link href="#action3">About Us</Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link>
                   <NavDropdown

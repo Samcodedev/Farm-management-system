@@ -9,6 +9,8 @@ import ProductDetails from './ProductDetails/ProductDetails'
 import CreateStock from './CreateStock/CreateStock'
 import ForgetPassword from './Checkin/FogetPassword/ForgetPassword'
 import ResetPassword from './Checkin/ResetPassword/ResetPassword'
+import CartPage from './CartPage/CartPage'
+import UpdateStock from './UpdateStock/UpdateStock'
 
 const Components = () => {
   return (
@@ -23,6 +25,8 @@ const Components = () => {
             <Route path='/Categories' element={<Categories />} />
             <Route path='/Details' element={<ProductDetails />} />
             <Route path='/CreateStock' element={<CreateStock />} />
+            <Route path='/UpdateStock' element={<UpdateStock />} />
+            <Route path='/Cart' element={<CartPage />} />
         </Routes>
     </Router>
   )
