@@ -38,7 +38,7 @@ function Navication() {
                   </Form>
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                  <Nav.Link><Link to='/'>Dashboard</Link></Nav.Link>
+                  <Nav.Link><Link to='/AdminProfile'>Dashboard</Link></Nav.Link>
                   <Nav.Link><Link to='/Details'>Stock details</Link></Nav.Link>
                   <Nav.Link><Link to='/CreateStock'>Create Stock</Link></Nav.Link>
                   <Nav.Link><Link to='/UpdateStock'>Update Stock</Link></Nav.Link>
