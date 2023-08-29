@@ -118,7 +118,7 @@ const UpdateStock = () => {
     <div className='UpdateStock'>
       <div className="sub-UpdateStock">
         <form action="" className='g-col-2'>
-          <h4>create stock</h4>
+          <h4>Update stock</h4>
             <img src={stockimage} alt="" style={{display: stockimage? 'block' : 'none'}} />
             <Row>
               {inputs}
@@ -129,7 +129,7 @@ const UpdateStock = () => {
             size='lg' 
             onClick={loading_function}
           >
-              {loading? 'Loading...': 'Create Stock'}
+              {loading? 'Loading...': 'Update Stock'}
           </Button>
         </div>
         {
@@ -140,7 +140,7 @@ const UpdateStock = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? 'Stock created successfuly' : 'Unable to create stock' } </p>
+            <p>{alert? 'Stock updated successfuly' : 'Unable to update stock' } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to the stock profile shortly' : 'Try filing all the input field above with the right details'} </p>
           </Alert>

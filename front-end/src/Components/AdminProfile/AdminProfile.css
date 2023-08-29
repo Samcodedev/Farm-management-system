@@ -1,0 +1,77 @@
+.AdminProfile{
+    display: flex;
+    justify-content: center;
+}
+.AdminProfile .sub-AdminProfile{
+    width: 95%;
+}
+.AdminProfile .sub-AdminProfile .profile{
+    background-color: var(--brandcolor-light);
+    width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    color: var(--brandcolor-dark);
+}
+.AdminProfile .sub-AdminProfile .profile .content{
+    width: 50%;
+}
+.AdminProfile .sub-AdminProfile .profile h2{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.AdminProfile .sub-AdminProfile .profile h5{
+    font-size: 1rem;
+}
+.AdminProfile .sub-AdminProfile .profile .img-div{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    border: 5px solid var(--brandcolor-dark);
+    border-radius: 10px;
+    margin-top: 150px;
+    margin-right: 50px;
+    overflow: hidden;
+}
+.AdminProfile .sub-AdminProfile .profile .img-div img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.AdminProfile .sub-AdminProfile .container{
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+.AdminProfile .sub-AdminProfile .container .cards svg{
+    font-size: 50px;
+    color: var(--brandcolor-dark);
+}
+.AdminProfile .sub-AdminProfile .container .cards{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 30px 50px;
+    background-color: cadetblue;
+    border-radius: 5px;
+}
+.AdminProfile .sub-AdminProfile .container .cards .text{
+    display: flex;
+    flex-direction: column;
+}
+.AdminProfile .sub-AdminProfile .container .cards .text h5{
+    margin-bottom: 0;
+    font-weight: 700;
+}
+.AdminProfile .sub-AdminProfile .container .cards .text p{
+    margin-bottom: 0;
+    font-size: .8rem;
+}
