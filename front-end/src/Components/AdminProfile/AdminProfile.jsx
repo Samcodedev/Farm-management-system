@@ -1,7 +1,14 @@
 import React from 'react'
 import './AdminProfile.css'
 import img from '../Assets/dummy.png'
-import {MdAddChart} from 'react-icons/md'
+import { MdAddChart } from 'react-icons/md'
+import { BsListCheck } from 'react-icons/bs'
+import { RiLineChartLine } from 'react-icons/ri'
+import { MdPlaylistRemove } from 'react-icons/md'
+
+// import Container from 'react-bootstrap/esm/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const AdminProfile = () => {
   return (
@@ -17,36 +24,44 @@ const AdminProfile = () => {
             <img src={img} alt="" />
           </div>
         </div>
-        <div className="container">
-          <div className="cards">
-            <MdAddChart />
+        <Row className="container">
+          <Col className="cards">
+            <div className="icon">
+              <MdAddChart />
+            </div>
             <div className="text">
-              <h5>3</h5>
+              <h5>50</h5>
               <p>Stock created</p>
             </div>
-          </div>
-          <div className="cards">
-            <MdAddChart />
-            <div className="text">
-              <h5>3</h5>
-              <p>Stock created</p>
+          </Col>
+          <Col className="cards">
+            <div className="icon">
+              <BsListCheck />
             </div>
-          </div>
-          <div className="cards">
-            <MdAddChart />
             <div className="text">
-              <h5>3</h5>
-              <p>Stock created</p>
+              <h5>30</h5>
+              <p>Stock listed</p>
             </div>
-          </div>
-          <div className="cards">
-            <MdAddChart />
+          </Col>
+          <Col className="cards">
+            <div className="icon">
+              <RiLineChartLine />
+            </div>
             <div className="text">
-              <h5>3</h5>
-              <p>Stock created</p>
+              <h5>8</h5>
+              <p>Stock sold</p>
             </div>
-          </div>
-        </div>
+          </Col>
+          <Col className="cards">
+            <div className="icon">
+              <MdPlaylistRemove />
+            </div>
+            <div className="text">
+              <h5>20</h5>
+              <p>Stock unlisted</p>
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   )
