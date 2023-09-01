@@ -5,10 +5,19 @@
 .AdminProfile .sub-AdminProfile{
     width: 95%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    /* background-color: blue; */
     align-items: center;
 }
-.AdminProfile .sub-AdminProfile .profile{
+.AdminProfile .sub-AdminProfile .details{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: aqua; */
+}
+.AdminProfile .sub-AdminProfile .details .profile{
     background-color: var(--brandcolor-light);
     width: 100%;
     max-height: 200px;
@@ -19,18 +28,18 @@
     padding: 20px 20px;
     color: var(--brandcolor-dark);
 }
-.AdminProfile .sub-AdminProfile .profile .content{
+.AdminProfile .sub-AdminProfile .details .profile .content{
     width: 50%;
     margin-left: 50px;
 }
-.AdminProfile .sub-AdminProfile .profile h2{
+.AdminProfile .sub-AdminProfile .details .profile h2{
     font-size: 2rem;
     font-weight: 700;
 }
-.AdminProfile .sub-AdminProfile .profile h5{
+.AdminProfile .sub-AdminProfile .details .profile h5{
     font-size: 1rem;
 }
-.AdminProfile .sub-AdminProfile .profile .img-div{
+.AdminProfile .sub-AdminProfile .details .profile .img-div{
     width: 200px;
     height: 200px;
     display: flex;
@@ -44,65 +53,71 @@
     overflow: hidden;
     z-index: 3;
 }
-.AdminProfile .sub-AdminProfile .profile .img-div img{
+.AdminProfile .sub-AdminProfile .details .profile .img-div img{
     position: relative;
     width: 100%;
     height: 100%;
 }
 
 
-.AdminProfile .sub-AdminProfile .container{
+.AdminProfile .sub-AdminProfile .details .container{
     width: 100%;
     justify-content: space-between;
     gap: 20px;
     margin-top: 80px;
     margin-right: 0;
 }
-.AdminProfile .sub-AdminProfile .container .cards .icon{
+.AdminProfile .sub-AdminProfile .details .container .cards .icon{
     background-color: #ffffff3c;
     padding: 5px 5px;
     border-radius: 5px;
 }
-.AdminProfile .sub-AdminProfile .container .cards .icon svg{
+.AdminProfile .sub-AdminProfile .details .container .cards .icon svg{
     font-size: 50px;
     color: var(--brandcolor-dark);
 }
-.AdminProfile .sub-AdminProfile .container .cards{
+.AdminProfile .sub-AdminProfile .details .container .cards{
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 30px 50px;
+    gap: 10px;
+    padding: 20px 20px;
     background-color: cadetblue;
     border-radius: 5px;
     cursor: pointer;
 }
-.AdminProfile .sub-AdminProfile .container .cards .text{
+.AdminProfile .sub-AdminProfile .details .container .cards .text{
     display: flex;
     flex-direction: column;
     color: var(--brandcolor-dark);
 }
-.AdminProfile .sub-AdminProfile .container .cards .text h5{
+.AdminProfile .sub-AdminProfile .details .container .cards .text h5{
     margin-bottom: 0;
     font-weight: 700;
 }
-.AdminProfile .sub-AdminProfile .container .cards .text p{
+.AdminProfile .sub-AdminProfile .details .container .cards .text p{
     margin-bottom: 0;
     font-size: .9rem;
 }
 
+.AdminProfile .sub-AdminProfile .chat{
+    width: 30%;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: var(--light-gray);
+}
 
 @media screen and (max-width: 690px) {
-    .AdminProfile .sub-AdminProfile .profile{
+    .AdminProfile .sub-AdminProfile .details .profile{
         flex-direction: column;
         max-height: fit-content;
         align-items: center;
     }
-    .AdminProfile .sub-AdminProfile .profile .content{
+    .AdminProfile .sub-AdminProfile .details .profile .content{
         text-align: center;
         width: 80%;
         margin-left: 0;
     }
-    .AdminProfile .sub-AdminProfile .profile .img-div{
+    .AdminProfile .sub-AdminProfile .details .profile .img-div{
         margin-top: 20px;
         margin-right: 0;
         position: relative;
