@@ -87,7 +87,7 @@ const PieChartShaped = ({data, active, chartActiveFunc}) => {
     const [activeIndex, setActiveIndex] = useState(change);
     const onPieEnter = useCallback(
       (_ ,index, active) => {
-        chartActiveFunc(index)
+        // chartActiveFunc(index) uncomment this
         setActiveIndex(index);
         changeFunc(active)
       },
