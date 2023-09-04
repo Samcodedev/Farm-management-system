@@ -69,9 +69,6 @@ const registerStock = asyncHandler( async (req, res) =>{
         res.status(400)
         throw new Error('Stock data not valid')
     }
-
-
-    res.status(200).json({message: "register stock working"})
 })
 
 
