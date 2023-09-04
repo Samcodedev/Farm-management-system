@@ -31,11 +31,6 @@ const registerAdmin = asyncHandler(async (req, res)=>{
             Phone: user.userPhone,
             Email: user.userEmail
         })
-        console.log({
-            Name: name,
-            Email: email,
-            Phone: phone
-        });
     }
     else{
         res.status(400)

@@ -20,8 +20,26 @@ const Register = () => {
 
     const [alert, alertFunc] = useState(NaN)
     const [pupup, pupupFunc] = useState(false)
+    const [backendResponse, backendResponseFunc] = useState()
     // const []
-  
+
+    const handleRegister = async (e) =>{
+      e.preventDefault();
+      let result = await fetch(
+        "http://localhost:5001/api/admin/register",
+        {
+          method: "post",
+          credencials: "include",
+          mode: "cors",
+          body: JSON.stringify({ name: fullname, email, phone, password }),
+          headers: {
+            "content-Type": "application/json",
+          },
+        }
+      );
+      result = await result.json();
+      console.log(result)
+    }
     const inputs = Data.map((item)=>{
       return(
         <Input 
@@ -81,7 +99,7 @@ const Register = () => {
 
   return (
     <div className='Check'>
-      <form action=''>
+      <form action='' onSubmit={handleRegister}>
         <h4>Farm management system</h4>
         {inputs}
         <div className='d-grid gap-2'>
@@ -89,6 +107,7 @@ const Register = () => {
             variant={loading? 'secondary' : 'success'}
             size='lg' 
             onClick={loading_function}
+            type='submit'
           >
               {loading? 'Loading...': 'Register'}
           </Button>

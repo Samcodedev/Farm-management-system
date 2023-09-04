@@ -1,6 +1,6 @@
 const {constant} = require('../constant')
  
-const handleError = (err, req, res) =>{
+const handleError = (err, req, res, next) =>{
     const statusCode = res.statusCode ? res.statusCode : 500
 
     if(statusCode === constant.VALIDATION_ERROR){
