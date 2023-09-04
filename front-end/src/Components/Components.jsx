@@ -12,6 +12,7 @@ import ResetPassword from './Checkin/ResetPassword/ResetPassword'
 import CartPage from './CartPage/CartPage'
 import UpdateStock from './UpdateStock/UpdateStock'
 import AdminProfile from './AdminProfile/AdminProfile'
+import StockDataPage from './StockDataPage/StockDataPage'
 
 const Components = () => {
   return (
@@ -29,6 +30,7 @@ const Components = () => {
             <Route path='/UpdateStock' element={<UpdateStock />} />
             <Route path='/Cart' element={<CartPage />} />
             <Route path='/AdminProfile' element={<AdminProfile />} />
+            <Route path='/DataTable' element={<StockDataPage />} />
         </Routes>
     </Router>
   )
