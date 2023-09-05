@@ -1,6 +1,10 @@
 const asyncHandler = require('express-async-handler')
 const stockModel = require('../Models/stockModels')
 
+
+// Register a new stock
+// Method: POST
+// access: private
 const registerStock = asyncHandler( async (req, res) =>{
     const {
         stockType,
@@ -73,17 +77,18 @@ const registerStock = asyncHandler( async (req, res) =>{
 })
 
 
-
-
-
-
-
-
+// Get all stock
+// Method: POST
+// access: private (but public to all users)
 const getStock = asyncHandler( async (req, res) =>{
     const stock = await stockModel.find()
     res.status(200).json(stock)
 })
 
+
+// Update a specific stock
+// Method: PUT
+// access: private (can only be updated by the creator)
 const updateStock = asyncHandler( async (req, res) =>{
     const stock = await stockModel.findById(req.params.id)
     if(!stock){
@@ -105,6 +110,10 @@ const updateStock = asyncHandler( async (req, res) =>{
     res.status(200).json({updateStock})
 })
 
+
+// Get a particular stock
+// Method: GET
+// access: private (but public to all users)
 const stockDetail = asyncHandler( async (req, res) =>{
     const stock = await stockModel.findById(req.params.id)
     if(!stock){

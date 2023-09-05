@@ -4,6 +4,9 @@ const userModels = require('../Models/userModels')
 const jwt = require('jsonwebtoken')
 const stockModel = require('../Models/stockModels')
 
+// Register a new user
+// Method: POST
+// access: public
 const registerAdmin = asyncHandler(async (req, res)=>{
     const {name, email, phone, password} = req.body
     if(!name || !email || !phone || !password){
@@ -39,6 +42,10 @@ const registerAdmin = asyncHandler(async (req, res)=>{
     }
 })
 
+
+// Login a  user
+// Method: POST
+// access: public
 const loginAdmin = asyncHandler( async (req, res)=>{
     const {email, password} = req.body
     if(!email || !password){
@@ -73,6 +80,10 @@ const loginAdmin = asyncHandler( async (req, res)=>{
 
 )
 
+
+// Get user
+// Method: GET
+// access: private
 const getAdmin = asyncHandler( async (req, res)=>{
     if(req.user){
         const getCreatedStock = await stockModel.find({userId: req.user._id})

@@ -1,5 +1,6 @@
 const {constant} = require('../constant')
  
+// Handling all errors by displaying it in a json format
 const handleError = (err, req, res, next) =>{
     const statusCode = res.statusCode ? res.statusCode : 500
 

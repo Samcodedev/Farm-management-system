@@ -4,6 +4,7 @@ const validateToken = require('../middleware/validateToken')
 const {registerStock, getStock, updateStock, stockDetail} = require('../controllers/stockController')
 
 
+// all endpoint on STOCK route, they are all private endpoint
 router.use(validateToken)
 router.post('/register', registerStock)
 router.get('/', getStock)
