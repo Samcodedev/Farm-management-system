@@ -53,7 +53,9 @@ const loginAdmin = asyncHandler( async (req, res)=>{
                 _id: user._id,
                 Name: user.userName,
                 Email: user.userEmail,
-                Phone: user.userPhone
+                Phone: user.userPhone,
+                createdAT: user.createdAt,
+                updatedAt: user.updatedAt
             }
         },
         process.env.ACCESS_TOKEN_SECERT,
@@ -70,10 +72,13 @@ const loginAdmin = asyncHandler( async (req, res)=>{
 
 )
 
-const getAdmin = (req, res)=>{
-    res.status(200).json({meaasge: "requesting to get admin"})
-    console.log('get Admin');
-}
+const getAdmin = asyncHandler( async (req, res)=>{
+    if(req.user){
+        res.status(200).json(req.user)
+    }
+    res.status(401)
+    throw new Error('unauthotized')
+})
 
 module.exports = {getAdmin, registerAdmin, loginAdmin}
 
