@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema({
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: 'usersmodels'
+    },
     stockType:{
         type: String,
         require: [true, 'Please add Stock type']

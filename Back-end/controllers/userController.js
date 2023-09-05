@@ -83,9 +83,18 @@ const getAdmin = asyncHandler( async (req, res)=>{
 module.exports = {getAdmin, registerAdmin, loginAdmin}
 
 
-// {
-//     "name": "obanla samuel",
-//     "email": "obanlasamuelolakunle@gmail.com",
-//     "phone": "09067925333",
-//     "password": "samuel.0406"
-// }
+/*
+{
+    "name": "obanla samuel",
+    "email": "obanlasamuelolakunle@gmail.com",
+    "phone": "09067925333",
+    "password": "samuel.0406"
+}
+
+{
+    "name": "olonade toyosi",
+    "email": "olonadetoyosi@gmail.com",
+    "phone": "123456789",
+    "password": "password"
+}
+*/

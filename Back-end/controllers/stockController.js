@@ -55,7 +55,8 @@ const registerStock = asyncHandler( async (req, res) =>{
         stockCurrentLocation,
         stockLastVeterinarianCheck,
         stockLastVeterinarian,
-        stockLastDiagnosis
+        stockLastDiagnosis,
+        userId: req.user
     })
 
     if(stock){
@@ -88,6 +89,10 @@ const updateStock = asyncHandler( async (req, res) =>{
     if(!stock){
         res.status(404)
         throw new Error('stock not found')
+    }
+    if(stock.userId.toString() !== req.user._id){
+        res.status(401)
+        throw new Error('You do not have permission to update this stock')
     }
     const updateStock = await stockModel.findByIdAndUpdate(
         req.params.id,
