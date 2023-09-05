@@ -7,7 +7,7 @@ const {registerStock, getStock, updateStock, stockDetail} = require('../controll
 router.use(validateToken)
 router.post('/register', registerStock)
 router.get('/', getStock)
-router.put('/id', updateStock)
-router.get('/id', stockDetail)
+router.put('/:id', updateStock)
+router.get('/:id', stockDetail)
 
 module.exports = router

@@ -57,7 +57,7 @@ const loginAdmin = asyncHandler( async (req, res)=>{
             }
         },
         process.env.ACCESS_TOKEN_SECERT,
-        {expiresIn: '15min'}
+        {expiresIn: '20min'}
         )
 
         res.status(200).json({accessToken})
@@ -79,8 +79,8 @@ module.exports = {getAdmin, registerAdmin, loginAdmin}
 
 
 // {
-//     "name": "samuel",
-//     "email": "sam@gmail",
+//     "name": "obanla samuel",
+//     "email": "obanlasamuelolakunle@gmail.com",
 //     "phone": "09067925333",
-//     "password": "samuel"
-//   }
+//     "password": "samuel.0406"
+// }

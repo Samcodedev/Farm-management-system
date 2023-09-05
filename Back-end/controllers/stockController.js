@@ -78,16 +78,35 @@ const registerStock = asyncHandler( async (req, res) =>{
 
 
 
-const getStock = (req, res) =>{
-    res.status(200).json({message: "get stock working"})
-}
+const getStock = asyncHandler( async (req, res) =>{
+    const stock = await stockModel.find()
+    res.status(200).json(stock)
+})
 
-const updateStock = (req, res) =>{
-    res.status(200).json({message: "update stock working"})
-}
+const updateStock = asyncHandler( async (req, res) =>{
+    const stock = await stockModel.findById(req.params.id)
+    if(!stock){
+        res.status(404)
+        throw new Error('stock not found')
+    }
+    const updateStock = await stockModel.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+            new: true
+        }
+    )
 
-const stockDetail = (req, res) =>{
-    res.status(200).json({message: "stock details working"})
-}
+    res.status(200).json({updateStock})
+})
+
+const stockDetail = asyncHandler( async (req, res) =>{
+    const stock = await stockModel.findById(req.params.id)
+    if(!stock){
+        res.status(404)
+        throw new Error('stock not found')
+    }
+    res.status(200).json(stock)
+})
 
 module.exports = {registerStock, getStock, updateStock, stockDetail}
