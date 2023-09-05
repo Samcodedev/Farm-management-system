@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const asyncHandler = require('express-async-handler')
 const userModels = require('../Models/userModels')
 const jwt = require('jsonwebtoken')
+const stockModel = require('../Models/stockModels')
 
 const registerAdmin = asyncHandler(async (req, res)=>{
     const {name, email, phone, password} = req.body
@@ -74,7 +75,27 @@ const loginAdmin = asyncHandler( async (req, res)=>{
 
 const getAdmin = asyncHandler( async (req, res)=>{
     if(req.user){
-        res.status(200).json(req.user)
+        const getCreatedStock = await stockModel.find({userId: req.user._id})
+        const stocks = []
+        getCreatedStock.map((item) =>{
+            stocks.push(item._id)
+        })
+        
+        const {_id, Name, Email, Phone, createdAT, updatedAt } = req.user
+        const response = {
+            _id,
+            Name,
+            Email,
+            Phone,
+            createdAT,
+            updatedAt,
+            stockCreated: {
+                totalStock: getCreatedStock.length,
+                stocksId: stocks
+            }
+            
+        }
+        res.status(200).json(response)
     }
     res.status(401)
     throw new Error('unauthotized')
