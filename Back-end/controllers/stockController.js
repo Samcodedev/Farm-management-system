@@ -123,4 +123,22 @@ const stockDetail = asyncHandler( async (req, res) =>{
     res.status(200).json(stock)
 })
 
-module.exports = {registerStock, getStock, updateStock, stockDetail}
+
+// Delete a particular stock
+// Method: DEL
+// access: private
+const deleteStock = asyncHandler( async (req, res) =>{
+    const stock = await stockModel.findById(req.params.id)
+    if(!stock){
+        res.status(404)
+        throw new Error('Stock not found')
+    }
+    if(stock.userId.toString() !== req.user._id){
+        res.status(401)
+        throw new Error('User not authorize to delete this stock')
+    }
+    const deleteStock = await stockModel.findByIdAndDelete(req.params.id)
+    res.status(200).json(deleteStock)
+})
+
+module.exports = {registerStock, getStock, updateStock, stockDetail, deleteStock}
