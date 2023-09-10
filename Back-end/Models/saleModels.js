@@ -51,6 +51,9 @@ const saleSchema = mongoose.Schema({
         type: String,
         require: [true, 'Please add a Stock price']
     }
+},
+{
+    timestamps: true
 })
 
 module.exports = mongoose.model('saleModel', saleSchema)

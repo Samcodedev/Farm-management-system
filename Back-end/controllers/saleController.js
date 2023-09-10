@@ -25,6 +25,8 @@ const listStock = asyncHandler( async (req, res) =>{
         throw new Error('All input field are mandatary')
     }
 
+
+
     const stockData = {
         stockType: stock.stockType,
         stockBreed: stock.stockBreed,
@@ -36,25 +38,24 @@ const listStock = asyncHandler( async (req, res) =>{
         stockCurrentLocation: stock.stockCurrentLocation
     }
 
-    const st = JSON.stringify(stockData)
+    // trying to convert STOCKDATA to string
+    const stringData = JSON.stringify(stockData)
 
-    const listStockData = {
-        stockType: st.stockType,
-        stockBreed: st.stockBreed,
-        stockGroup: st.stockGroup,
-        stockImage: st.stockImage,
-        stockAge: st.stockAge,
-        stockGeder: st.stockGeder,
-        stockWeight: st.stockWeight,
-        stockCurrentLocation: st.stockCurrentLocation,
+
+    const listStock = await saleModels.create({
+        stockType: stringData.stockType,
+        stockBreed: stringData.stockBreed,
+        stockGroup: stringData.stockGroup,
+        stockImage: stringData.stockImage,
+        stockAge: stringData.stockAge,
+        stockGeder: stringData.stockGeder,
+        stockWeight: stringData.stockWeight,
+        stockCurrentLocation: stringData.stockCurrentLocation,
 
         stockPrice,
         stockDescription,
         stockReview
-    }
-
-    // const toto = listStockData
-    const listStock = await saleModels.create(listStockData)
+    })
     if(listStock){
         res.status(200).json({
             stockType,

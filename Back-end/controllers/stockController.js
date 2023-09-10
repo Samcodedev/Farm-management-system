@@ -44,35 +44,41 @@ const registerStock = asyncHandler( async (req, res) =>{
         throw new Error('All input field are mandatary')
     }
 
-    const stock = await stockModel.create({
-        stockType,
-        stockBreed,
-        stockGroup,
-        stockImage,
-        stockAge,
-        stockHealthStatus,
-        stockHealthPercente,
-        stockGeder,
-        stockWeight,
-        stockVerccineName,
-        stockVerccineDueDate,
-        stockCurrentLocation,
-        stockLastVeterinarianCheck,
-        stockLastVeterinarian,
-        stockLastDiagnosis,
-        userId: req.user
-    })
-
-    if(stock){
-        res.status(200).json({
-            _id: stock._id,
-            stockType: stock.stockType,
-            stockBreed: stock.stockBreed
+    if(req.user.role === 'farmer' || req.user.role === 'admin'){
+        const stock = await stockModel.create({
+            stockType,
+            stockBreed,
+            stockGroup,
+            stockImage,
+            stockAge,
+            stockHealthStatus,
+            stockHealthPercente,
+            stockGeder,
+            stockWeight,
+            stockVerccineName,
+            stockVerccineDueDate,
+            stockCurrentLocation,
+            stockLastVeterinarianCheck,
+            stockLastVeterinarian,
+            stockLastDiagnosis,
+            userId: req.user
         })
+    
+        if(stock){
+            res.status(200).json({
+                _id: stock._id,
+                stockType: stock.stockType,
+                stockBreed: stock.stockBreed
+            })
+        }
+        else{
+            res.status(400)
+            throw new Error('Stock data not valid')
+        }
     }
     else{
-        res.status(400)
-        throw new Error('Stock data not valid')
+        res.status(401)
+        throw new Error('user do not have permission to create stock')
     }
 })
 
@@ -95,19 +101,26 @@ const updateStock = asyncHandler( async (req, res) =>{
         res.status(404)
         throw new Error('stock not found')
     }
-    if(stock.userId.toString() !== req.user._id){
+    if(req.user.role === 'farmer' || req.user.role === 'admin'){
+        if(stock.userId.toString() !== req.user._id){
+            res.status(401)
+            throw new Error('You do not have permission to update this stock')
+        }
+        const updateStock = await stockModel.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {
+                new: true
+            }
+        )
+    
+        res.status(200).json({updateStock})
+    }
+    else{
         res.status(401)
         throw new Error('You do not have permission to update this stock')
     }
-    const updateStock = await stockModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-            new: true
-        }
-    )
-
-    res.status(200).json({updateStock})
+    
 })
 
 

@@ -16,7 +16,7 @@ const registerAdmin = asyncHandler(async (req, res)=>{
 
     const userAuthentication = await userModels.findOne({email})
     if(userAuthentication){
-        res.status('400')
+        res.status(400)
         throw new Error('User already exist')
     }
 
@@ -26,14 +26,16 @@ const registerAdmin = asyncHandler(async (req, res)=>{
         userName: name,
         userEmail: email,
         userPhone: phone,
-        userPassword: hashpassword
+        userPassword: hashpassword,
+        role: 'farmer'
     })
 
     if(user){
         res.status(200).json({
             _id: user._id,
             Phone: user.userPhone,
-            Email: user.userEmail
+            Email: user.userEmail,
+            Role: user.role
         })
     }
     else{
@@ -63,7 +65,8 @@ const loginAdmin = asyncHandler( async (req, res)=>{
                 Email: user.userEmail,
                 Phone: user.userPhone,
                 createdAT: user.createdAt,
-                updatedAt: user.updatedAt
+                updatedAt: user.updatedAt,
+                role: user.role
             }
         },
         process.env.ACCESS_TOKEN_SECERT,
@@ -92,7 +95,7 @@ const getAdmin = asyncHandler( async (req, res)=>{
             stocks.push(item._id)
         })
         
-        const {_id, Name, Email, Phone, createdAT, updatedAt } = req.user
+        const { _id, Name, Email, Phone, createdAT, updatedAt, role } = req.user
         const response = {
             _id,
             Name,
@@ -100,6 +103,7 @@ const getAdmin = asyncHandler( async (req, res)=>{
             Phone,
             createdAT,
             updatedAt,
+            role,
             stockCreated: {
                 totalStock: getCreatedStock.length,
                 stocksId: stocks

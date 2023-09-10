@@ -12,11 +12,16 @@ const userSchema = mongoose.Schema({
     },
     userPhone: {
         type: String,
-        require: [true, 'Please add phone']
+        require: [true, 'Please add phone'],
+        unique: [true, 'Email address already taken']
     },
     userPassword: {
         type: String,
         require: [true, 'Please add password']
+    },
+    role: {
+        type: String,
+        require: [true, 'Please input role']
     }
 },
 {
