@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler')
 const userModels = require('../Models/userModels')
 const jwt = require('jsonwebtoken')
 const stockModel = require('../Models/stockModels')
+const nodemailer = require('nodemailer')
 
 // Register a new user
 // Method: POST
@@ -116,7 +117,64 @@ const getAdmin = asyncHandler( async (req, res)=>{
     throw new Error('unauthotized')
 })
 
-module.exports = {getAdmin, registerAdmin, loginAdmin}
+const forgetPassword = asyncHandler( async (req, res, next) =>{
+    const { email } = req.body
+    const userAuthentication = await userModels.findOne({userEmail: email})
+    if(!userAuthentication){
+        res.status(404)
+        throw new Error('User not found')
+    }
+    const accessToken = jwt.sign({
+        email: {
+            email
+        }
+    },
+    process.env.ACCESS_TOKEN_SECERT,
+    {expiresIn: '10min'}
+    )
+
+    res.status(200).json({accessToken})
+
+    // const transporter = nodemailer.createTransport({
+    //   host: "obanlasamuelolakunle@gmail.com",
+    //   port: 465,
+    //   secure: true,
+    // service: "gmail",
+    //   auth: {
+    //     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+    //     user: "obanlasamuelolakunle@gmail.com",
+    //     pass: "Samuel.0406",
+    //   },
+    // });
+
+    // const info = await transporter.sendMail({
+    //     from: 'obanlasamuelolakunle@gmail.com', // sender address
+    //     to: email, // list of receivers
+    //     subject: "Hello ✔", // Subject line
+    //     text: "Hello world?", // plain text body
+    //     html: "<b>Hello world?</b>", // html body
+    //   });
+
+    //   transporter.sendMail(info, (err) =>{
+    //     if(err){
+    //         console.log(err);
+    //     }
+    //     else{
+    //         console.log('email sent');
+    //     }
+    //   })
+    
+    //   console.log(info.messageId);
+    //   res.status(200).json({Messages: info.messageId})
+
+})
+
+const resetPassword = asyncHandler( async (req, res) =>{
+    const { password } = req.body
+    const userAuthentication = await userModels.findById()
+})
+
+module.exports = {getAdmin, registerAdmin, loginAdmin, forgetPassword, resetPassword}
 
 
 /*
