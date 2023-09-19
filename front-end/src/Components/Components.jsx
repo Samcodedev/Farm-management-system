@@ -13,6 +13,7 @@ import CartPage from './CartPage/CartPage'
 import UpdateStock from './UpdateStock/UpdateStock'
 import AdminProfile from './AdminProfile/AdminProfile'
 import StockDataPage from './StockDataPage/StockDataPage'
+import StockProfile from './StockProfile/StockProfile'
 
 const Components = () => {
   return (
@@ -31,6 +32,7 @@ const Components = () => {
             <Route path='/Cart' element={<CartPage />} />
             <Route path='/AdminProfile' element={<AdminProfile />} />
             <Route path='/DataTable' element={<StockDataPage />} />
+            <Route path='/StockProfile' element={<StockProfile />} />
         </Routes>
     </Router>
   )

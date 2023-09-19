@@ -6,6 +6,7 @@ a{
 
 :root{
     --brandcolor: #198754 !important;
+    --subBrand: #0b3d70;
     --brandcolor-dark: #0a492c !important;
     --brandcolor-opacity: rgba(23, 130, 80, 0.283) !important;
     --brandcolor-light: #6bbb96 !important;

@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col'
 
 const CreateStock = () => {
   const [stockimage, stockimageFunc] = useState()
-  const [stockname, stocknameFunc] = useState()
+  const [stockgroup, stockgroupFunc] = useState()
   const [discription, discriptionFunc] = useState()
   const [stockcategories, stockcategoriesFunc] = useState()
   const [stockage, stockageFunc] = useState()
@@ -25,7 +25,22 @@ const CreateStock = () => {
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
 
+  // !stockType ||
+  // !stockBreed ||
+  // !stockGroup ||
+  // !stockImage ||
+  // !stockAge ||
+  // !stockHealthStatus ||
+  // !stockWeight ||
 
+  // !stockHealthPercente ||
+  // !stockGeder ||
+  // !stockVerccineName ||
+  // !stockVerccineDueDate ||
+  // !stockCurrentLocation ||
+  // !stockLastVeterinarianCheck ||
+  // !stockLastVeterinarian ||
+  // !stockLastDiagnosis
     const inputs = Data.map((item) =>{
         return(
             <Col xs={6} md={4}>
@@ -45,7 +60,7 @@ const CreateStock = () => {
         stockimageFunc(data)
       }
       else if(indicator === 'stockname'){
-        stocknameFunc(data)
+        stockgroupFunc(data)
       }
       else if(indicator === 'discription'){
         discriptionFunc(data)
@@ -77,10 +92,10 @@ const CreateStock = () => {
       loadinfFunc(!loading)
 
       // form validation
-      if(!stockimage && !stockname && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stocksize && !stockhealthcondition && !stockcolor){
+      if(!stockimage && !stockgroup && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stocksize && !stockhealthcondition && !stockcolor){
         alertFunc(false)
       }
-      else if(!stockimage || !stockname || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stocksize || !stockhealthcondition || !stockcolor ){
+      else if(!stockimage || !stockgroup || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stocksize || !stockhealthcondition || !stockcolor ){
         alertFunc(false)
       } 
       else if(stockage < 1 || stockweight < 1){
@@ -89,7 +104,7 @@ const CreateStock = () => {
       else if(stockage < 0 && stockweight < 0){
         alertFunc(false)
       }
-      else if(stockimage && stockname && discription && stockcategories && stockbreed && stockage && stockweight && stocksize && stockhealthcondition && stockcolor){
+      else if(stockimage && stockgroup && discription && stockcategories && stockbreed && stockage && stockweight && stocksize && stockhealthcondition && stockcolor){
         alertFunc(true)
       }
 

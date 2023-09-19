@@ -17,11 +17,6 @@ const AdminProfile = () => {
 const [chartActive, chartActiveFunc] = useState(0)
 
 
-const data = [
-  { name: 'stock listed', value: 300 },
-  { name: 'stock sold', value: 300 },
-  { name: 'stock unlisted', value: 200 },
-];
 
   return (
     <div className='AdminProfile'>
@@ -38,30 +33,33 @@ const data = [
             </div>
           </div>
           <Row className="container">
-            <Col className="cards" onClick={()=> chartActiveFunc(0)} >
+            <Col className="cards" onClick={()=> chartActiveFunc(0)} 
+              style={{
+                backgroundColor: chartActive === 0? '#6bbb96' : 'var(--subBrand)'
+              }}>
               <div className="icon">
                 <MdAddChart />
               </div>
               <div className="text">
-                <h5>{chartActive}</h5>
+                <h5>100</h5>
                 <p>Stock created</p>
               </div>
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(1)}
               style={{
-                backgroundColor: chartActive === 0? '#6bbb96' : 'cadetblue'
+                backgroundColor: chartActive === 1? '#6bbb96' : 'var(--subBrand)'
               }}>
               <div className="icon">
                 <BsListCheck />
               </div>
               <div className="text">
-                <h5>30</h5>
+                <h5>70</h5>
                 <p>Stock listed</p>
               </div>
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(2)}
               style={{
-                backgroundColor: chartActive === 1? '#6bbb96' : 'cadetblue'
+                backgroundColor: chartActive === 2? '#6bbb96' : 'var(--subBrand)'
               }}>
               <div className="icon">
                 <RiLineChartLine />
@@ -73,24 +71,20 @@ const data = [
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(3)}
               style={{
-                backgroundColor: chartActive === 2? '#6bbb96' : 'cadetblue'
+                backgroundColor: chartActive === 3? '#6bbb96' : 'var(--subBrand)'
               }}>
               <div className="icon">
                 <MdPlaylistRemove />
               </div>
               <div className="text">
-                <h5>20</h5>
-                <p>Stock unlisted</p>
+                <h5>5</h5>
+                <p>Stock motality</p>
               </div>
             </Col>
           </Row>
         </div>
         <div className="chat">
-          <PieChartShaped 
-            data={data}
-            active={chartActive}
-            chartActiveFunc={chartActiveFunc}
-          />
+              hddhd
         </div>
       </div>
     </div>

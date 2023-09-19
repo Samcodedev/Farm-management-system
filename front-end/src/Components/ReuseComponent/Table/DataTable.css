@@ -14,21 +14,6 @@ Table tbody tr td #pup{
     height: 100vh;
     top: 0;
     right: 0;
-    background-color: var(--light-gray);
-    display: none;
-    animation: pup-up 1s ease-in-out;
-}
-@keyframes pup-up {
-    from{
-        top: 0;
-        right: 0;
-        width: 0vw;
-    }
-    to{
-        top: 0;
-        right: 0;
-        width: 90vw;
-    }
 }
 Table tbody tr td:hover #pup{
     display: block;

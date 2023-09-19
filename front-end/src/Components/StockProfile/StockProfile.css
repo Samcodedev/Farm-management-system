@@ -1,0 +1,101 @@
+.StockProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.StockProfile .sub-StockProfile .farmer{
+    width: 100%;
+    height: 200px;
+    background-color: var(--brandcolor-light);
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.StockProfile .sub-StockProfile .farmer .img-div{
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+}
+.StockProfile .sub-StockProfile .farmer .img-div img{
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    border: 5px solid var(--brandcolor-dark);
+}
+.StockProfile .sub-StockProfile .farmer .text-div{
+    height: 90%;
+    color: var(--brandcolor-dark);
+}
+.StockProfile .sub-StockProfile .farmer .text-div h4{
+    font-weight: 700;
+}
+.StockProfile .sub-StockProfile .farmer .text-div h4 span{
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+
+
+
+.StockProfile .sub-StockProfile{
+    width: 95%;
+
+}
+.StockProfile .sub-StockProfile .stock{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+}
+.StockProfile .sub-StockProfile .stock .img-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+}
+.StockProfile .sub-StockProfile .stock .img-div img{
+    width: 100%;
+    position: relative;
+    border-radius: 5px;
+}
+.StockProfile .sub-StockProfile .stock .text-div{
+    background-color: var(--light-gray);
+    width: fit-content;
+    height: 350px;
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+.StockProfile .sub-StockProfile .stock .text-div .box{
+    background-color: var(--gray);
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 350px;
+    color: var(--brandcolor-dark);
+}
+.StockProfile .sub-StockProfile .stock .text-div .box:hover{
+    background-color: var(--brandcolor-light);
+}
+.StockProfile .sub-StockProfile .stock .text-div .box h3{
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.StockProfile .sub-StockProfile .stock .text-div .box p{
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}

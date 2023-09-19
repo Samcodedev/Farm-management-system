@@ -4,7 +4,7 @@ import RoundedNav from '../ReuseComponent/RoundedNav/RoundedNav'
 import './StockDataPage.css'
 
 const StockDataPage = () => {
-  const lists = ['Cattle', 'Buffaloes', 'Sheep', 'Goats', 'Pigs', 'Chickens']
+  const lists = ['Cattle', 'Buffaloes', 'Sheep', 'Goats', 'Pigs', 'Chickens', 'Fish']
   return (
     <div className='StockDataPage'>
       <div className="sub-StockDataPage">

@@ -23,9 +23,9 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock name",
+        "placeholder": "Stock group",
         "type": "text",
-        "onChange": "stockname"
+        "onChange": "stockgroup"
     },
     {
         "area_label": "with textrea",

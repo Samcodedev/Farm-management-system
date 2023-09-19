@@ -74,21 +74,21 @@
 }
 .AdminProfile .sub-AdminProfile .details .container .cards .icon svg{
     font-size: 50px;
-    color: var(--brandcolor-dark);
+    color: #fff;
 }
 .AdminProfile .sub-AdminProfile .details .container .cards{
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 20px 20px;
-    background-color: cadetblue;
+    background-color: var(--subBrand);
     border-radius: 5px;
     cursor: pointer;
 }
 .AdminProfile .sub-AdminProfile .details .container .cards .text{
     display: flex;
     flex-direction: column;
-    color: var(--brandcolor-dark);
+    color: #fff;
 }
 .AdminProfile .sub-AdminProfile .details .container .cards .text h5{
     margin-bottom: 0;
@@ -101,9 +101,10 @@
 
 .AdminProfile .sub-AdminProfile .chat{
     width: 30%;
-    margin-top: 10px;
+    height: 100%;
+    margin-top: 0px;
     border-radius: 5px;
-    background-color: var(--light-gray);
+    background-color: var(--subBrand);
 }
 
 @media screen and (max-width: 690px) {

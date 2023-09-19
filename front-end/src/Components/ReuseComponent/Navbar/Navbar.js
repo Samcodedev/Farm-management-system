@@ -39,13 +39,13 @@ function Navication() {
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
                   <Nav.Link><Link to='/AdminProfile'>Dashboard</Link></Nav.Link>
-                  <Nav.Link><Link to='/Details'>Stock details</Link></Nav.Link>
+                  <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
+                  <Nav.Link><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
                   <Nav.Link><Link to='/CreateStock'>Create Stock</Link></Nav.Link>
                   <Nav.Link><Link to='/UpdateStock'>Update Stock</Link></Nav.Link>
                   <Nav.Link><Link to='/Cart'>Cart</Link></Nav.Link>
-                  <Nav.Link><Link to='/Categories'>Products Categories</Link></Nav.Link>
-                  <Nav.Link><Link to='/DataTable'>About Us</Link></Nav.Link>
-                  <Nav.Link href="#action2">Contact Us</Nav.Link>
+                  {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
+                  <Nav.Link href="#action2">Contact Us</Nav.Link> */}
                   <NavDropdown
                     title="More options"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
