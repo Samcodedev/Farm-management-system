@@ -105,6 +105,7 @@
     margin-top: 0px;
     border-radius: 5px;
     background-color: var(--subBrand);
+    padding: 20px 10px 20px 0px;
 }
 
 @media screen and (max-width: 690px) {

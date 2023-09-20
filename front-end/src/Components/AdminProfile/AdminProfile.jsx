@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './AdminProfile.css'
-import img from '../Assets/dummy.png'
+import img from '../Assets/Farmer.jpg'
 import { MdAddChart } from 'react-icons/md'
 import { BsListCheck } from 'react-icons/bs'
 import { RiLineChartLine } from 'react-icons/ri'
@@ -10,6 +10,7 @@ import { MdPlaylistRemove } from 'react-icons/md'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PieChartShaped from '../ReuseComponent/Charts/PieChartShaped'
+import LineCharts from '../ReuseComponent/Charts/LineCharts'
 
 const AdminProfile = () => {
 
@@ -84,7 +85,7 @@ const [chartActive, chartActiveFunc] = useState(0)
           </Row>
         </div>
         <div className="chat">
-              hddhd
+              <LineCharts />
         </div>
       </div>
     </div>

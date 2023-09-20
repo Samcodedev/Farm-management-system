@@ -1,6 +1,7 @@
 import React from 'react'
 import './StockProfile.css'
 import img from '../Assets/dummy.png'
+import farmer from '../Assets/Farmer.jpg'
 
 import Table from 'react-bootstrap/esm/Table'
 
@@ -10,7 +11,7 @@ const StockProfile = () => {
         <div className="sub-StockProfile">
             <div className="farmer">
                 <div className="img-div">
-                    <img src={img} alt="farmer" />
+                    <img src={farmer} alt="farmer" />
                 </div>
                 <div className="text-div">
                     <h4>Farmer: <span>Samuel Obanla</span></h4>
