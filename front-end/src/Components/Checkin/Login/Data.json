@@ -2,9 +2,9 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "username",
-        "type": "text",
-        "onChange": "username"
+        "placeholder": "Email address",
+        "type": "email",
+        "onChange": "email"
     },
     {
         "area_label": "Default",

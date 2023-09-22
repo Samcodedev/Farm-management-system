@@ -33,7 +33,7 @@ const registerAdmin = asyncHandler(async (req, res)=>{
 
     if(user){
         res.status(200).json({
-            _id: user._id,
+            Name: user.name,
             Phone: user.userPhone,
             Email: user.userEmail,
             Role: user.role
@@ -69,6 +69,7 @@ const loginAdmin = asyncHandler( async (req, res)=>{
                 updatedAt: user.updatedAt,
                 role: user.role
             }
+            
         },
         process.env.ACCESS_TOKEN_SECERT,
         {expiresIn: '20min'}

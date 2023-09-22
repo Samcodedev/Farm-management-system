@@ -1,35 +1,27 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema({
-    cartList: {
-        type: String,
-        require: [true, 'Please input the stock']
+    user:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'usersmodels'
     },
-    userId:{
-        type: String,
-        require: [true,'Please input the userId']
+    stock:[{
+        stockId:{
+            type: String,
+            require: [true, 'Please input the stockId']
+        },
+        stockType:{
+            type: String,
+            require: [true, 'Please input the stockType']
+        },
+        stockPrice:{
+            type:Number,
+            require: [true, 'Please input the stockPrice']
+        },
+    }],
+    bill:{
+        type:Number,
     }
-    // stockType:{
-    //     type: String,
-    //     require: [true, 'Please input the stockType']
-    // },
-    // stockPrice:{
-    //     type: String,
-    //     require: [true, 'Please input the stockPrice']
-    // },
-    // stockQuality:{
-    //     type: String,
-    //     require: [true, 'Please input the stockQuality']
-    // },
-    // stockId:{
-    //     type: String,
-    //     require: [true, 'Please input the stockId']
-    // },
-    // stockPublisher:{
-    //     type: String,
-    //     require: [true, 'Please input the stockPublisher']
-    // }
-
 },
 {
     timestamps: true

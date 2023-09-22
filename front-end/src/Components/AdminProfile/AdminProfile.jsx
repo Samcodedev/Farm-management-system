@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './AdminProfile.css'
 import img from '../Assets/Farmer.jpg'
 import { MdAddChart } from 'react-icons/md'
@@ -16,8 +16,39 @@ const AdminProfile = () => {
 
 
 const [chartActive, chartActiveFunc] = useState(0)
+const [Name, NameFunc] = useState()
+const [Email, EmailFunc] = useState()
+const [Phone, PhoneFunc] = useState()
+const [Role, RoleFunc] = useState()
+const [stockCreated, stockCreatedFunc] = useState()
 
 
+const handleProfile = async () =>{
+  let result = await fetch(
+    "http://localhost:5001/api/admin/",
+    {
+      method: "get",
+      credencials: "include",
+      mode: "cors",
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem('accessToken'),
+      },
+    }
+  );
+  result = await result.json();
+  let {Name, Email, Phone, role, stockCreated } = result
+  NameFunc(Name)
+  EmailFunc(Email)
+  PhoneFunc(Phone)
+  RoleFunc(role)
+  stockCreatedFunc(stockCreated.totalStock)
+  console.log(result)
+}
+
+useEffect(()=>{
+  handleProfile()
+}, [])
 
   return (
     <div className='AdminProfile'>
@@ -25,9 +56,10 @@ const [chartActive, chartActiveFunc] = useState(0)
         <div className="details">
           <div className="profile">
             <div className="content">
-              <h2>Obanla Samuel</h2>
-              <h5>obanlasamuelolakunle@gmail.com</h5>
-              <h5>+2349 067 925 333</h5>
+              <h2>{Name}</h2>
+              <h5>{Email}</h5>
+              <h5>{Phone}</h5>
+              <h5>{Role}</h5>
             </div>
             <div className="img-div">
               <img src={img} alt="" />
@@ -42,7 +74,7 @@ const [chartActive, chartActiveFunc] = useState(0)
                 <MdAddChart />
               </div>
               <div className="text">
-                <h5>100</h5>
+                <h5>{stockCreated}</h5>
                 <p>Stock created</p>
               </div>
             </Col>

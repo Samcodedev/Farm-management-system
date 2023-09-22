@@ -2,6 +2,7 @@ const express = require('express')
 const handleError = require('./middleware/errorHandling')
 const connectDB = require('./config/dbConnection')
 const dotenv = require('dotenv').config()
+const cors = require('cors')
 
 connectDB()
 
@@ -10,6 +11,7 @@ const port = process.env.PORT
 
 // setting the response format to JSON format
 app.use(express.json())
+app.use(cors())
 
 // sets of data routes wish are the USER and STOCK
 app.use('/api/admin', require('./routes/userRoute'))

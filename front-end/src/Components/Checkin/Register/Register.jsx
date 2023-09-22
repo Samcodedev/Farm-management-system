@@ -38,6 +38,7 @@ const Register = () => {
         }
       );
       result = await result.json();
+      backendResponseFunc(result)
       console.log(result)
     }
     const inputs = Data.map((item)=>{
@@ -120,7 +121,7 @@ const Register = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? 'Welcome to the Farm management system' : 'Unable to log you in' } </p>
+            <p>{alert? `Welcome ${backendResponse.Email} to the Farm management system` : 'Unable to log you in' } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to your profile page shortly' : 'Try filing all the input field above with the correct details'} </p>
           </Alert>

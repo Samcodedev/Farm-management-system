@@ -11,10 +11,42 @@ import Alert from 'react-bootstrap/Alert'
 
 const Login = () => {
   const [loading, loadinfFunc] = useState(false)
-  const [username, usernameFunc] = useState('')
+  const [email, emailFunc] = useState('')
   const [password, passwordFunc] = useState('')
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
+  const [backendResponse, backendResponseFunc] = useState()
+
+  const handleRegister = async (e) =>{
+    e.preventDefault();
+    let result = await fetch(
+      "http://localhost:5001/api/admin/login",
+      {
+        method: "post",
+        credencials: "include",
+        mode: "cors",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
+    result = await result.json();
+    localStorage.setItem('accessToken', result.accessToken)
+    if(result.message){
+      backendResponseFunc(result.message)
+      alertFunc(false)
+    }
+    if(result){
+      // loading stop
+      setTimeout(() => {
+        loadinfFunc(false)
+        pupupFunc(true)
+      }, 5000);
+      pupupFunc(false)
+    }
+    console.log(result)
+  }
 
   const inputs = Data.map((item)=>{
     return(
@@ -30,8 +62,8 @@ const Login = () => {
 
   
   function onChangeFunc(data, indicator){
-    if(indicator === 'username'){
-      usernameFunc(data)
+    if(indicator === 'email'){
+      emailFunc(data)
     }
     else if(indicator === 'password'){
       passwordFunc(data)
@@ -42,27 +74,20 @@ const Login = () => {
     loadinfFunc(!loading)
 
     // form validation
-    if(!username && !password){
+    if(!email && !password){
       alertFunc(false)
     }
-    else if(!username || !password){
+    else if(!email || !password){
       alertFunc(false)
     }
-    else if(username && password){
+    else if(email && password){
       alertFunc(true)
     }
-
-    // loading stop
-    setTimeout(() => {
-      loadinfFunc(false)
-      pupupFunc(true)
-    }, 5000);
-    pupupFunc(false)
   }
 
   return (
     <div className='Check'>
-      <form action=''>
+      <form action='' onSubmit={handleRegister}>
         <h4>Farm management system</h4>
         {inputs}
         <Link to='/ForgetPassword'>Forget Password</Link>
@@ -71,6 +96,7 @@ const Login = () => {
             variant={loading? 'secondary' : 'success'}
             size='lg' 
             onClick={loading_function}
+            type='submit'
           >
               {loading? 'Loading...': 'Login'}
           </Button>
@@ -83,7 +109,7 @@ const Login = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? 'Welcome to the Farm management system' : 'Unable to log you in' } </p>
+            <p>{alert? `Welcome to the Farm management system ` : `${backendResponse}` } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to your profile page shortly' : 'Try filing all the input field above with the right details'} </p>
           </Alert>
