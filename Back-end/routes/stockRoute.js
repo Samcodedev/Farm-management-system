@@ -5,9 +5,9 @@ const {registerStock, getStock, updateStock, stockDetail, deleteStock} = require
 
 
 // all endpoint on STOCK route, they are all private endpoint
+router.get('/', getStock)
 router.use(validateToken)
 router.post('/register', registerStock)
-router.get('/', getStock)
 router.put('/:id', updateStock)
 router.get('/:id', stockDetail)
 router.delete('/:id', deleteStock)

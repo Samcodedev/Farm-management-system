@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoriesTop from './Categories-top/CategoriesTop'
 import CategoriesList from './Categories-list/CategoriesList'
 
 const Categories = () => {
+  const [backendResponse, backendResponseFunc] = useState()
 
   const handleRegister = async () =>{
     let result = await fetch(
@@ -17,7 +18,7 @@ const Categories = () => {
       }
     );
     result = await result.json();
-    // backendResponseFunc(result)
+    backendResponseFunc(result)
     console.log(result)
   }
 
@@ -28,7 +29,9 @@ const Categories = () => {
   return (
     <div className='categories'>
       <CategoriesTop />
-      <CategoriesList />
+      <CategoriesList 
+        data={backendResponse}
+      />
     </div>
   )
 }

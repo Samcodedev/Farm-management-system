@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from 'react-bootstrap/esm/Table'
 import img from '../../Assets/dummy.png'
 import './DataTable.css'
 import { Link } from 'react-router-dom'
 
-const DataTable = () => {
+const DataTable = ({data}) => {
+  const [stock, stockFunc] = useState()
+
+  setTimeout(() => {
+    // const obj = Object.values(Object.keys(data))
+    stockFunc(
+      data.map((item) =>{
+        return(
+          <tr>
+              <td>
+                <Link to='/StockProfile'>
+                    <img src={img} alt='product-img' />
+                </Link>
+              </td>
+              <td>{item.stockType}</td>
+              <td>{item.stockBreed}</td>
+              <td>{item.stockGeder}</td>
+              <td>{item.stockGroup}</td>
+              <td>{item.stockWeight}</td>
+              <td>{item.stockCurrentLocation}</td>
+              <td>{item.stockAge}</td>
+              <td>{item.stockHealthStatus}</td>
+          </tr>
+        )
+      })
+    )
+  }, 1000);
   return (
     <Table striped hover>
       <thead>
@@ -21,156 +47,7 @@ const DataTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Cow</td>
-            <td>foreign Cow</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>North farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Goat</td>
-            <td>He-Goat</td>
-            <td>Male</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
-        <tr>
-            <td>
-              <Link to='/StockProfile'>
-                  <img src={img} alt='product-img' />
-              </Link>
-            </td>
-            <td>Ram</td>
-            <td>Nanny-Goat</td>
-            <td>Female</td>
-            <td>001</td>
-            <td>10kg</td>
-            <td>East farm</td>
-            <td>4 month</td>
-            <td>active</td>
-        </tr>
+        {stock}
       </tbody>
     </Table>
   )

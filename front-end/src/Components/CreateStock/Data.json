@@ -30,9 +30,9 @@
     {
         "area_label": "with textrea",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Description",
+        "placeholder": "Stock Health Percentage",
         "type": "text-area",
-        "onChange": "discription",
+        "onChange": "stockHealthPercente",
         "as": "textarea"
     },
     {

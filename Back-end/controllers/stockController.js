@@ -7,15 +7,15 @@ const stockModel = require('../Models/stockModels')
 // access: private
 const registerStock = asyncHandler( async (req, res) =>{
     const {
-        stockType,
-        stockBreed,
-        stockGroup,
-        stockImage,
-        stockAge,
-        stockHealthStatus,
+            stockType,
+            stockBreed,
+            stockGroup,
+            stockImage,
+            stockAge,
+            stockHealthStatus,
         stockHealthPercente,
         stockGeder,
-        stockWeight,
+            stockWeight,
         stockVerccineName,
         stockVerccineDueDate,
         stockCurrentLocation,
@@ -83,8 +83,7 @@ const registerStock = asyncHandler( async (req, res) =>{
 })
 
 
-// Get all stock
-// Method: POST
+// Get all stock GET
 // access: private (but public to all users)
 const getStock = asyncHandler( async (req, res) =>{
     const stock = await stockModel.find()
