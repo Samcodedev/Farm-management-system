@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 
-const Input = ({name, area_label, aria_describedby, placeholder, type, onChange, as }) => {
+const Input = ({name, area_label, aria_describedby, placeholder, type, onChange }) => {
   return (
     <InputGroup className="mb-3">
         <Form.Control 
@@ -15,8 +15,6 @@ const Input = ({name, area_label, aria_describedby, placeholder, type, onChange,
           placeholder={placeholder}
           type={type}
           onChange={onChange}
-          as={as}
-          row={as === 'textarea'? 3 : ''}
         />
     </InputGroup>
   )

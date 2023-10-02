@@ -18,7 +18,7 @@ const DataTable = ({data}) => {
                     <img src={img} alt='product-img' />
                 </Link>
               </td>
-              <td>{item.stockType}</td>
+              <td>{item.stockCategories}</td>
               <td>{item.stockBreed}</td>
               <td>{item.stockGeder}</td>
               <td>{item.stockGroup}</td>

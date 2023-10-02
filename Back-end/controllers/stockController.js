@@ -7,24 +7,27 @@ const stockModel = require('../Models/stockModels')
 // access: private
 const registerStock = asyncHandler( async (req, res) =>{
     const {
-            stockType,
+            stockCategories,
             stockBreed,
             stockGroup,
             stockImage,
             stockAge,
             stockHealthStatus,
-        stockHealthPercente,
-        stockGeder,
+            stockHealthPercente,
+            stockGeder,
             stockWeight,
         stockVerccineName,
         stockVerccineDueDate,
-        stockCurrentLocation,
+            stockCurrentLocation,
         stockLastVeterinarianCheck,
         stockLastVeterinarian,
-        stockLastDiagnosis
+        stockLastDiagnosis,
+
+        stockVeterinarian,
+        stockColor,
     } = req.body
     if(
-        !stockType ||
+        !stockCategories ||
         !stockBreed ||
         !stockGroup ||
         !stockImage ||
@@ -38,7 +41,9 @@ const registerStock = asyncHandler( async (req, res) =>{
         !stockCurrentLocation ||
         !stockLastVeterinarianCheck ||
         !stockLastVeterinarian ||
-        !stockLastDiagnosis
+        !stockLastDiagnosis ||
+        !stockVeterinarian ||
+        !stockColor
     ){
         res.status(400)
         throw new Error('All input field are mandatary')
@@ -46,7 +51,7 @@ const registerStock = asyncHandler( async (req, res) =>{
 
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
         const stock = await stockModel.create({
-            stockType,
+            stockCategories,
             stockBreed,
             stockGroup,
             stockImage,
@@ -61,13 +66,16 @@ const registerStock = asyncHandler( async (req, res) =>{
             stockLastVeterinarianCheck,
             stockLastVeterinarian,
             stockLastDiagnosis,
+
+            stockVeterinarian,
+            stockColor,
             userId: req.user
         })
     
         if(stock){
             res.status(200).json({
                 _id: stock._id,
-                stockType: stock.stockType,
+                stockCategories: stock.stockCategories,
                 stockBreed: stock.stockBreed
             })
         }

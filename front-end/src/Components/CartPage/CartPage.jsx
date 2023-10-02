@@ -42,27 +42,6 @@ const CartPage = () => {
             <CartList />
           </div>
         </div>
-        <div className="order-summary">
-          <div className="head">
-            <h3>Order Summary</h3>
-          </div>
-          <div className="body">
-            <div className="amount">
-              <p>3 items</p>
-              <p>$888</p>
-            </div>
-            {inputs}
-            <div className='d-grid gap-2'>
-              <Button 
-                variant={loading? 'secondary' : 'success'}
-                size='lg' 
-                onClick={loading_function}
-              >
-                  {loading? 'Loading...': 'Checkout'}
-              </Button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Data from './Data.json'
 
 //bootstrap import
@@ -17,6 +17,8 @@ const Login = () => {
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
 
+  const navigate = useNavigate()
+
   const handleRegister = async (e) =>{
     e.preventDefault();
     let result = await fetch(
@@ -32,13 +34,18 @@ const Login = () => {
       }
     );
     result = await result.json();
-    localStorage.setItem('accessToken', result.accessToken)
     if(result.message){
       backendResponseFunc(result.message)
       alertFunc(false)
     }
+    else if(result.accessToken){
+      localStorage.setItem('accessToken', result.accessToken)
+      navigate('/AdminProfile')
+
+    }
     if(result){
       // loading stop
+      // navigate('/AdminProfile')
       setTimeout(() => {
         loadinfFunc(false)
         pupupFunc(true)

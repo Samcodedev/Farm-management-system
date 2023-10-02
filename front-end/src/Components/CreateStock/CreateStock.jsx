@@ -8,39 +8,89 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+// import { BsNutFill } from 'react-icons/bs';
 
 const CreateStock = () => {
-  const [stockimage, stockimageFunc] = useState()
-  const [stockgroup, stockgroupFunc] = useState()
-  const [discription, discriptionFunc] = useState()
-  const [stockcategories, stockcategoriesFunc] = useState()
-  const [stockage, stockageFunc] = useState()
-  const [stockweight, stockweightFunc] = useState()
-  const [stocksize, stocksizeFunc] = useState()
-  const [stockhealthcondition, stockstockhealthconditionFunc] = useState()
-  const [stockcolor, stockcolorFunc] = useState()
-  const [stockbreed, stockbreedFunc] = useState()
+  const [stockImage, stockimageFunc] = useState()
+  const [stockCategories, stockcategoriesFunc] = useState()
+  const [stockBreed, stockbreedFunc] = useState()
+  const [stockGeder, stockgenderFunc] = useState()
+  const [stockGroup, stockgroupFunc] = useState()
+  const [stockAge, stockageFunc] = useState()
+  const [stockWeight, stockweightFunc] = useState()
+  const [stockCurrentLocation, stockCurrentLocationFunc] = useState()
+  const [stockHealthPercente, stockhealthpercenteFunc] = useState()
+  const [stockHealthStatus, stockHealthStatusFunc] = useState()
+  const [stockVeterinarian, stockveterinarianFunc] = useState()
+  const [stockColor, stockcolorFunc] = useState()
+
+  let [stockVerccineName, stockVerccineNameFunc] = useState()
+  let [stockVerccineDueDate, stockVerccineDueDateFunc] = useState()
+  let [stockLastVeterinarianCheck, stockLastVeterinarianCheckFunc] = useState()
+  let [stockLastVeterinarian, stockLastVeterinarianFunc] = useState()
+  let [stockLastDiagnosis, stockLastDiagnosisFunc] = useState()
+
 
   const [loading, loadinfFunc] = useState(false)
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
+  const [backendResponse, backendResponseFunc] = useState()
 
-  // !stockType ||
-  // !stockBreed ||
-  // !stockGroup ||
-  // !stockImage ||
-  // !stockAge ||
-  // !stockHealthStatus ||
-  // !stockWeight ||
 
-  // !stockHealthPercente ||
-  // !stockGeder ||
-  // !stockVerccineName ||
-  // !stockVerccineDueDate ||
-  // !stockCurrentLocation ||
-  // !stockLastVeterinarianCheck ||
-  // !stockLastVeterinarian ||
-  // !stockLastDiagnosis
+
+  const handleRegisterStock = async (e) =>{
+    e.preventDefault();
+    console.log(stockVerccineName);
+    let result = await fetch(
+      "http://localhost:5001/api/stock/register",
+      {
+        method: "post",
+        credencials: "include",
+        mode: "cors",
+        body: JSON.stringify({
+          stockCategories,
+          stockBreed,
+          stockGroup,
+          stockImage,
+          stockAge,
+          stockHealthStatus,
+          stockHealthPercente,
+          stockGeder,
+          stockWeight,
+          stockCurrentLocation,
+          stockVeterinarian,
+          stockColor,
+
+          stockVerccineName,
+          stockVerccineDueDate,
+          stockLastVeterinarianCheck,
+          stockLastVeterinarian,
+          stockLastDiagnosis
+        }),
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem('accessToken'),
+        },
+      }
+    );
+    result = await result.json();
+    if(result.message){
+      backendResponseFunc(result.message)
+      alertFunc(false)
+    }
+    if(result){
+      backendResponseFunc(result)
+      alertFunc(true)
+      // loading stop
+      setTimeout(() => {
+        loadinfFunc(false)
+        pupupFunc(true)
+      }, 5000);
+      pupupFunc(false)
+    }
+    console.log(result);
+  }
+  
     const inputs = Data.map((item) =>{
         return(
             <Col xs={6} md={4}>
@@ -56,14 +106,9 @@ const CreateStock = () => {
     })
 
     function onChangeFunc(data, indicator){
+
       if(indicator === 'stockimage'){
         stockimageFunc(data)
-      }
-      else if(indicator === 'stockname'){
-        stockgroupFunc(data)
-      }
-      else if(indicator === 'discription'){
-        discriptionFunc(data)
       }
       else if(indicator === 'stockcategories'){
         stockcategoriesFunc(data)
@@ -71,17 +116,29 @@ const CreateStock = () => {
       else if(indicator === 'stockbreed'){
         stockbreedFunc(data)
       }
+      else if(indicator === 'stockgender'){
+        stockgenderFunc(data)
+      }
+      else if(indicator === 'stockgroup'){
+        stockgroupFunc(data)
+      }
       else if(indicator === 'stockage'){
         stockageFunc(data)
       }
       else if(indicator === 'stockweight'){
         stockweightFunc(data) 
       }
-      else if(indicator === 'stocksize'){
-        stocksizeFunc(data)
+      else if(indicator === 'stocklocation'){
+        stockCurrentLocationFunc(data)
+      }
+      else if(indicator === 'stockhealthpercente'){
+        stockhealthpercenteFunc(data)
       }
       else if(indicator === 'stockhealthcondition'){
-        stockstockhealthconditionFunc(data)
+        stockHealthStatusFunc(data)
+      }
+      else if(indicator === 'stockveterinarian'){
+        stockveterinarianFunc(data)
       }
       else if(indicator === 'stockcolor'){
         stockcolorFunc(data)
@@ -89,39 +146,44 @@ const CreateStock = () => {
     }
 
     function loading_function(){
+      stockVerccineNameFunc('null')
+      stockVerccineDueDateFunc('null')
+      stockLastVeterinarianCheckFunc('null')
+      stockLastVeterinarianFunc('null')
+      stockLastDiagnosisFunc('null')
       loadinfFunc(!loading)
+      console.log(false);
 
       // form validation
-      if(!stockimage && !stockgroup && !discription && !stockcategories && !stockbreed && !stockage && !stockweight && !stocksize && !stockhealthcondition && !stockcolor){
+      if(!stockCategories && !stockBreed && !stockGroup && !stockImage && !stockAge && !stockHealthStatus && !stockHealthPercente && !stockGeder && !stockWeight && !stockVerccineName && !stockVerccineDueDate && !stockCurrentLocation && !stockLastVeterinarianCheck && !stockLastVeterinarian && !stockLastDiagnosis && !stockVeterinarian && !stockColor){
         alertFunc(false)
+        console.log('error 1');
       }
-      else if(!stockimage || !stockgroup || !discription || !stockcategories || !stockbreed || !stockage || !stockweight || !stocksize || !stockhealthcondition || !stockcolor ){
+      if(!stockCategories || !stockBreed || !stockGroup || !stockImage || !stockAge || !stockHealthStatus || !stockHealthPercente || !stockGeder || !stockWeight || !stockVerccineName || !stockVerccineDueDate || !stockCurrentLocation || !stockLastVeterinarianCheck || !stockLastVeterinarian || !stockLastDiagnosis || !stockVeterinarian || !stockColor){
         alertFunc(false)
+        console.log('error 2');
       } 
-      else if(stockage < 1 || stockweight < 1){
+      else if(stockAge < 0 || stockWeight < 0){
         alertFunc(false)
+        console.log('error 3');
       }
-      else if(stockage < 0 && stockweight < 0){
+      else if(stockAge < 0 && stockWeight < 0){
         alertFunc(false)
+        console.log('error 4');
       }
-      else if(stockimage && stockgroup && discription && stockcategories && stockbreed && stockage && stockweight && stocksize && stockhealthcondition && stockcolor){
+      else if(stockCategories && stockBreed && stockGroup && stockImage && stockAge && stockHealthStatus && stockHealthPercente && stockGeder && stockWeight && stockVerccineName && stockVerccineDueDate && stockCurrentLocation && stockLastVeterinarianCheck && stockLastVeterinarian && stockLastDiagnosis && stockVeterinarian && stockColor){
         alertFunc(true)
+        console.log('fine');
       }
-
-      // loading stop
-      setTimeout(() => {
-        loadinfFunc(false)
-        pupupFunc(true)
-      }, 5000);
-      pupupFunc(false)
+      console.log('error last');
     }
 
   return (
     <div className='CreateStock'>
       <div className="sub-CreateStock">
-        <form action="" className='g-col-2'>
+        <form action="" className='g-col-2' onSubmit={handleRegisterStock} >
           <h4>create stock</h4>
-            <img src={stockimage} alt="" style={{display: stockimage? 'block' : 'none'}} />
+            <img src={stockImage} alt="" style={{display: stockImage? 'block' : 'none'}} />
             <Row>
               {inputs}
             </Row>
@@ -130,6 +192,7 @@ const CreateStock = () => {
             variant={loading? 'secondary' : 'success'}
             size='lg' 
             onClick={loading_function}
+            type='submit'
           >
               {loading? 'Loading...': 'Create Stock'}
           </Button>
@@ -142,7 +205,7 @@ const CreateStock = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? 'Stock created successfuly' : 'Unable to create stock' } </p>
+            <p>{alert? `Stock ${backendResponse.stockCategories}, Bread ${backendResponse.stockBreed} created successfuly` : `${backendResponse}` } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to the stock profile shortly' : 'Try filing all the input field above with the right details'} </p>
           </Alert>

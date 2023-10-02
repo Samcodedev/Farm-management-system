@@ -1,6 +1,6 @@
 import React from 'react'
 import './Register.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Data from './Data.json'
 
 //bootstrap import
@@ -12,7 +12,7 @@ import Alert from 'react-bootstrap/Alert'
 const Register = () => {
     const [loading, loadinfFunc] = useState(false)
     
-    const [fullname, fullnameFunc] = useState('')
+    const [name, nameFunc] = useState('')
     const [email, emailFunc] = useState('')
     const [phone, phoneFunc] = useState('')
     const [password, passwordFunc] = useState('')
@@ -21,7 +21,8 @@ const Register = () => {
     const [alert, alertFunc] = useState(NaN)
     const [pupup, pupupFunc] = useState(false)
     const [backendResponse, backendResponseFunc] = useState()
-    // const []
+    
+    const navigate = useNavigate()
 
     const handleRegister = async (e) =>{
       e.preventDefault();
@@ -31,14 +32,32 @@ const Register = () => {
           method: "post",
           credencials: "include",
           mode: "cors",
-          body: JSON.stringify({ name: fullname, email, phone, password }),
+          body: JSON.stringify({ name, email, phone, password }),
           headers: {
             "content-Type": "application/json",
           },
         }
       );
       result = await result.json();
-      backendResponseFunc(result)
+      if(result.message){
+        backendResponseFunc(result.message)
+        alertFunc(false)
+      }
+      else if(result.Email){
+        backendResponseFunc(result)
+        setTimeout(() => {
+          navigate('/Login')
+        }, 5000);
+      }
+      if(result){
+        // loading stop
+        setTimeout(() => {
+          loadinfFunc(false)
+          pupupFunc(true)
+
+        }, 5000);
+        pupupFunc(false)
+      }
       console.log(result)
     }
     const inputs = Data.map((item)=>{
@@ -56,7 +75,7 @@ const Register = () => {
     
     function onChangeFunc(data, indicator){
       if(indicator === 'fullname'){
-        fullnameFunc(data)
+        nameFunc(data)
       }
       else if(indicator === 'email'){
         emailFunc(data)
@@ -76,31 +95,24 @@ const Register = () => {
       loadinfFunc(!loading)
   
       // form validation
-      if(!fullname && !password && !email && !phone && !password && !confirmpassword){
+      if(!name && !password && !email && !phone && !password && !confirmpassword){
         alertFunc(false)
       }
-      else if(!fullname || !password || !email || !phone || !password || !confirmpassword){
+      else if(!name || !password || !email || !phone || !password || !confirmpassword){
         alertFunc(false)
       }
-      else if(fullname && password && email && phone && password && confirmpassword){
+      else if(name && password && email && phone && password && confirmpassword){
         alertFunc(true)
       }
       
       if(password !== confirmpassword){
         alertFunc(false)
       }
-  
-      // loading stop
-      setTimeout(() => {
-        loadinfFunc(false)
-        pupupFunc(true)
-      }, 5000);
-      pupupFunc(false)
     }
 
   return (
     <div className='Check'>
-      <form action='' onSubmit={handleRegister}>
+      <form action='' onSubmit={handleRegister} >
         <h4>Farm management system</h4>
         {inputs}
         <div className='d-grid gap-2'>
@@ -121,7 +133,7 @@ const Register = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? `Welcome ${backendResponse.Email} to the Farm management system` : 'Unable to log you in' } </p>
+            <p>{alert? `Welcome ${backendResponse.Email} to the Farm management system` : `${backendResponse}` } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to your profile page shortly' : 'Try filing all the input field above with the correct details'} </p>
           </Alert>

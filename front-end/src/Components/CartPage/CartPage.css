@@ -3,7 +3,7 @@
     justify-content: center;
 }
 .CartPage .sub-CartPage{
-    width: 90%;
+    width: 80%;
     background-color: var(--light-gray);
     padding: 20px 20px;
     border-radius: 10px;
@@ -12,7 +12,7 @@
 }
 .CartPage .sub-CartPage .cart{
     position: relative;
-    width: 70%;
+    width: 100%;
 }
 .CartPage .sub-CartPage .cart .head{
     border-bottom: 1.5px solid var(--brandcolor);
@@ -26,33 +26,3 @@
 }
 
 
-
-.CartPage .sub-CartPage .order-summary{
-    position: relative;
-    width: 30%;
-    padding: 0 0 0 10px;
-    border-left: 2px solid var(--brandcolor);
-}
-.CartPage .sub-CartPage .order-summary .head{
-    border-bottom: 1.5px solid var(--brandcolor);
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-.CartPage .sub-CartPage .order-summary .head h3{
-    font-size: 1rem;
-    font-weight: 700;
-}
-.CartPage .sub-CartPage .order-summary .body{
-    display: flex;
-    flex-direction: column;
-}
-.CartPage .sub-CartPage .order-summary .body .amount{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-.CartPage .sub-CartPage .order-summary .body .amount p{
-    font-weight: 700;
-}

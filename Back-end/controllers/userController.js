@@ -20,7 +20,7 @@ const registerAdmin = asyncHandler(async (req, res)=>{
         res.status(400)
         throw new Error('User already exist')
     }
-
+    
     const hashpassword = await bcrypt.hash(password, 10)
 
     const user = await userModels.create({
@@ -72,7 +72,7 @@ const loginAdmin = asyncHandler( async (req, res)=>{
             
         },
         process.env.ACCESS_TOKEN_SECERT,
-        {expiresIn: '20min'}
+        {expiresIn: '50min'}
         )
 
         res.status(200).json({accessToken})

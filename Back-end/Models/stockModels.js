@@ -6,7 +6,7 @@ const Schema = mongoose.Schema({
         require: true,
         ref: 'usersmodels'
     },
-    stockType:{
+    stockCategories:{
         type: String,
         require: [true, 'Please add Stock type']
     },
@@ -65,6 +65,14 @@ const Schema = mongoose.Schema({
     stockLastDiagnosis:{
         type: String,
         require: [true, 'Please add Stock last diagnosis']
+    },
+    stockVeterinarian:{
+        type: String,
+        require: [true, 'Please add Stock stock veterinarian']
+    },
+    stockColor:{
+        type: String,
+        require: [true, 'Please add Stock stock color']
     }
 },
 {

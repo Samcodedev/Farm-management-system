@@ -9,31 +9,9 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock categories/type",
+        "placeholder": "Stock group",
         "type": "text",
-        "onChange": "stockcategories"
-    },
-    {
-        "area_label": "Default",
-        "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock breed",
-        "type": "text",
-        "onChange": "stockbreed"
-    },
-    {
-        "area_label": "Default",
-        "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock name",
-        "type": "text",
-        "onChange": "stockname"
-    },
-    {
-        "area_label": "with textrea",
-        "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Description",
-        "type": "text-area",
-        "onChange": "discription",
-        "as": "textarea"
+        "onChange": "stockgroup"
     },
     {
         "area_label": "Default",
@@ -52,9 +30,16 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock Height-Width",
+        "placeholder": "Stock current location",
         "type": "text",
-        "onChange": "stocksize"
+        "onChange": "stocklocation"
+    },
+    {
+        "area_label": "with textrea",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock Health Percentage",
+        "type": "text-area",
+        "onChange": "stockhealthpercente"
     },
     {
         "area_label": "Default",
@@ -66,24 +51,53 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock color",
-        "type": "color",
-        "onChange": "stockcolor"
-    },
-
-
-    {
-        "sale": [
-            "still under farmer's care",
-            "List for sale"
-        ],
-        "onChange": "list"
+        "placeholder": "Stock Veterinarian",
+        "type": "text",
+        "onChange": "stockveterinarian"
     },
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "List price ($)",
-        "type": "number",
-        "onChange": "stockprice"
+        "placeholder": "Stock color",
+        "type": "text",
+        "onChange": "stockcolor"
+    }
+
+
+    ,
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock Verccine Name",
+        "type": "text",
+        "onChange": "stockVerccineName"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock Verccine Due Date",
+        "type": "text",
+        "onChange": "stockVerccineDueDate"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock Last Veterinarian Check",
+        "type": "text",
+        "onChange": "stockLastVeterinarianCheck"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock Last Veterinarian",
+        "type": "text",
+        "onChange": "stockLastVeterinarian"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock Last Diagnosis",
+        "type": "text",
+        "onChange": "stockLastDiagnosis"
     }
 ]
