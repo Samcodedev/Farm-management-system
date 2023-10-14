@@ -6,7 +6,19 @@ const saleSchema = mongoose.Schema({
         require: true,
         ref: 'usersmodels'
     },
-    stockType:{
+    userName:{
+        type: String,
+        require: [true, 'Please add User Name']
+    },
+    userEmail:{
+        type: String,
+        require: [true, 'Please add User Email']
+    },
+    userPhone:{
+        type: String,
+        require: [true, 'Please add User Phone']
+    },
+    stockCategories:{
         type: String,
         require: [true, 'Please add Stock type']
     },

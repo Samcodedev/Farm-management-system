@@ -4,11 +4,14 @@ import { MdStar } from 'react-icons/md'
 import { BsCartPlus } from 'react-icons/bs'
 import { RiPlayListAddFill } from 'react-icons/ri'
 import img from '../Assets/animal-2.jpeg'
+import { useLocation } from 'react-router-dom'
 
 import Accordion from 'react-bootstrap/Accordion'
 import Table from 'react-bootstrap/Table'
 
 const ProductDetails = () => {
+    let stockData = useLocation().state
+    console.log(stockData);
   return (
     <div className='ProductDetails'>
       <div className="sub-ProductDetails">
@@ -18,8 +21,8 @@ const ProductDetails = () => {
         <div className="details">
             <div className="top">
                 <small>Available</small>
-                <h2>Mighty black bull</h2>
-                <p>Olonade Toyosi</p>
+                <h2>{stockData.stockBreed}</h2>
+                <p>{stockData.userName}</p>
                 <div className="star">
                     <MdStar />
                     <MdStar />
@@ -27,10 +30,10 @@ const ProductDetails = () => {
                     <MdStar />
                     <MdStar />
                 </div>
-                <h1>$899.99</h1>
+                <h1>{stockData.stockPrice}</h1>
             </div>
             <div className="body">
-                <p>this is a well fed bull and also rigid for farm work, well muscle bull with a hight ability to pull a max load of 500tunes with ease, can run with a speed of 1/2 meter per 1min, a rigid and roburst bull also friendly and less harmful. </p>
+                <p>{stockData.stockDescription}</p>
                 <Accordion defaultActiveKey='0'>
                     <Accordion.Item eventKey='1'>
                         <Accordion.Header>
@@ -40,7 +43,7 @@ const ProductDetails = () => {
                             <Table striped bordered hover variant='light'>
                                 <thead>
                                     <tr>
-                                        <th>Size</th>
+                                        <th>Gender</th>
                                         <th>Weight</th>
                                         <th>Color</th>
                                         <th>Age</th>
@@ -48,10 +51,10 @@ const ProductDetails = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>3feets * 2feets</td>
-                                        <td>5turns</td>
+                                        <td>{stockData.stockGeder}</td>
+                                        <td>{stockData.stockWeight}turns</td>
                                         <td>black</td>
-                                        <td>3years</td>
+                                        <td>{stockData.stockAge}years</td>
                                     </tr>
                                 </tbody>
                             </Table>
@@ -135,9 +138,9 @@ const ProductDetails = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Gbotija</td>
-                                        <td>+234 9067 925 333</td>
-                                        <td>Gbotija@gmail.com</td>
+                                        <td>{stockData.userName}</td>
+                                        <td>{stockData.userPhone}</td>
+                                        <td>{stockData.userEmail}</td>
                                     </tr>
                                 </tbody>
                             </Table>
