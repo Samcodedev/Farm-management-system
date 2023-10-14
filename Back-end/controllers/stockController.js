@@ -113,6 +113,9 @@ const updateStock = asyncHandler( async (req, res) =>{
             res.status(401)
             throw new Error('You do not have permission to update this stock')
         }
+        if(!req.body){
+            throw new Error('No data is been updated')
+        }
         const updateStock = await stockModel.findByIdAndUpdate(
             req.params.id,
             req.body,
@@ -120,6 +123,10 @@ const updateStock = asyncHandler( async (req, res) =>{
                 new: true
             }
         )
+
+        if(updateStock === stock){
+            
+        }
     
         res.status(200).json({updateStock})
     }

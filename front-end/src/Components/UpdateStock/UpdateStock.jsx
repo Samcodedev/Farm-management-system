@@ -3,6 +3,8 @@ import Data from './Data.json'
 import Input from '../ReuseComponent/Input'
 import './UpdateStock.css'
 
+import { useLocation } from 'react-router-dom'
+
 //bootstrap import
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert'
@@ -34,6 +36,8 @@ const UpdateStock = () => {
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
+  const stockId = useLocation()
+  console.log(stockId.useState);
 
 
 
@@ -41,7 +45,7 @@ const UpdateStock = () => {
     e.preventDefault();
     console.log(stockVerccineName);
     let result = await fetch(
-      "http://localhost:5001/api/stock/651b36c1767b6ffa451615fc",
+      `http://localhost:5001/api/stock/${stockId.state}`,
       {
         method: "put",
         credencials: "include",
@@ -74,8 +78,8 @@ const UpdateStock = () => {
       backendResponseFunc(result.message)
       alertFunc(false)
     }
-    if(result){
-      backendResponseFunc(result)
+    if(result.updateStock){
+      backendResponseFunc(result.updateStock)
       alertFunc(true)
       // loading stop
       setTimeout(() => {
@@ -204,7 +208,7 @@ const UpdateStock = () => {
             dismissible
           >
             <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
-            <p>{alert? 'Stock updated successfuly' : 'Unable to update stock' } </p>
+            <p>{alert? `Stock ${backendResponse.stockBreed} updated successfuly` : 'Unable to update stock' } </p>
             <hr />
             <p className='mb-0'>{alert? 'You will be taken to the stock profile shortly' : 'Try filing all the input field above with the right details'} </p>
           </Alert>

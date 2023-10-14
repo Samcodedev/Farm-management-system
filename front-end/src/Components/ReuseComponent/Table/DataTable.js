@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import Table from 'react-bootstrap/esm/Table'
-import img from '../../Assets/dummy.png'
+// import img from '../../Assets/dummy.png'
 import './DataTable.css'
 import { Link } from 'react-router-dom'
 
 const DataTable = ({data}) => {
   const [stock, stockFunc] = useState()
+  const savedData = localStorage.getItem('stocks')
 
   setTimeout(() => {
     // const obj = Object.values(Object.keys(data))
     stockFunc(
-      data.map((item) =>{
+     (data? data : JSON.parse(savedData)).map((item) =>{
         return(
           <tr>
               <td>
-                <Link to='/StockProfile'>
-                    <img src={img} alt='product-img' />
+                <Link to='/StockProfile' state={item}>
+                    <img src={item.stockImage} alt='product-img' />
                 </Link>
               </td>
               <td>{item.stockCategories}</td>
@@ -24,13 +25,14 @@ const DataTable = ({data}) => {
               <td>{item.stockGroup}</td>
               <td>{item.stockWeight}</td>
               <td>{item.stockCurrentLocation}</td>
+              <td>{(item.updatedAt).split(':')[0]}</td>
               <td>{item.stockAge}</td>
               <td>{item.stockHealthStatus}</td>
           </tr>
         )
       })
     )
-  }, 1000);
+  }, 2000);
   return (
     <Table striped hover>
       <thead>
@@ -42,6 +44,7 @@ const DataTable = ({data}) => {
             <th>Group</th>
             <th>Weight</th>
             <th>Current Location</th>
+            <th>Last Updated</th>
             <th>Age</th>
             <th>Health Status</th>
         </tr>

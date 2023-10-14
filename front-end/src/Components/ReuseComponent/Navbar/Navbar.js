@@ -5,9 +5,37 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 function Navication() {
+
+  const navigate = useNavigate()
+
+  function logout(){
+    localStorage.clear('accessToken')
+    navigate('/')
+  }
+
+  function profileRoute(){
+    const token = localStorage.getItem('accessToken')
+    if(token){
+      navigate('/AdminProfile')
+    }
+    else{
+      navigate('/Login')
+    }
+  }
+
+  function CreateStockRoute(){
+    const token = localStorage.getItem('accessToken')
+    if(token){
+      navigate('/CreateStock')
+    }
+    else{
+      navigate('/Login')
+    }
+  }
+
   return (
     <>
       {[false].map((expand) => (
@@ -38,11 +66,10 @@ function Navication() {
                   </Form>
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                  <Nav.Link><Link to='/AdminProfile'>Dashboard</Link></Nav.Link>
+                  <Nav.Link onClick={profileRoute}>Dashboard</Nav.Link>
                   <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
                   <Nav.Link><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
-                  <Nav.Link><Link to='/CreateStock'>Create Stock</Link></Nav.Link>
-                  <Nav.Link><Link to='/UpdateStock'>Update Stock</Link></Nav.Link>
+                  <Nav.Link onClick={CreateStockRoute}>Create Stock</Nav.Link>
                   <Nav.Link><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}
@@ -55,8 +82,8 @@ function Navication() {
                       <Link to='/Register'>Register</Link>
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
+                    <NavDropdown.Item href="#action5" onClick={logout}>
+                      LogOut
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>

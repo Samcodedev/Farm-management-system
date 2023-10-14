@@ -3,9 +3,12 @@ import './StockProfile.css'
 import img from '../Assets/dummy.png'
 import farmer from '../Assets/Farmer.jpg'
 
-import Table from 'react-bootstrap/esm/Table'
+// import Table from 'react-bootstrap/esm/Table'
+import { useLocation, Link } from 'react-router-dom'
 
 const StockProfile = () => {
+    const data = useLocation().state
+    console.log(data.state);
   return (
     <div className='StockProfile'>
         <div className="sub-StockProfile">
@@ -15,7 +18,8 @@ const StockProfile = () => {
                 </div>
                 <div className="text-div">
                     <h4>Farmer: <span>Samuel Obanla</span></h4>
-                    <h4>Veterinarian: <span>Gbogunmi</span></h4>
+                    <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
+                    <Link to='/UpdateStock' state={data._id}><button>Update Stock</button></Link>
                 </div>
             </div>
             <div className="stock">
@@ -25,47 +29,47 @@ const StockProfile = () => {
                 <div className="text-div">
                     <div className="box">
                         <h3>Stock Type</h3>
-                        <p>Goat</p>
+                        <p>{data.stockCategories}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Breed</h3>
-                        <p>He-Goat</p>
+                        <p>{data.stockBreed}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Group</h3>
-                        <p>Group 001</p>
+                        <p>{data.stockGroup}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Age</h3>
-                        <p>3 months</p>
+                        <p>{data.stockAge}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Health Status</h3>
-                        <p>Active</p>
+                        <p>{data.stockHealthStatus}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Weight</h3>
-                        <p>100kg</p>
+                        <p>{data.stockWeight}kg</p>
                     </div>
                     <div className="box">
                         <h3>Stock Gender</h3>
-                        <p>Male</p>
+                        <p>{data.stockGeder}</p>
                     </div>
                     <div className="box">
                         <h3>Stock Current Location</h3>
-                        <p>East Farm</p>
+                        <p>{data.stockCurrentLocation}</p>
                     </div>
                     <div className="box">
                         <h3>Last Veterinarian Check</h3>
-                        <p>30-07-23</p>
+                        <p>{data.stockLastVeterinarianCheck}</p>
                     </div>
                     <div className="box">
                         <h3>Last Diagnosis</h3>
-                        <p>30-07-23</p>
+                        <p>{data.stockLastDiagnosis}</p>
                     </div>
                     <div className="box">
                         <h3>Verccine Name</h3>
-                        <p>Mawu mawu</p>
+                        <p>{data.stockVerccineName}</p>
                     </div>
                 </div>
             </div>
