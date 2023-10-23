@@ -1,0 +1,42 @@
+.stocks{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.stocks .sub-stocks{
+    width: 81%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--gray);
+    padding: 20px 0;
+    border-radius: 10px;
+    z-index: 4;
+}
+.stocks .sub-stocks .cards{
+    /* background-color: var(--brandcolor-light); */
+    /* padding: 10px 10px; */
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+.stocks .sub-stocks .cards p{
+    margin-bottom: 0;
+}
+.stocks .sub-stocks .cards .icon{
+    width: 50px;
+    height: 50px;
+    background-color: var(--brandcolor-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.stocks .sub-stocks .cards .icon:hover{
+    border: 1.5px solid var(--brandcolor-dark);
+}

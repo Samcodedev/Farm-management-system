@@ -1,0 +1,35 @@
+.header{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.header .sub-header{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.header .sub-header .text-div{
+    width: 40%;
+    margin-top: 50px;
+    margin-left: 70px;
+}
+.header .sub-header .text-div h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: var( --brandcolor-dark);
+}
+.header .sub-header .text-div h4{
+    color: var(--brandcolor-light);
+    font-size: 1rem;
+}
+.header .sub-header .img-div{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.header .sub-header .img-div img{
+    position: relative;
+    width: 80%;
+    border-radius: 5px;
+}

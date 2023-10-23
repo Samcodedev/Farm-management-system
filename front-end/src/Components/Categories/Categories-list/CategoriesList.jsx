@@ -6,6 +6,7 @@ const CategoriesList = () => {
 
   const [backendResponse, backendResponseFunc] = useState()
   const [listedProduct, listedProductFunc] = useState()
+  const savedStock = localStorage.getItem('listedstocks')
 
   const handleRegister = async () =>{
     let result = await fetch(
@@ -31,7 +32,7 @@ const CategoriesList = () => {
 
   setTimeout(() => {
     listedProductFunc(
-      backendResponse.map((item)=>{
+      (backendResponse? backendResponse : JSON.parse(savedStock)).map((item)=>{
         return(
           <ProductCards 
             stockCategories={item.stockCategories}

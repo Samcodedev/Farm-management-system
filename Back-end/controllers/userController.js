@@ -4,6 +4,7 @@ const userModels = require('../Models/userModels')
 const jwt = require('jsonwebtoken')
 const stockModel = require('../Models/stockModels')
 const nodemailer = require('nodemailer')
+const saleModels = require('../Models/saleModels')
 
 // Register a new user
 // Method: POST
@@ -96,6 +97,11 @@ const getAdmin = asyncHandler( async (req, res)=>{
         getCreatedStock.map((item) =>{
             stocks.push(item._id)
         })
+        const getListedStock = await saleModels.find({userId: req.user._id})
+        const listedStock = []
+        getListedStock.map((item) =>{
+            listedStock.push(item._id)
+        })
         
         const { _id, Name, Email, Phone, createdAT, updatedAt, role } = req.user
         const response = {
@@ -109,6 +115,10 @@ const getAdmin = asyncHandler( async (req, res)=>{
             stockCreated: {
                 totalStock: getCreatedStock.length,
                 stocksId: stocks
+            },
+            listedStock: {
+                totalListedStock: getListedStock.length,
+                stocksId: listedStock
             }
             
         }

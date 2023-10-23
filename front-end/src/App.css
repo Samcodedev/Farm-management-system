@@ -3,6 +3,14 @@ a{
     text-decoration-line: none !important;
 }
 
+.but{
+    padding: 10px 30px;
+    background-color: var(--brandcolor);
+    border: 2px solid var(--brandcolor);
+    color: #fff;
+    border-radius: 10px;
+}
+
 
 :root{
     --brandcolor: #198754 !important;

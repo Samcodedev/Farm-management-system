@@ -1,0 +1,30 @@
+[
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock discription",
+        "type": "text",
+        "onChange": "discription"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "stock price",
+        "type": "number",
+        "onChange": "price"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock availability(true/false)",
+        "type": "text",
+        "onChange": "availability"
+    },
+    {
+        "area_label": "Default",
+        "aria_describedby": "inputGroup-sizing-default",
+        "placeholder": "Stock rating",
+        "type": "text",
+        "onChange": "rating"
+    }
+]
