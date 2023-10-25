@@ -2,9 +2,8 @@ const mongoose = require('mongoose')
 
 const saleSchema = mongoose.Schema({
     userId:{
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        ref: 'usersmodels'
+        type: String,
+        require: [true, 'Please add UserId']
     },
     userName:{
         type: String,

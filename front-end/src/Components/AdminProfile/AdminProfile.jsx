@@ -9,8 +9,10 @@ import { MdPlaylistRemove } from 'react-icons/md'
 // import Container from 'react-bootstrap/esm/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import PieChartShaped from '../ReuseComponent/Charts/PieChartShaped'
+// import PieChartShaped from '../ReuseComponent/Charts/PieChartShaped'
 import LineCharts from '../ReuseComponent/Charts/LineCharts'
+import Table from 'react-bootstrap/esm/Table'
+import DataTable from '../ReuseComponent/Table/DataTable'
 
 const AdminProfile = () => {
 
@@ -21,6 +23,8 @@ const [Email, EmailFunc] = useState()
 const [Phone, PhoneFunc] = useState()
 const [Role, RoleFunc] = useState()
 const [stockCreated, stockCreatedFunc] = useState()
+const [stockListed, stockListedFunc] = useState()
+const [createdStock, createdStockFunc] = useState()
 
 
 const handleProfile = async () =>{
@@ -37,12 +41,15 @@ const handleProfile = async () =>{
     }
   );
   result = await result.json();
-  let {Name, Email, Phone, role, stockCreated } = result
+  let {Name, Email, Phone, role, stockCreated, listedStock } = result
   NameFunc(Name)
   EmailFunc(Email)
   PhoneFunc(Phone)
   RoleFunc(role)
   stockCreatedFunc(stockCreated.totalStock)
+  stockListedFunc(listedStock.totalListedStock)
+  createdStockFunc(stockCreated.stocksId)
+
   console.log(result)
 }
 
@@ -86,7 +93,7 @@ useEffect(()=>{
                 <BsListCheck />
               </div>
               <div className="text">
-                <h5>70</h5>
+                <h5>{stockListed}</h5>
                 <p>Stock listed</p>
               </div>
             </Col>
@@ -115,6 +122,9 @@ useEffect(()=>{
               </div>
             </Col>
           </Row>
+          <DataTable 
+            data={createdStock}
+          />
         </div>
         <div className="chat">
               <LineCharts />

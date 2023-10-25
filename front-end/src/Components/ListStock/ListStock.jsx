@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import data from './data.json'
 import Input from '../ReuseComponent/Input'
 
@@ -11,10 +11,53 @@ import Col from 'react-bootstrap/Col'
 const ListStock = () => {
     const [loading, loadinfFunc] = useState(false)
     const [alert, alertFunc] = useState(NaN)
+    const [backendResponse, backendResponseFunc] = useState()
 
-    function loading_function(){
-        loadinfFunc(!loading)
+    const [stockPrice, stockPriceFunc] = useState()
+    const [stockDescription, stockDescriptionFunc] = useState()
+    const [stockReview, stockReviewFunc] = useState()
+
+
+    const ListStock = async (e) =>{
+        e.preventDefault();
+        let result = await fetch(
+            `http://localhost:5001/api/stock/`,
+            {
+                method: "post",
+                credencials: "include",
+                mode: "cors",
+                body: JSON.stringify({
+                    stockPrice,
+                    stockDescription,
+                    stockReview
+                }),
+                headers: {
+                  "content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem('accessToken'),
+                }
+            }
+        )
+    
+        
+        result = await result.json()
+        if(result){
+            backendResponseFunc(result.message)
+            alertFunc(false)
+        }
+        if(result.success){
+            backendResponseFunc(result.success)
+            alertFunc(true)
+            // loading stop
+            setTimeout(() => {
+              loadinfFunc(false)
+              pupupFunc(true)
+            }, 5000);
+            pupupFunc(false)
+        }
+        console.log(result);
+        console.log(backendResponse);
     }
+
 
     const inputs = data.map((item)=>{
         return(
@@ -29,10 +72,42 @@ const ListStock = () => {
             </Col>
         )
     })
+
+    function onChange(data, indicator){
+
+        if(indicator === 'discription'){
+            stockDescriptionFunc(data)
+        }
+        else if(indicator === 'price'){
+            stockPriceFunc(data)
+        }
+        else if(indicator === 'rating'){
+            stockReviewFunc(data)
+        }
+    }
+
+    function loading_function(){
+        loadinfFunc(!loading)
+
+        // form validation
+        if(!stockPrice && !stockDescription && !stockReview){
+            alertFunc(false)
+        }
+        if(!stockPrice || !stockDescription || !stockReview){
+            alertFunc(false)
+        }
+        if(stockPrice < 50){
+            alertFunc(false)
+        }
+        if(stockPrice && stockDescription && stockReview){
+            alertFunc(true)
+        }
+    }
+
   return (
     <div className='list-stock'>
         <div className="sub-CreateStock">
-        <form action="" className='g-col-2' onSubmit={handleRegisterStock} >
+        <form action="" className='g-col-2' onSubmit={ListStock} >
             <h4>List stock</h4>
             <Row>
                 {inputs}
@@ -57,7 +132,7 @@ const ListStock = () => {
                 <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
                 <p> </p>
                 <hr />
-                <p className='mb-0'>{alert? 'You will be taken to the stock profile shortly' : 'Try filing all the input field above with the right details'} </p>
+                <p className='mb-0'>{alert? `${backendResponse} stock listed for sale` : 'Try filing all the input field above with the right details'} </p>
                 </Alert>
                 :
                 null

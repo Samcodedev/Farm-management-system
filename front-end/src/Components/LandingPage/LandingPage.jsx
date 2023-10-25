@@ -38,10 +38,10 @@ const LandingPage = () => {
     console.log(result);
   }
 
-  // useEffect(()=>{
-  //   handleListedStock()
-  //   handleStock()
-  // },[])
+  useEffect(()=>{
+    handleListedStock()
+    handleStock()
+  },[])
 
   return (
     <>

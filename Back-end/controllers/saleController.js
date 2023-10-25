@@ -20,7 +20,8 @@ const listStock = asyncHandler( async (req, res) =>{
     const {
         userName,
         userEmail,
-        userPhone
+        userPhone,
+        _id
     } = farmer
 
     const {
@@ -65,13 +66,16 @@ const listStock = asyncHandler( async (req, res) =>{
         
         userName,
         userEmail,
-        userPhone
+        userPhone,
+        userId: _id
     })
     if(listStock){
         res.status(200).json({
-            stockCategories,
-            stockBreed,
-            stockPrice
+            success:{
+                stockCategories,
+                stockBreed,
+                stockPrice
+            }
         })
     }
     else{

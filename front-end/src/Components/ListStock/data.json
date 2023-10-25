@@ -16,13 +16,6 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "Stock availability(true/false)",
-        "type": "text",
-        "onChange": "availability"
-    },
-    {
-        "area_label": "Default",
-        "aria_describedby": "inputGroup-sizing-default",
         "placeholder": "Stock rating",
         "type": "text",
         "onChange": "rating"

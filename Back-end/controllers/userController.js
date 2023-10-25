@@ -93,15 +93,15 @@ const loginAdmin = asyncHandler( async (req, res)=>{
 const getAdmin = asyncHandler( async (req, res)=>{
     if(req.user){
         const getCreatedStock = await stockModel.find({userId: req.user._id})
-        const stocks = []
-        getCreatedStock.map((item) =>{
-            stocks.push(item._id)
-        })
+        // const stocks = []
+        // getCreatedStock.map((item) =>{
+        //     stocks.push(item._id)
+        // })
         const getListedStock = await saleModels.find({userId: req.user._id})
-        const listedStock = []
-        getListedStock.map((item) =>{
-            listedStock.push(item._id)
-        })
+        // const listedStock = []
+        // getListedStock.map((item) =>{
+        //     listedStock.push(item._id)
+        // })
         
         const { _id, Name, Email, Phone, createdAT, updatedAt, role } = req.user
         const response = {
@@ -114,11 +114,11 @@ const getAdmin = asyncHandler( async (req, res)=>{
             role,
             stockCreated: {
                 totalStock: getCreatedStock.length,
-                stocksId: stocks
+                stocksId: getCreatedStock
             },
             listedStock: {
                 totalListedStock: getListedStock.length,
-                stocksId: listedStock
+                stocksId: getListedStock
             }
             
         }
