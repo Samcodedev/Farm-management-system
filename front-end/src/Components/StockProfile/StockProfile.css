@@ -36,10 +36,13 @@
     font-size: 1rem;
 }
 .StockProfile .sub-StockProfile .farmer .text-div button{
-    padding: 5px 15px;
+    padding: 3px 15px;
     border: 1.5px solid var(--brandcolor-dark);
     background-color: transparent;
     border-radius: 5px;
+}
+.StockProfile .sub-StockProfile .farmer .text-div button:first-child{
+    margin-bottom: 10px;
 }
 
 

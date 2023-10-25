@@ -70,6 +70,7 @@ function Navication() {
                   <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
                   <Nav.Link><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
                   <Nav.Link onClick={CreateStockRoute}>Create Stock</Nav.Link>
+                  <Nav.Link><Link to='/ListStock'>Listed Stock</Link></Nav.Link>
                   <Nav.Link><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}

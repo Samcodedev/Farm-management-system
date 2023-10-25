@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import data from './data.json'
 import Input from '../ReuseComponent/Input'
+import './ListStock.css'
+import { useLocation } from 'react-router-dom'
 
 //bootstrap import
 import Button from 'react-bootstrap/Button';
@@ -11,17 +13,21 @@ import Col from 'react-bootstrap/Col'
 const ListStock = () => {
     const [loading, loadinfFunc] = useState(false)
     const [alert, alertFunc] = useState(NaN)
+    const [pupup, pupupFunc] = useState(false)
     const [backendResponse, backendResponseFunc] = useState()
 
     const [stockPrice, stockPriceFunc] = useState()
     const [stockDescription, stockDescriptionFunc] = useState()
     const [stockReview, stockReviewFunc] = useState()
 
+    const stockId = useLocation()
+
+    console.log(stockId);
 
     const ListStock = async (e) =>{
         e.preventDefault();
         let result = await fetch(
-            `http://localhost:5001/api/stock/`,
+            `http://localhost:5001/api/sale/${stockId.state}`,
             {
                 method: "post",
                 credencials: "include",
@@ -73,7 +79,7 @@ const ListStock = () => {
         )
     })
 
-    function onChange(data, indicator){
+    function onChangeFunc(data, indicator){
 
         if(indicator === 'discription'){
             stockDescriptionFunc(data)
@@ -106,7 +112,7 @@ const ListStock = () => {
 
   return (
     <div className='list-stock'>
-        <div className="sub-CreateStock">
+        <div className="sub-list-stock">
         <form action="" className='g-col-2' onSubmit={ListStock} >
             <h4>List stock</h4>
             <Row>
@@ -132,7 +138,7 @@ const ListStock = () => {
                 <Alert.Heading>{alert? 'Congratulation' : 'OOh! Sorry'}</Alert.Heading>
                 <p> </p>
                 <hr />
-                <p className='mb-0'>{alert? `${backendResponse} stock listed for sale` : 'Try filing all the input field above with the right details'} </p>
+                <p className='mb-0'>{alert? `${backendResponse.stockBreed} stock listed for sale` : 'Try filing all the input field above with the right details'} </p>
                 </Alert>
                 :
                 null

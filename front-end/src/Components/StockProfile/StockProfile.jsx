@@ -19,7 +19,8 @@ const StockProfile = () => {
                 <div className="text-div">
                     <h4>Farmer: <span>Samuel Obanla</span></h4>
                     <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                    <Link to='/UpdateStock' state={data._id}><button>Update Stock</button></Link>
+                    <Link to='/UpdateStock' state={data._id}><button>Update Stock</button></Link><br />
+                    <Link to='/ListStock' state={data._id}><button>List Stock</button></Link>
                 </div>
             </div>
             <div className="stock">

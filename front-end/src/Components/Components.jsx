@@ -14,6 +14,7 @@ import UpdateStock from './UpdateStock/UpdateStock'
 import AdminProfile from './AdminProfile/AdminProfile'
 import StockDataPage from './StockDataPage/StockDataPage'
 import StockProfile from './StockProfile/StockProfile'
+import ListStock from './ListStock/ListStock'
 
 const Components = () => {
   return (
@@ -33,6 +34,7 @@ const Components = () => {
             <Route path='/AdminProfile' element={<AdminProfile />} />
             <Route path='/DataTable' element={<StockDataPage />} />
             <Route path='/StockProfile' element={<StockProfile />} />
+            <Route path='/ListStock' element={<ListStock />} />
         </Routes>
     </Router>
   )
