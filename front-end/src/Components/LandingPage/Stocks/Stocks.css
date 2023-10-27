@@ -9,10 +9,14 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    background-color: var(--gray);
+    background-color: var(--light-gray);
+    background-color: #fff;
+    border: 1.5px solid var(--gray);
     padding: 20px 0;
     border-radius: 10px;
     z-index: 4;
+    box-shadow: -0px 1px 3px var(--brandcolor-light),
+                -0px -0px 3px var(--gray);
 }
 .stocks .sub-stocks .cards{
     /* background-color: var(--brandcolor-light); */
@@ -36,6 +40,10 @@
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
+}
+.stocks .sub-stocks .cards .icon svg{
+    font-size: 30px;
+    color: var(--brandcolor-dark);
 }
 .stocks .sub-stocks .cards .icon:hover{
     border: 1.5px solid var(--brandcolor-dark);

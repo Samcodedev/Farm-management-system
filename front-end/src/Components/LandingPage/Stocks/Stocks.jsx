@@ -1,6 +1,9 @@
 import React from 'react'
 import './Stocks.css'
 import img from '../../Assets/animal-2.jpeg'
+import {GiCow, GiHighGrass} from 'react-icons/gi'
+import {FaUserDoctor} from 'react-icons/fa6'
+import {MdManageAccounts, MdHealthAndSafety} from 'react-icons/md'
 
 const Stocks = () => {
   return (
@@ -8,33 +11,33 @@ const Stocks = () => {
       <div className="sub-stocks">
         <div className="cards">
             <div className="icon">
-              w
+              <GiCow />
             </div>
-            <p>lorem ipsum</p>
+            <p>Animals</p>
         </div>
         <div className="cards">
             <div className="icon">
-              w
+              <FaUserDoctor />
             </div>
-            <p>lorem ipsum</p>
+            <p>Vertinary</p>
         </div>
         <div className="cards">
             <div className="icon">
-              w
+              <GiHighGrass />
             </div>
-            <p>lorem ipsum</p>
+            <p>Feeding</p>
         </div>
         <div className="cards">
             <div className="icon">
-              w
+              <MdManageAccounts />
             </div>
-            <p>lorem ipsum</p>
+            <p>Management</p>
         </div>
         <div className="cards">
             <div className="icon">
-              w
+              <MdHealthAndSafety />
             </div>
-            <p>lorem ipsum</p>
+            <p>Health</p>
         </div>
       </div>
     </div>
