@@ -1,30 +1,27 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema({
-    user:{
-        type: mongoose.Schema.ObjectId,
-        ref: 'usersmodels'
-    },
-    stock:[{
-        stockId:{
-            type: String,
-            require: [true, 'Please input the stockId']
-        },
-        stockType:{
-            type: String,
-            require: [true, 'Please input the stockType']
-        },
-        stockPrice:{
-            type:Number,
-            require: [true, 'Please input the stockPrice']
-        },
-    }],
-    bill:{
-        type:Number,
-    }
-},
-{
-    timestamps: true
-})
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: true,
+    ref: 'usersmodels'
+  },
+  products: [{
+    productId: String,
+    quantity: Number,
+    name: String,
+    price: Number
+  }],
+  active: {
+    type: Boolean,
+    default: true
+  },
+  modifiedOn: {
+    type: Date,
+    default: Date.now
+  }
+}, {
+  timestamps: true
+});
 
-module.exports = mongoose.model('cartModels', Schema)
+module.exports = mongoose.model('cartModels', Schema);
