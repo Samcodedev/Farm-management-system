@@ -5,11 +5,12 @@ const saleModel = require('../Models/saleModels')
 
 const addCart = asyncHandler( async (req, res) =>{
     const { productId, quantity, name, price } = req.body;
-    const userId = '64fd7c8eb8125296f2a62e7e'; // TODO: the logged in user id
+    const {_id} = req.user
+    const userId = _id;
 
     let stock = await saleModel.findById(productId)
     if(!stock){
-        res.status(400)
+        res.status(404)
         throw new Error('stock not found or not listed for sale')
     }
 
@@ -43,11 +44,13 @@ const addCart = asyncHandler( async (req, res) =>{
 })
 
 const deleteCart = asyncHandler( async (req, res) =>{
-    const userId = '64fd7c8eb8125296f2a62e7e'; // TODO: the logged in user id
-    const productId = '65388e0dc3af090dca0a03bc'
+    const {_id} = req.user
+    const {productId} = req.body
+    const userId = _id; 
+
     const cart = await cartModels.findOne({userId})
     if(!cart){
-        res.status(400)
+        res.status(404)
         throw new Error('You have nothing added to cart')
     }
     let product = await cartModels.findOne({ userId, products: { $elemMatch: {productId} } });
@@ -63,7 +66,7 @@ const deleteCart = asyncHandler( async (req, res) =>{
         res.status(201).json(update);
     }
     else{
-        res.status(400)
+        res.status(404)
         throw new Error('cart not found')
     }
 })
