@@ -8,6 +8,11 @@ const addCart = asyncHandler( async (req, res) =>{
     const {_id} = req.user
     const userId = _id;
 
+    if(!userId){
+        res.status(401)
+        throw new Error('User not logged in')
+    }
+
     let stock = await saleModel.findById(productId)
     if(!stock){
         res.status(404)
@@ -71,9 +76,19 @@ const deleteCart = asyncHandler( async (req, res) =>{
     }
 })
 
-// 6537825ace976d494df7f171
-// 653775dd16d3e2caa143b7d9
+const getCart = asyncHandler( async (req, res) =>{
+    const {_id} = req.user
+    const userId =_id
+    const cart = await cartModels.findOne({userId})
+    if(cart){
+        res.status(200).json(cart)
+    }
+    else{
+        res.status(400)
+        throw new Error('Cart is empty')
+    }
+})
 // 65388e0dc3af090dca0a03bc
 // olonadetoyosi@gmail.com
 
-module.exports = {addCart, deleteCart}
+module.exports = {addCart, deleteCart, getCart}
