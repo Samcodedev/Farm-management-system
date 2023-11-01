@@ -7,7 +7,7 @@
 .stocks .sub-stocks{
     width: 81%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 10px;
     background-color: var(--light-gray);
     background-color: #fff;
@@ -21,7 +21,7 @@
 .stocks .sub-stocks .cards{
     /* background-color: var(--brandcolor-light); */
     /* padding: 10px 10px; */
-    width: 200px;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,10 +41,16 @@
     border-radius: 50%;
     cursor: pointer;
 }
+/* .stocks .sub-stocks .cards:hover #p{
+    color: var(--brandcolor-dark);
+} */
 .stocks .sub-stocks .cards .icon svg{
     font-size: 30px;
     color: var(--brandcolor-dark);
 }
 .stocks .sub-stocks .cards .icon:hover{
     border: 1.5px solid var(--brandcolor-dark);
+}
+.stocks .sub-stocks .cards .icon:hover #icon{
+    zoom: 106%;
 }

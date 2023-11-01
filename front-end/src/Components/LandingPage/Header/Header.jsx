@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.css'
-import img from '../../Assets/Farmer.jpg'
+import img from '../../Assets/3a7bb851-d9be-492a-99e3-dbfb2feff4a2.jpeg.png'
 
 const Header = () => {
   return (
