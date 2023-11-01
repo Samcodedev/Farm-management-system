@@ -11,33 +11,33 @@ const Stocks = () => {
       <div className="sub-stocks">
         <div className="cards">
             <div className="icon">
-              <GiCow />
+              <GiCow id='icon' />
             </div>
-            <p>Animals</p>
+            <p id='p'>Animals</p>
         </div>
         <div className="cards">
             <div className="icon">
-              <FaUserDoctor />
+              <FaUserDoctor id='icon' />
             </div>
-            <p>Vertinary</p>
+            <p id='p'>Vertinary</p>
         </div>
         <div className="cards">
             <div className="icon">
-              <GiHighGrass />
+              <GiHighGrass id='icon' />
             </div>
-            <p>Feeding</p>
+            <p id='p'>Feeding</p>
         </div>
         <div className="cards">
             <div className="icon">
-              <MdManageAccounts />
+              <MdManageAccounts id='icon' />
             </div>
-            <p>Management</p>
+            <p id='p'>Management</p>
         </div>
         <div className="cards">
             <div className="icon">
-              <MdHealthAndSafety />
+              <MdHealthAndSafety id='icon' />
             </div>
-            <p>Health</p>
+            <p id='p'>Health</p>
         </div>
       </div>
     </div>
