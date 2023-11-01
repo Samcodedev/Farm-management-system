@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './CartList.css'
 import img from '../../Assets/animal-2.jpeg'
 
+import {MdOutlineDeleteForever} from 'react-icons/md'
+//bootstrap import
+import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/esm/Table'
 
 const CartList = () => {
@@ -25,13 +28,14 @@ const CartList = () => {
 
   return (
     <div className='CartList'>
-        <Table variant='secondary'>
+        <Table>
             <thead>
                 <tr>
                     <th>Product details</th>
                     <th>Quality</th>
                     <th>Price</th>
                     <th>Total</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,12 +50,13 @@ const CartList = () => {
                         </div>
                     </td>
                     <td>
-                        <span onClick={qualitySub}>-</span>
-                        <div className='count'>{count >=1? count : countFunc(1)}</div>
-                        <span onClick={qualityAdd}>+</span>
+                        <input type='number' onChange={(e)=> change(e.target.value) } />
                     </td>
                     <td><p>${productPrice}</p></td>
                     <td><p>${price}</p></td>
+                    <td>
+                        <Button variant="danger">remove <MdOutlineDeleteForever fontSize={23} /> </Button>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -64,12 +69,13 @@ const CartList = () => {
                         </div>
                     </td>
                     <td>
-                        <span onClick={qualitySub}>-</span>
-                        <div className='count'>{count >=1? count : countFunc(1)}</div>
-                        <span onClick={qualityAdd}>+</span>
+                        <input type='number' onChange={(e)=> change(e.target.value) } />
                     </td>
                     <td><p>${productPrice}</p></td>
                     <td><p>${price}</p></td>
+                    <td>
+                        <Button variant="danger">remove <MdOutlineDeleteForever fontSize={23} /> </Button>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -82,12 +88,13 @@ const CartList = () => {
                         </div>
                     </td>
                     <td>
-                        <span onClick={qualitySub}>-</span>
-                        <div className='count'>{count >=1? count : countFunc(1)}</div>
-                        <span onClick={qualityAdd}>+</span>
+                        <input type='number' onChange={(e)=> change(e.target.value) } />
                     </td>
                     <td><p>${productPrice}</p></td>
                     <td><p>${price}</p></td>
+                    <td>
+                        <Button variant="danger">remove <MdOutlineDeleteForever fontSize={23} /> </Button>
+                    </td>
                 </tr>
             </tbody>
         </Table>

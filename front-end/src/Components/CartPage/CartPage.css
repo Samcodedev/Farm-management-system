@@ -4,7 +4,7 @@
 }
 .CartPage .sub-CartPage{
     width: 80%;
-    background-color: var(--light-gray);
+    /* background-color: var(--light-gray); */
     padding: 20px 20px;
     border-radius: 10px;
     display: flex;
@@ -15,14 +15,14 @@
     width: 100%;
 }
 .CartPage .sub-CartPage .cart .head{
-    border-bottom: 1.5px solid var(--brandcolor);
+    /* border-bottom: 1.5px solid var(--brandcolor); */
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
 }
 .CartPage .sub-CartPage .cart .head h3{
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
 }
 
 
