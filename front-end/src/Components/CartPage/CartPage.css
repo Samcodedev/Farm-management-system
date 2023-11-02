@@ -14,15 +14,5 @@
     position: relative;
     width: 100%;
 }
-.CartPage .sub-CartPage .cart .head{
-    /* border-bottom: 1.5px solid var(--brandcolor); */
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-.CartPage .sub-CartPage .cart .head h3{
-    font-size: 1.3rem;
-    font-weight: 800;
-}
 
 

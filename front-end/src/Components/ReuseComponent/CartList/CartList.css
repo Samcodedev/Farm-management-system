@@ -1,14 +1,25 @@
 .CartList{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: var(--light-gray) !important;
     margin-top: 20px;
-    border-radius: 10px;
-    padding: 20px 20px 0px 20px;
+}
+
+.CartList .head{
+    /* border-bottom: 1.5px solid var(--brandcolor); */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.CartList .head h3{
+    font-size: 1.3rem;
+    font-weight: 800;
 }
 
 .CartList table{
-    background-color: transparent !important;
+    /* background-color: transparent !important; */
+    background-color: var(--light-gray) !important;
+    border-radius: 10px;
 }
 .CartList table tbody tr td p{
     line-height: 65px;

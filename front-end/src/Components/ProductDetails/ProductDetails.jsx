@@ -11,7 +11,33 @@ import Table from 'react-bootstrap/Table'
 
 const ProductDetails = () => {
     let stockData = useLocation().state
+    const {_id, stockBreed, stockPrice } = stockData
     console.log(stockData);
+    
+    const addCart = async () =>{
+        let result = await fetch(
+            'http://localhost:5001/api/cart/',
+            {
+                method: "post",
+                credencials: "include",
+                mode: "cors",
+                body: JSON.stringify({
+                    productId:_id, 
+                    quantity: 1, 
+                    name: stockBreed, 
+                    price: stockPrice
+                }),
+                headers: {
+                  "content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem('accessToken'),
+                },
+            }
+        )
+        result = await result.json()
+        console.log(result);
+    }
+
+
   return (
     <div className='ProductDetails'>
       <div className="sub-ProductDetails">
@@ -150,7 +176,7 @@ const ProductDetails = () => {
             </div>
             <div className="bottom">
                 <button>ADD TO WISHLIST <RiPlayListAddFill /></button>
-                <button>ADD TO CART <BsCartPlus /></button>
+                <button onClick={addCart}>ADD TO CART <BsCartPlus /></button>
             </div>
         </div>
       </div>

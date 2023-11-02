@@ -4,8 +4,6 @@ import Data from './Data.json'
 import './CartPage.css'
 import Input from '../ReuseComponent/Input'
 
-import {MdShoppingCartCheckout} from 'react-icons/md'
-
 //bootstrap import
 import Button from 'react-bootstrap/Button';
 
@@ -36,11 +34,6 @@ const CartPage = () => {
     <div className='CartPage'>
       <div className="sub-CartPage">
         <div className="cart">
-          <div className="head">
-            <h3>Product Cart</h3>
-            <h3>3 Items</h3>
-            <Button variant="success">Check Out <MdShoppingCartCheckout fontSize={23} /> </Button>
-          </div>
           <div className="body">
             <CartList />
           </div>
