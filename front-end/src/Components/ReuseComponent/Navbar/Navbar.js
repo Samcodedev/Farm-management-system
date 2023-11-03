@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -5,20 +7,58 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, withRouter} from 'react-router-dom'
 
 function Navication() {
+  let [unValidate, unValidateFunc] = useState()
+  let [isAdmin, isAdminFunc] = useState(false)
+
+  let token = localStorage.getItem('accessToken')
+  let validationToken = localStorage.getItem('validationToken')
+  console.log(validationToken);
+
+  function callValidation(){
+    const parseJwt = (token) => {
+      // console.log('gggggggggggggggggggggggggghghg',token);
+      try {
+        return JSON.parse(atob(token.split(".")[1]));
+      } catch (e) {
+        return null;
+      }
+    };
+    console.log(parseJwt(token || validationToken));
+
+    console.log('workng');
+    if(parseJwt(token || validationToken).exp * 1000 > Date.now()){
+      unValidateFunc(true)
+    }
+    else{
+      unValidateFunc(false)
+    }
+    if(parseJwt(token || validationToken).user.role === 'farmer'){
+      isAdminFunc(true)
+    }
+    else if(parseJwt(token || validationToken).user.role === 'client'){
+      isAdminFunc(false)
+    }
+    else{
+      isAdminFunc(false)
+    }
+  }
+
+  useEffect(()=>{
+    // callValidation()
+  })
 
   const navigate = useNavigate()
 
   function logout(){
-    localStorage.clear('accessToken')
+    localStorage.removeItem('accessToken')
     navigate('/')
   }
 
   function profileRoute(){
-    const token = localStorage.getItem('accessToken')
-    if(token){
+    if(token || validationToken){
       navigate('/AdminProfile')
     }
     else{
@@ -27,8 +67,7 @@ function Navication() {
   }
 
   function CreateStockRoute(){
-    const token = localStorage.getItem('accessToken')
-    if(token){
+    if(token || validationToken){
       navigate('/CreateStock')
     }
     else{
@@ -41,7 +80,7 @@ function Navication() {
       {[false].map((expand) => (
         <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
           <Container fluid>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} onClick={callValidation} />
             <Navbar.Brand href="#">Farm management system</Navbar.Brand>
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -66,12 +105,12 @@ function Navication() {
                   </Form>
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                  <Nav.Link onClick={profileRoute}>Dashboard</Nav.Link>
+                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
                   <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
-                  <Nav.Link><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
-                  <Nav.Link onClick={CreateStockRoute}>Create Stock</Nav.Link>
-                  <Nav.Link><Link to='/ListStock'>Listed Stock</Link></Nav.Link>
-                  <Nav.Link><Link to='/Cart'>Cart</Link></Nav.Link>
+                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
+                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
+                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} ><Link to='/ListStock'>Listed Stock</Link></Nav.Link>
+                  <Nav.Link style={{display: isAdmin? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}
                   <NavDropdown
@@ -82,8 +121,8 @@ function Navication() {
                     <NavDropdown.Item to="#action4">
                       <Link to='/Register'>Register</Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5" onClick={logout}>
+                    <NavDropdown.Divider style={{display: unValidate? 'block' : 'none'}} />
+                    <NavDropdown.Item style={{display: unValidate? 'block' : 'none'}} href="#action5" onClick={logout}>
                       LogOut
                     </NavDropdown.Item>
                   </NavDropdown>

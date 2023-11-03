@@ -121,7 +121,7 @@
     border-radius: 5px;
 }
 .StockProfile .sub-StockProfile .stock .text-div{
-    background-color: var(--light-gray);
+    background-color: var(--subBrand);
     width: fit-content;
     height: 350px;
     border-radius: 5px;
@@ -134,7 +134,7 @@
     cursor: pointer;
 }
 .StockProfile .sub-StockProfile .stock .text-div .box{
-    background-color: var(--gray);
+    background-color: var(--light-gray);
     padding: 10px 20px;
     border-radius: 5px;
     width: fit-content;
