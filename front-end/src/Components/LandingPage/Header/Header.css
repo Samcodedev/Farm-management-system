@@ -5,6 +5,7 @@
 }
 .header .sub-header{
     width: 90%;
+    height: 80vh;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -27,6 +28,7 @@
     width: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .header .sub-header .img-div img{
     position: relative;

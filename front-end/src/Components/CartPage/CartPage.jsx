@@ -34,10 +34,6 @@ const CartPage = () => {
     <div className='CartPage'>
       <div className="sub-CartPage">
         <div className="cart">
-          <div className="head">
-            <h3>Shopping Cart</h3>
-            <h3>3items</h3>
-          </div>
           <div className="body">
             <CartList />
           </div>

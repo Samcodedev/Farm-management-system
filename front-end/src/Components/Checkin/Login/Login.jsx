@@ -40,6 +40,7 @@ const Login = () => {
     }
     else if(result.accessToken){
       localStorage.setItem('accessToken', result.accessToken)
+      localStorage.setItem('validationToken', result.accessToken)
       navigate('/AdminProfile')
 
     }

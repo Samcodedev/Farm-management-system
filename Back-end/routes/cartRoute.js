@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const { addCart, deleteCart, getCart } = require('../controllers/cartController')
+const validateToken = require('../middleware/validateToken')
+const {addCart, deleteCart, getCart} = require('../controllers/cartController')
 
 
-router.post('/:id', addCart)
-router.get('/:id', getCart)
-router.delete('/:id', deleteCart)
+router.use(validateToken)
+router.get('/', getCart)
+router.post('/', addCart)
+router.delete('/', deleteCart)
 
 module.exports = router

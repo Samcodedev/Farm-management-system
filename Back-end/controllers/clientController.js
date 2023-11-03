@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const clientModels = require('../Models/clientModels')
+const cartModels = require('../Models/cartModels')
 
 const registerClient = asyncHandler( async (req, res) =>{
     const {name, email, phone, password} = req.body
@@ -76,6 +77,8 @@ const loginClient = asyncHandler( async (req, res) =>{
 const getClient = asyncHandler( async (req, res) =>{
     if(req.user){
         const { _id, Name, Email, Phone, createdAT, updatedAt, role } = req.user
+        const userId = _id
+        const cart = await cartModels.findOne({userId})
         
         res.status(200).json({
             _id,
@@ -84,7 +87,11 @@ const getClient = asyncHandler( async (req, res) =>{
             Phone,
             createdAT,
             updatedAt,
-            role
+            role,
+            cart: {
+                totalCart: cart.length,
+                cart: cart
+            }
         })
     }
 })

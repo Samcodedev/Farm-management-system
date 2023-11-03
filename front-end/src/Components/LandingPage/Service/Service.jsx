@@ -1,6 +1,6 @@
 import React from 'react'
 import './Service.css'
-import img from '../../Assets/animal-2.jpeg'
+import img from '../../Assets/3695101d-47c9-4438-a553-6e3bf80daf9c.jpeg.png'
 
 const Service = () => {
   return (

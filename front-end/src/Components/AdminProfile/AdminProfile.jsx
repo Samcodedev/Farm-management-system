@@ -26,7 +26,6 @@ const [stockCreated, stockCreatedFunc] = useState()
 const [stockListed, stockListedFunc] = useState()
 const [createdStock, createdStockFunc] = useState()
 
-
 const handleProfile = async () =>{
   let result = await fetch(
     "http://localhost:5001/api/admin/",
