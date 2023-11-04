@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './CategoriesList.css'
 import ProductCards from '../../ReuseComponent/ProductCards/ProductCards'
+import Carousel from 'react-bootstrap/Carousel';
 
 const CategoriesList = () => {
 
@@ -34,25 +35,25 @@ const CategoriesList = () => {
     listedProductFunc(
       (backendResponse? backendResponse : JSON.parse(savedStock)).map((item)=>{
         return(
-          <ProductCards 
-            stockCategories={item.stockCategories}
-            stockBreed={item.stockBreed}
-            stockGroup={item.stockGroup}
-            stockImage={item.stockImage}
-            stockAge={item.stockAge}
-            stockGeder={item.stockGeder}
-            stockWeight={item.stockWeight}
-            stockCurrentLocation={item.stockCurrentLocation}
-    
-            stockPrice={item.stockPrice}
-            stockDescription={item.stockDescription}
-            stockReview={item.stockReview}
+                  <ProductCards 
+                    stockCategories={item.stockCategories}
+                    stockBreed={item.stockBreed}
+                    stockGroup={item.stockGroup}
+                    stockImage={item.stockImage}
+                    stockAge={item.stockAge}
+                    stockGeder={item.stockGeder}
+                    stockWeight={item.stockWeight}
+                    stockCurrentLocation={item.stockCurrentLocation}
             
-            userName={item.userName}
-            userEmail={item.userEmail}
-            userPhone={item.userPhone}
-            data={item}
-          />
+                    stockPrice={item.stockPrice}
+                    stockDescription={item.stockDescription}
+                    stockReview={item.stockReview}
+                    
+                    userName={item.userName}
+                    userEmail={item.userEmail}
+                    userPhone={item.userPhone}
+                    data={item}
+                  />
         )
       })
     )
@@ -61,11 +62,14 @@ const CategoriesList = () => {
   return (
     <div className='CategoriesList'>
       <div className="Categories-grouping">
-        <h3>Bulls</h3>
         <div className="Categories-cards">
-          <div className="scroll">
-            {listedProduct}
-          </div>
+            <Carousel controls={false}>
+              <Carousel.Item bsPrefix='carousel-item'>
+                <div className="scroll">
+                  {listedProduct}
+                </div>
+              </Carousel.Item>
+            </Carousel>
         </div>
       </div>
     </div>

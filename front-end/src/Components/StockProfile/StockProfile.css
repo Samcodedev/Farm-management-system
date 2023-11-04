@@ -74,11 +74,12 @@
     border: 5px solid var(--brandcolor-dark);
 }
 .StockProfile .sub-StockProfile .farmer .details .text-div{
-    height: 90%;
+    height: fit-content;
     color: var(--brandcolor-dark);
 }
 .StockProfile .sub-StockProfile .farmer .details .text-div h4{
     font-weight: 700;
+    font-size: 1.3rem;
 }
 .StockProfile .sub-StockProfile .farmer .details .text-div h4 span{
     font-weight: 500;

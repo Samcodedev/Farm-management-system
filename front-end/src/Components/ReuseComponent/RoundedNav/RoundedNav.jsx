@@ -3,7 +3,7 @@ import './RoundedNav.css'
 import { Link } from 'react-router-dom'
 
 const RoundedNav = ({lists}) => {
-    const list = lists.map((item) => {
+    const list = (lists || ['loading', 'loading', 'loading']).map((item) => {
         return(
             <Link><li>{item}</li></Link>
         )

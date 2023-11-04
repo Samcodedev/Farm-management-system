@@ -69,6 +69,9 @@
     color: var(--brandcolor-light);
     margin-bottom: 5px;
 }
+.ProductCards .details h5::first-line{
+    text-transform: capitalize;
+}
 .ProductCards .details h4{
     font-size: 1rem;
     color: rgb(212, 184, 1);
@@ -77,21 +80,21 @@
     color: rgba(219, 192, 13, 0.493);
 }
 .ProductCards .details button{
-    border: 2px solid var(--brandcolor);
+    /* border: 2px solid var(--brandcolor);
     background-color: var(--brandcolor);
     color: #fff;
     border-radius: 10px;
-    padding: 5px 20px;
+    padding: 5px 20px; */
     width: 100%;
-    margin-top: 5px;
-    transition-duration: 2s;
-    transition-timing-function: ease-in;
+    margin-top: 18px;
+    /* transition-duration: 2s;
+    transition-timing-function: ease-in; */
 }
-.ProductCards .details button:hover{
+/* .ProductCards .details button:hover{
     background-color: var(--brandcolor-light);
     border-color: var(--brandcolor-light);
     color: #fff;
-}
+} */
 .ProductCards .details button svg{
     font-size: 20px;
 }

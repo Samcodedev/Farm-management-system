@@ -4,7 +4,8 @@ import RoundedNav from '../ReuseComponent/RoundedNav/RoundedNav'
 import './StockDataPage.css'
 
 const StockDataPage = () => {
-  const lists = ['Cattle', 'Buffaloes', 'Sheep', 'Goats', 'Pigs', 'Chickens', 'Fish']
+  // const lists = ['Cattle', 'Buffaloes', 'Sheep', 'Goats', 'Pigs', 'Chickens', 'Fish']
+  let [lists, listsFunc] = useState()
 
   const [backendResponse, backendResponseFunc] = useState()
 
@@ -22,6 +23,14 @@ const StockDataPage = () => {
     );
     result = await result.json();
     backendResponseFunc(result)
+    let getCategories = []
+    result.map((item)=>{
+      if(!(getCategories.includes(item.stockCategories))){
+        getCategories.push(item.stockCategories)
+      }
+    })
+    listsFunc(getCategories)
+      console.log(getCategories);
     console.log(result)
   }
 

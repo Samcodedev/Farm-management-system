@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ProductCards.css'
 import img from '../../Assets/animal-2.jpeg'
 import { 
@@ -7,18 +7,69 @@ import {
   MdStar
  } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 
-const ProductCards = ({data,stockBreed,stockPrice,stockDescription}) => {
-  // const [star, starFunc] = useState()
-  // if(stockReview === "0"){
-  //   starFunc(
-  //     <MdStarOutline />
-  //     <MdStarOutline />
-  //     <MdStarOutline />
-  //     <MdStarOutline />
-  //     <MdStarOutline />
-  //   )
-  // }
+const ProductCards = ({data,stockBreed,stockPrice,stockDescription,stockReview}) => {
+  
+  let [star, starFunc] = useState()
+  useEffect(()=>{
+      if(stockReview <= '1'){
+          starFunc(
+              <>
+                  <MdStar />
+                  <MdStarOutline />
+                  <MdStarOutline />
+                  <MdStarOutline />
+                  <MdStarOutline />
+              </>
+          )
+      }
+      else if(stockReview === '2'){
+          starFunc(
+              <>
+                  <MdStar />
+                  <MdStar />
+                  <MdStarOutline />
+                  <MdStarOutline />
+                  <MdStarOutline />
+              </>
+          )
+      }
+      else if(stockReview === '3'){
+          starFunc(
+              <>
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+                  <MdStarOutline />
+                  <MdStarOutline />
+              </>
+          )
+      }
+      else if(stockReview === '4'){
+          starFunc(
+              <>
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+                  <MdStarOutline />
+              </>
+          )
+      }
+      else{
+          starFunc(
+              <>
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+                  <MdStar />
+              </>
+          )
+      }
+  }, [])
+  
   
   return (
     <div className='ProductCards'>
@@ -28,15 +79,11 @@ const ProductCards = ({data,stockBreed,stockPrice,stockDescription}) => {
         <div className='details'>
             <h5>{stockBreed}</h5>
             <div className='star'>
-              <MdStar />
-              <MdStar />
-              <MdStar />
-              <MdStar />
-              <MdStar />
+              {star}
             </div>
-            <p>{stockDescription}</p>
-            <h4><s>$999.99</s> {stockPrice}</h4>
-            <Link to='/Details' state={data}><button>Details <MdReadMore /> </button></Link>
+            <p>{((stockDescription.split(' ')).slice(0, 10)).map((item)=> {return item + ' '})}...</p>
+            <h4><s>{stockPrice+.99}</s> {stockPrice}</h4>
+            <Link to='/Details' state={data}><Button variant='success'>Details <MdReadMore /> </Button></Link>
         </div>
     </div>
   )

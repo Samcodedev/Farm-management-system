@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './CategoriesTop.css'
 import RoundedNav from '../../ReuseComponent/RoundedNav/RoundedNav'
 
-const CategoriesTop = () => {
-    const lists = ['livestock', 'plants', 'Foods']
+const CategoriesTop = ({data}) => {
   return (
     <div className='CategoriesTop'>
       <RoundedNav 
-        lists={lists}
+        lists={data}
       />
     </div>
   )

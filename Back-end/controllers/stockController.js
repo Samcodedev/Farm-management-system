@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const stockModel = require('../Models/stockModels')
+const userModels = require('../Models/userModels')
 
 
 // Register a new stock
@@ -50,6 +51,7 @@ const registerStock = asyncHandler( async (req, res) =>{
     }
 
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
+        const farmerDetails = await userModels.findById()
         const stock = await stockModel.create({
             stockCategories,
             stockBreed,
