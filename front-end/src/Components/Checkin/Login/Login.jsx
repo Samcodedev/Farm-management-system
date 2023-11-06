@@ -16,6 +16,7 @@ const Login = () => {
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
+  const [users, userFunc] = useState()
 
   const navigate = useNavigate()
 
@@ -41,9 +42,24 @@ const Login = () => {
     else if(result.accessToken){
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('validationToken', result.accessToken)
-      navigate('/AdminProfile')
 
-    }
+      const parseJwt = (token) => {
+      try {
+        return JSON.parse(atob(token.split(".")[1]));
+      } catch (e) {
+        return null;
+      }
+      };
+    //   console.log(parseJwt(token || validationToken));
+      if(parseJwt(result.accessToken).user.role === 'admin'){
+        userFunc('admin')
+      }
+      else if(parseJwt(result.accessToken).user.role === 'client'){
+        userFunc('client')
+      }
+        navigate('/AdminProfile', {state: users} )
+
+      }
     if(result){
       // loading stop
       // navigate('/AdminProfile')

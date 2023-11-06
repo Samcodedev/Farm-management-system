@@ -43,7 +43,11 @@ const addCart = asyncHandler( async (req, res) =>{
         }
     }
     else{
-        const newCart = await cartModels.create({ userId, products: [{ productId, quantity, name, price }] });
+        let addProduct = []
+        addProduct.push({ productId, quantity, name, price })
+        console.log({userId, products: addProduct});
+        const newCart = await cartModels.create( {userId, products: addProduct} );
+        console.log(newCart);
         res.status(200).json(newCart)
     }
 })

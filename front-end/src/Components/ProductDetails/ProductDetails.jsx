@@ -240,9 +240,9 @@ const ProductDetails = () => {
             </div>
             <div className="bottom">
                 <Button variant='danger' style={{display: message === 'Unauthorized'? 'block': 'none'}}>User {message}<RxCross2 /></Button>
-                <Button variant='success' style={{display: message === 'done'? 'block' : 'none'}} >Done <MdDone /></Button>
+                <Button variant='success' style={{display: message === 'done'? 'block' : 'none'}} >DONE <MdDone /></Button>
                 <Button variant='success' style={{display: message? 'none' : 'block'}} onClick={addCart}>ADD TO CART <BsCartPlus /></Button>
-                <Button variant='secondary' style={{display: message === 'Adding to cart'? 'block' : 'none'}} onClick={addCart}>ADDING TO CART  <BiLoaderAlt id='loading' /></Button>
+                <Button variant='secondary' style={{display: message === 'Adding to cart'? 'block' : 'none'}}>ADDING TO CART  <BiLoaderAlt id='loading' /></Button>
 
             </div>
         </div>

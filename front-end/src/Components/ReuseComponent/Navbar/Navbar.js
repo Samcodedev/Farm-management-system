@@ -46,7 +46,7 @@ function Navication() {
   }
 
   useEffect(()=>{
-    callValidation()
+    // callValidation()
   })
 
   const navigate = useNavigate()
@@ -106,8 +106,8 @@ function Navication() {
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
                   <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
+                  <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
+                  <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
                   <Nav.Link style={{display: isAdmin? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}

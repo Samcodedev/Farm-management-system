@@ -18,7 +18,7 @@ import DataTable from '../ReuseComponent/Table/DataTable'
 
 const AdminProfile = () => {
 
-const data = useLocation()
+  const data = useLocation()
 
 const [chartActive, chartActiveFunc] = useState(0)
 const [Name, NameFunc] = useState()
@@ -30,25 +30,8 @@ const [stockListed, stockListedFunc] = useState()
 const [createdStock, createdStockFunc] = useState()
 const [cart, cartFunc] = useState()
 let getToken = localStorage.getItem('accessToken')
-// let [quantity, quantityFunc] = useState()
-let [addQuality, addQualityFunc] = useState(0)
-let [addPrice, addPriceFunc] = useState(0)
 
 const handleProfile = async () =>{
-
-  function add(quantityData){
-    let quantitySum = 0
-    let priceSum = 0
-    for(let i=0; i<quantityData.length; i++){
-      quantitySum += quantityData[i].quantity
-      priceSum += quantityData[i].price
-      // console.log(sum);
-    }
-    addQualityFunc(quantitySum);
-    addPriceFunc(priceSum)
-  }
-
-
   if(getToken){
     const parseJwt = (token) => {
       try {
@@ -58,7 +41,7 @@ const handleProfile = async () =>{
       }
     };
     //   console.log(parseJwt(token || validationToken));
-    if(parseJwt(getToken).user.role === 'farmer'){
+    if(parseJwt(getToken).user.role === 'admin'){
       let result = await fetch(
         `http://localhost:5001/api/admin/`,
         {
@@ -80,6 +63,7 @@ const handleProfile = async () =>{
       stockCreatedFunc(stockCreated.totalStock)
       stockListedFunc(listedStock.totalListedStock)
       createdStockFunc(stockCreated.stocksId)
+    
       console.log(result)
     }
     else if(parseJwt(getToken).user.role === 'client'){
@@ -97,15 +81,15 @@ const handleProfile = async () =>{
       );
       result = await result.json();
       let {Name, Email, Phone, role, cart } = result
-      // quantityFunc(cart.cart.products)
       NameFunc(Name)
       EmailFunc(Email)
       PhoneFunc(Phone)
       RoleFunc(role)
       cartFunc(cart.cart.products.length)
-      add(cart.cart.products)
       // console.log();
+      console.log(result)
     }
+
   }
 
 }
@@ -139,7 +123,7 @@ useEffect(()=>{
               </div>
               <div className="text">
                 <h5>{stockCreated || cart}</h5>
-                <p>{stockCreated? 'Stock Created' : 'Total Cart'}</p>
+                <p>{stockCreated? 'Stock created' : 'Total cart'}</p>
               </div>
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(1)}
@@ -150,8 +134,8 @@ useEffect(()=>{
                 <BsListCheck />
               </div>
               <div className="text">
-                <h5>{stockListed || addQuality}</h5>
-                <p>{stockListed? 'Stock Listed' : 'Total Stocks'}</p>
+                <h5>{stockListed}</h5>
+                <p>Stock listed</p>
               </div>
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(2)}
@@ -162,8 +146,8 @@ useEffect(()=>{
                 <RiLineChartLine />
               </div>
               <div className="text">
-                <h5>₦{addPrice * addQuality}</h5>
-                <p>{addPrice? 'total cost' : 'Amount Earned'}</p>
+                <h5>8</h5>
+                <p>Stock sold</p>
               </div>
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(3)}
