@@ -1,11 +1,11 @@
 .stocks{
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 .stocks .sub-stocks{
-    width: 81%;
+    width: 60%;
     display: flex;
     justify-content: space-around;
     gap: 10px;

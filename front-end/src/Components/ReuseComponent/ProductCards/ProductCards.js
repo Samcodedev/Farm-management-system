@@ -82,7 +82,7 @@ const ProductCards = ({data,stockBreed,stockPrice,stockDescription,stockReview})
               {star}
             </div>
             <p>{((stockDescription.split(' ')).slice(0, 10)).map((item)=> {return item + ' '})}...</p>
-            <h4><s>{stockPrice+.99}</s> {stockPrice}</h4>
+            <h4><s>₦{stockPrice+.99}</s> ₦{stockPrice}</h4>
             <Link to='/Details' state={data}><Button variant='success'>Details <MdReadMore /> </Button></Link>
         </div>
     </div>

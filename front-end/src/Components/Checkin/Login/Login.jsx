@@ -140,7 +140,7 @@ const Login = () => {
           :
           null
         }
-        <small>Did not have an account <Link to='/Register'>register</Link></small>
+        <small>Don't have an account? <Link to='/Register'><u style={{color: 'red'}}>Register</u></Link></small>
       </form>
     </div>
   )

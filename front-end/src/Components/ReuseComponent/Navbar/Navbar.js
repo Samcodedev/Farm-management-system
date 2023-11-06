@@ -105,7 +105,7 @@ function Navication() {
                   <br/ >
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
-                  <Nav.Link><Link to='/Categories'>Listed Stocks Categories</Link></Nav.Link>
+                  <Nav.Link><Link to='/Categories'>Available Stock</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
                   <Nav.Link style={{display: isAdmin? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>

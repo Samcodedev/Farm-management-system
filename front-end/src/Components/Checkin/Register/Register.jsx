@@ -140,7 +140,7 @@ const Register = () => {
           :
           null
         }
-        <small>Already have an account <Link to='/Login'>Login</Link></small>
+        <small>Already have an account? <Link to='/Login'><u style={{color: 'red'}}>Login</u></Link></small>
       </form>
     </div>
   )

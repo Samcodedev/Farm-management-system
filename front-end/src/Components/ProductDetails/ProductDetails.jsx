@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ProductDetails.css'
-import { MdStar, MdStarOutline , MdDone, MdOutlineEventAvailable} from 'react-icons/md'
+import { MdStar, MdStarOutline , MdDone} from 'react-icons/md'
+import { TbSquareCheck } from 'react-icons/tb'
 import { BsCartPlus } from 'react-icons/bs'
 import { RxCross2 } from 'react-icons/rx'
 import { BiLoaderAlt } from 'react-icons/bi'
@@ -114,13 +115,13 @@ const ProductDetails = () => {
         </div>
         <div className="details">
             <div className="top">
-                <small>Available <MdOutlineEventAvailable fontSize={20} /></small>
+                <small>Available <TbSquareCheck fontSize={20} /></small>
                 <h2>{stockData.stockBreed}</h2>
                 <p>{stockData.userName}</p>
                 <div className="star">
                     {star}
                 </div>
-                <h1>{stockData.stockPrice}</h1>
+                <h1>₦{stockData.stockPrice}</h1>
             </div>
             <div className="body">
                 <p>{stockData.stockDescription}</p>
@@ -135,15 +136,15 @@ const ProductDetails = () => {
                                     <tr>
                                         <th>Gender</th>
                                         <th>Weight</th>
-                                        <th>Color</th>
+                                        <th>Breed</th>
                                         <th>Age</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>{stockData.stockGeder}</td>
-                                        <td>{stockData.stockWeight}turns</td>
-                                        <td>black</td>
+                                        <td>{stockData.stockWeight}kg</td>
+                                        <td>{stockData.stockBreed}</td>
                                         <td>{stockData.stockAge}years</td>
                                     </tr>
                                 </tbody>

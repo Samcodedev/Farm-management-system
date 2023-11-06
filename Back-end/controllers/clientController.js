@@ -63,7 +63,7 @@ const loginClient = asyncHandler( async (req, res) =>{
             }
         },
         process.env.ACCESS_TOKEN_SECERT,
-        {expiresIn: '20min'}
+        {expiresIn: '30min'}
         )
 
         res.status(200).json({accessToken})

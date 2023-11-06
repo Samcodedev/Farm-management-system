@@ -3,20 +3,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
 }
 .service .sub-service{
     width: 90%;
     display: flex;
+    gap: 20px;
 }
 .service .sub-service .img-div{
-    width: 60%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+    margin-left: 50px;
+ }
 .service .sub-service .img-div img{
     position: relative;
     width: 70%;
+    border-radius: 10px;
 }
 .service .sub-service .list{
     width: 40%;
@@ -56,4 +60,5 @@
 .service .sub-service .list .cards .text p{
     margin-bottom: 0;
     font-size: 12px;
+    max-width: 400px;
 }

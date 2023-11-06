@@ -13,13 +13,13 @@ const Stocks = () => {
             <div className="icon">
               <GiCow id='icon' />
             </div>
-            <p id='p'>Animals</p>
+            <p id='p'>Livestock</p>
         </div>
         <div className="cards">
             <div className="icon">
               <FaUserDoctor id='icon' />
             </div>
-            <p id='p'>Vertinary</p>
+            <p id='p'>Veterinarian</p>
         </div>
         <div className="cards">
             <div className="icon">
