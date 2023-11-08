@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const clientModels = require('../Models/clientModels')
 const cartModels = require('../Models/cartModels')
+const userModels = require('../Models/userModels')
+let cloudinary = require('cloudinary').v2;
 
 const registerClient = asyncHandler( async (req, res) =>{
     const {name, email, phone, password} = req.body
@@ -59,7 +61,8 @@ const loginClient = asyncHandler( async (req, res) =>{
                 Phone: client.phone,
                 createdAT: client.createdAt,
                 updatedAt: client.updatedAt,
-                role: client.role
+                role: client.role,
+                image: client.image
             }
         },
         process.env.ACCESS_TOKEN_SECERT,
@@ -74,9 +77,50 @@ const loginClient = asyncHandler( async (req, res) =>{
     }
 })
 
+
+const uploadPicture = asyncHandler(async (req, res) => {
+    const { image } = req.body;
+
+    const user = await clientModels.findById(req.user._id);
+
+    if (!user) {
+        res.status(404);
+        throw new Error('Unauthorized user')
+    }
+
+    cloudinary.config({ 
+        cloud_name: 'farm-management-system', 
+        api_key: '118842453864288', 
+        api_secret: 'UBUdMMicO5qGilobsj4Res5JGFM',
+        secure: true
+    });
+
+    // Upload an image
+    let response
+    cloudinary.uploader.upload(`${image}`, (error, result) => {
+        if (error) {
+        console.error(error);
+        return;
+        }
+        console.log(result.secure_url);
+        response = result.secure_url
+    });
+    const updateUser = await clientModels.findByIdAndUpdate(
+        req.user._id,
+        req.body,
+        {
+            new: true
+        }
+    )
+    res.status(200).json(updateUser)
+});
+
+
+
+
 const getClient = asyncHandler( async (req, res) =>{
     if(req.user){
-        const { _id, Name, Email, Phone, createdAT, updatedAt, role } = req.user
+        const { _id, Name, Email, Phone, createdAT, updatedAt, role, image } = req.user
         const userId = _id
         const cart = await cartModels.findOne({userId})
         
@@ -88,6 +132,7 @@ const getClient = asyncHandler( async (req, res) =>{
             createdAT,
             updatedAt,
             role,
+            image,
             cart: {
                 totalCart: cart.length,
                 cart: cart
@@ -105,4 +150,4 @@ const getClient = asyncHandler( async (req, res) =>{
 }
 */
 
-module.exports = {registerClient, loginClient, getClient}
+module.exports = {registerClient, loginClient, uploadPicture, getClient}

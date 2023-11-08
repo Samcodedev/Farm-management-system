@@ -4,9 +4,6 @@ import Data from './Data.json'
 import './CartPage.css'
 import Input from '../ReuseComponent/Input'
 
-//bootstrap import
-import Button from 'react-bootstrap/Button';
-
 const CartPage = () => {
   const [loading, loadinfFunc] = useState(false)
 
@@ -17,7 +14,6 @@ const CartPage = () => {
         aria-describedby={item.aria_describedby}
         placeholder={item.placeholder}
         type={item.type}
-        // onChange={(e) => onChangeFunc((e.target.value), item.onChange)}
       />
     )
   })

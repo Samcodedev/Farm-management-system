@@ -2,11 +2,11 @@ import React from 'react'
 import './Login.css'
 import {Link, useNavigate} from 'react-router-dom'
 import Data from './Data.json'
+import Input from '../../ReuseComponent/Input';
+import { useState } from 'react';
 
 //bootstrap import
 import Button from 'react-bootstrap/Button';
-import Input from '../../ReuseComponent/Input';
-import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert'
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
   const handleRegister = async (e) =>{
     e.preventDefault();
     let result = await fetch(
-      "http://localhost:5001/api/admin/login",
+      "http://localhost:5001/api/client/login",
       {
         method: "post",
         credencials: "include",
@@ -50,7 +50,6 @@ const Login = () => {
         return null;
       }
       };
-    //   console.log(parseJwt(token || validationToken));
       if(parseJwt(result.accessToken).user.role === 'admin'){
         userFunc('admin')
       }
@@ -61,8 +60,6 @@ const Login = () => {
 
       }
     if(result){
-      // loading stop
-      // navigate('/AdminProfile')
       setTimeout(() => {
         loadinfFunc(false)
         pupupFunc(true)

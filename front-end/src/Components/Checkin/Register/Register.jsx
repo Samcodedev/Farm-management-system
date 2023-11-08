@@ -2,11 +2,11 @@ import React from 'react'
 import './Register.css'
 import {Link, useNavigate} from 'react-router-dom'
 import Data from './Data.json'
+import Input from '../../ReuseComponent/Input';
+import { useState } from 'react';
 
 //bootstrap import
 import Button from 'react-bootstrap/Button';
-import Input from '../../ReuseComponent/Input';
-import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert'
 
 const Register = () => {
@@ -27,7 +27,7 @@ const Register = () => {
     const handleRegister = async (e) =>{
       e.preventDefault();
       let result = await fetch(
-        "http://localhost:5001/api/admin/register",
+        "http://localhost:5001/api/client/register",
         {
           method: "post",
           credencials: "include",
@@ -104,10 +104,6 @@ const Register = () => {
       else if(name && password && email && phone && password && confirmpassword){
         alertFunc(true)
       }
-      
-      if(password !== confirmpassword){
-        alertFunc(false)
-      }
     }
 
   return (
@@ -116,7 +112,7 @@ const Register = () => {
         <h4>Farm management system</h4>
         {inputs}
         <div className='d-grid gap-2'>
-          <Button 
+        <Button 
             variant={loading? 'secondary' : 'success'}
             size='lg' 
             onClick={loading_function}

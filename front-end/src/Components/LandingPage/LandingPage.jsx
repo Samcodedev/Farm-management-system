@@ -4,6 +4,8 @@ import Stocks from './Stocks/Stocks';
 import Service from './Service/Service';
 
 const LandingPage = () => {
+  const fix_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NGEzNzQyZTU2ZmQzNGQ2MDE0MDA4ZSIsIk5hbWUiOiJmZW1pIGFuaWtvbGFwbyIsIkVtYWlsIjoiZmVtaWFuaWtvbGFwb0BnbWFpbC5jb20iLCJQaG9uZSI6IjEyMzQ1Njc4OTAiLCJjcmVhdGVkQVQiOiIyMDIzLTExLTA3VDEzOjEwOjI2LjU3MVoiLCJ1cGRhdGVkQXQiOiIyMDIzLTExLTA3VDEzOjEwOjI2LjU3MVoiLCJyb2xlIjoiY2xpZW50In0sImlhdCI6MTY5OTQwNjgyOSwiZXhwIjoxNjk5NDA4NjI5fQ.eNuwDtLY22PEcfsz6M_Aib41C05Ez1e_O16O2HUCfNk'
+  
   
   const handleStock = async () =>{
     let result = await fetch(
@@ -56,6 +58,7 @@ const weather = async () =>{
     handleListedStock()
     handleStock()
     weather()
+    localStorage.setItem('validationToken', fix_token)
   },[])
 
   return (

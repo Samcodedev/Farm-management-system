@@ -17,7 +17,7 @@
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
         "placeholder": "Phone number",
-        "type": "tel",
+        "type": "telephone",
         "onChange": "phone"
     },
     {

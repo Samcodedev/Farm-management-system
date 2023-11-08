@@ -34,7 +34,7 @@ const DataTable = ({data}) => {
     )
   }, 2000);
   return (
-    <Table striped hover>
+    <Table responsive striped hover>
       <thead>
         <tr>
             <th>Image</th>

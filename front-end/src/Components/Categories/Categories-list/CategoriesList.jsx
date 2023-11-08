@@ -63,13 +63,13 @@ const CategoriesList = () => {
     <div className='CategoriesList'>
       <div className="Categories-grouping">
         <div className="Categories-cards">
-            <Carousel controls={false}>
-              <Carousel.Item bsPrefix='carousel-item'>
+            {/* <Carousel controls={false}>
+              <Carousel.Item bsPrefix='carousel-item'> */}
                 <div className="scroll">
                   {listedProduct}
                 </div>
-              </Carousel.Item>
-            </Carousel>
+              {/* </Carousel.Item>
+            </Carousel> */}
         </div>
       </div>
     </div>

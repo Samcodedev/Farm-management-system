@@ -43,3 +43,20 @@
     /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.541),
                 -0px -5px 20px rgb(0, 0, 0, 0.541); */
 }
+
+
+
+
+@media screen and (max-width: 1300px) {
+    .header .sub-header{
+        flex-direction: column;
+        height: 100%;
+    }
+    .header .sub-header .text-div{
+        width: 80%;
+    }
+    .header .sub-header .img-div{
+        width: 80%;
+        margin-bottom: 50px;
+    }
+}

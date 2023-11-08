@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const stockModel = require('../Models/stockModels')
 const nodemailer = require('nodemailer')
 const saleModels = require('../Models/saleModels')
+let cloudinary = require('cloudinary').v2;
 
 // Register a new user
 // Method: POST

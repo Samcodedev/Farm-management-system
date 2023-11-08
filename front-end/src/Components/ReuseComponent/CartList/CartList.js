@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CartList.css'
 import img from '../../Assets/animal-2.jpeg'
 
 import {MdOutlineDeleteForever, MdShoppingCartCheckout} from 'react-icons/md'
+import {RxUpdate} from 'react-icons/rx'
 //bootstrap import
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/esm/Table'
@@ -32,7 +33,7 @@ const CartList = () => {
           result = await result.json();
           CartAvailableFunc(result.products)
         // backendDataFunc(result)
-        backendResponseFunc( (result.products).map((item, index) =>{
+        backendResponseFunc( (result.products || null).map((item, index) =>{
             return(
                 <tr>
                     <td>
@@ -50,7 +51,8 @@ const CartList = () => {
                     <td><p>${item.price}</p></td>
                     <td><p>${item.price * item.quantity}</p></td>
                     <td>
-                        <Button variant="danger">remove <MdOutlineDeleteForever fontSize={23} /> </Button>
+                        <Button variant="danger" onClick={delCart}>remove <MdOutlineDeleteForever fontSize={23} /> </Button><br/>
+                        <Button variant="warning" onClick={addCart}>update <RxUpdate fontSize={23} /> </Button>
                     </td>
                 </tr>
             )
@@ -92,6 +94,7 @@ const CartList = () => {
         )
         result = await result.json()
         console.log(result);
+        cart()
     }
 
     const delCart = async () =>{
@@ -112,6 +115,7 @@ const CartList = () => {
         )
         result = await result.json()
         console.log(result);
+        cart()
     }
     
     // function del(data, index){
@@ -121,6 +125,10 @@ const CartList = () => {
     //     }
     //     productIdFunc(CartAvailable[index].productId)
     // }
+
+    useEffect(()=>{
+        cart()
+    })
 
 
   return (
@@ -135,13 +143,13 @@ const CartList = () => {
                 <tr>
                     <th>Product details</th>
                     <th>Quality</th>
-                    <th onClick={delCart}>Price</th>
-                    <th onClick={addCart}>Total</th>
-                    <th onClick={cart}>Remove</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                {backendResponse}
+                {backendResponse === null? 'nothing in your cart' : backendResponse}
             </tbody>
         </Table>
     </div>

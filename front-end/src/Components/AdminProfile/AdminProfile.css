@@ -52,6 +52,8 @@
     margin-right: 50px;
     overflow: hidden;
     z-index: 3;
+    background-image: url('../Assets/download.jpg');
+    background-size: contain;
 }
 .AdminProfile .sub-AdminProfile .details .profile .img-div img{
     position: relative;
@@ -109,7 +111,20 @@
     padding: 20px 10px 20px 0px;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 1273px) {
+    .AdminProfile .sub-AdminProfile{
+        flex-direction: column;
+    }
+    .AdminProfile .sub-AdminProfile .details{
+        width: 100%;
+    }
+    .AdminProfile .sub-AdminProfile .chat{
+        width: 100%;
+        margin-bottom: 50px;
+    }
+}
+@media screen and (max-width: 1187px) {
+    
     .AdminProfile .sub-AdminProfile .details .profile{
         flex-direction: column;
         max-height: fit-content;

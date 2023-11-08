@@ -21,9 +21,9 @@ const AdminProfile = () => {
 const data = useLocation()
 
 const [chartActive, chartActiveFunc] = useState(0)
-const [Name, NameFunc] = useState()
-const [Email, EmailFunc] = useState()
-const [Phone, PhoneFunc] = useState()
+let [Name, NameFunc] = useState()
+let [Email, EmailFunc] = useState()
+let [Phone, PhoneFunc] = useState()
 let [Role, RoleFunc] = useState()
 const [stockCreated, stockCreatedFunc] = useState()
 const [stockListed, stockListedFunc] = useState()
@@ -33,6 +33,8 @@ let getToken = localStorage.getItem('accessToken')
 // let [quantity, quantityFunc] = useState()
 let [addQuality, addQualityFunc] = useState(0)
 let [addPrice, addPriceFunc] = useState(0)
+let [profileImage, profileImageFunc] = useState()
+let [display, displayFunc] = useState()
 
 const handleProfile = async () =>{
 
@@ -96,7 +98,8 @@ const handleProfile = async () =>{
         }
       );
       result = await result.json();
-      let {Name, Email, Phone, role, cart } = result
+      console.log(result);
+      let {Name, Email, Phone, role, cart, image } = result
       // quantityFunc(cart.cart.products)
       NameFunc(Name)
       EmailFunc(Email)
@@ -104,10 +107,34 @@ const handleProfile = async () =>{
       RoleFunc(role)
       cartFunc(cart.cart.products.length)
       add(cart.cart.products)
-      // console.log();
+      displayFunc(image)
     }
   }
 
+}
+
+const upload = async () =>{
+  console.log('working');
+  let result = await fetch(
+    "http://localhost:5001/api/client/",
+    {
+      method: "put",
+      credencials: "include",
+      mode: "cors",
+      body: JSON.stringify({ image: profileImage }),
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem('accessToken'),
+      },
+    }
+  );
+  result = await result.json();
+  console.log(result);
+  displayFunc(result.image)
+}
+
+function call(url){
+  profileImageFunc(url)
 }
 
 useEffect(()=>{
@@ -123,10 +150,11 @@ useEffect(()=>{
               <h2>{Name}</h2>
               <h5>{Email}</h5>
               <h5>{Phone}</h5>
-              <h5>{Role}</h5>
+              <h5 onClick={upload}>{Role}</h5>
+              <input type="file" onChange={(e)=> call(URL.createObjectURL(e.target.files[0])) } />
             </div>
             <div className="img-div">
-              <img src={img} alt="" />
+              <img src={display} alt="" />
             </div>
           </div>
           <Row className="container">
@@ -168,7 +196,8 @@ useEffect(()=>{
             </Col>
             <Col className="cards" onClick={()=> chartActiveFunc(3)}
               style={{
-                backgroundColor: chartActive === 3? '#6bbb96' : 'var(--subBrand)'
+                backgroundColor: chartActive === 3? '#6bbb96' : 'var(--subBrand)',
+                display: 'none'
               }}>
               <div className="icon">
                 <MdPlaylistRemove />
@@ -179,12 +208,19 @@ useEffect(()=>{
               </div>
             </Col>
           </Row>
-          <DataTable 
-            data={createdStock}
-          />
+          <div className="table" style={{display: stockCreated? 'block' : 'none' }}>
+            <DataTable 
+              data={createdStock}
+            />
+          </div>
         </div>
         <div className="chat">
-              <LineCharts />
+              <LineCharts 
+                listed={stockListed}
+                create={stockCreated}
+                amount={addPrice * addQuality}
+                unlisted={stockCreated - stockListed}
+              />
         </div>
       </div>
     </div>

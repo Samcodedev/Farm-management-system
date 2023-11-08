@@ -11,33 +11,26 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-    {
-      name: 'Listed RN',
-      Amount: 62,
-    },
-    {
-      name: 'Stock',
-      Amount: 95,
-    },
-    {
-      name: 'Created',
-      Amount: 100,
-    },
-    {
-      name: 'Listed',
-      Amount: 70,
-    },
-    {
-      name: 'Sold',
-      Amount: 8,
-    },
-    {
-      name: 'Motality',
-      Amount: 5,
-    },
-  ];
-const LineCharts = () => {
+const LineCharts = ({listed, create, amount, unlisted}) => {
+
+  const data = [
+      {
+        name: 'Listed stock',
+        Amount: listed,
+      },
+      {
+        name: 'Stock Created',
+        Amount: create,
+      },
+      {
+        name: 'Total Earned',
+        Amount: amount,
+      },
+      {
+        name: 'Listed Stock',
+        Amount: unlisted,
+      }
+    ];
 
   return (
     <ResponsiveContainer width="100%" height="100%">

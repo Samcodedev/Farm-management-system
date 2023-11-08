@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema({
     role: {
         type: String,
         require: [true, 'Please input role']
+    },
+    image: {
+        type: String,
+        require: [true, 'please input image']
     }
 },
 {
