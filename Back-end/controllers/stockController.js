@@ -1,17 +1,19 @@
 const asyncHandler = require('express-async-handler')
 const stockModel = require('../Models/stockModels')
 const userModels = require('../Models/userModels')
+const fs = require("fs")
+const cloudinary = require("../utils/cloudinary")
 
 
 // Register a new stock
 // Method: POST
 // access: private
 const registerStock = asyncHandler( async (req, res) =>{
+ 
     const {
             stockCategories,
             stockBreed,
             stockGroup,
-            stockImage,
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -27,36 +29,55 @@ const registerStock = asyncHandler( async (req, res) =>{
         stockVeterinarian,
         stockColor,
     } = req.body
-    if(
-        !stockCategories ||
-        !stockBreed ||
-        !stockGroup ||
-        !stockImage ||
-        !stockAge ||
-        !stockHealthStatus ||
-        !stockHealthPercente ||
-        !stockGeder ||
-        !stockWeight ||
-        !stockVerccineName ||
-        !stockVerccineDueDate ||
-        !stockCurrentLocation ||
-        !stockLastVeterinarianCheck ||
-        !stockLastVeterinarian ||
-        !stockLastDiagnosis ||
-        !stockVeterinarian ||
-        !stockColor
-    ){
-        res.status(400)
-        throw new Error('All input field are mandatary')
+    const file = req.file
+    if(!file){
+        
+        throw new Error('All input field are mandatary') 
     }
-
+    // if(
+    //     !stockCategories ||
+    //     !stockBreed ||
+    //     !stockGroup ||
+    //     !stockAge ||
+    //     !stockHealthStatus ||
+    //     !stockHealthPercente ||
+    //     !stockGeder ||
+    //     !stockWeight ||
+    //     !stockVerccineName ||
+    //     !stockVerccineDueDate ||
+    //     !stockCurrentLocation ||
+    //     !stockLastVeterinarianCheck ||
+    //     !stockLastVeterinarian ||
+    //     !stockLastDiagnosis ||
+    //     !stockVeterinarian ||
+    //     !stockColor
+    // ){
+    //     res.status(400)
+    //     throw new Error('All input field are mandatary')
+    // }
+   
+    const uploader = async (path) => await cloudinary.uploads(path , 'coursecontent')
+    
+    let url;
+ 
+   
+    
+    const {path} = file
+    
+    const newPath = await uploader(path)
+    
+    url = newPath.url
+    
+    
+    fs.unlinkSync(path)
+   
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
         const farmerDetails = await userModels.findById()
         const stock = await stockModel.create({
             stockCategories,
             stockBreed,
             stockGroup,
-            stockImage,
+            stockImage:url.toString(),
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -78,7 +99,8 @@ const registerStock = asyncHandler( async (req, res) =>{
             res.status(200).json({
                 _id: stock._id,
                 stockCategories: stock.stockCategories,
-                stockBreed: stock.stockBreed
+                stockBreed: stock.stockBreed,
+                stockImage:stock.stockImage
             })
         }
         else{
