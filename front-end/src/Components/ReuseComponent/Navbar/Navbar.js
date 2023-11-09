@@ -10,7 +10,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import {Link, useNavigate, withRouter} from 'react-router-dom'
 
 function Navication() {
-  let [unValidate, unValidateFunc] = useState()
+  let [unValidate, unValidateFunc] = useState(true)
   let [isAdmin, isAdminFunc] = useState(null)
 
   let token = localStorage.getItem('accessToken')
@@ -98,7 +98,7 @@ function Navication() {
                   <Nav.Link><Link to='/Categories'>Available Stock</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
-                  <Nav.Link style={{display: isAdmin === true || isAdmin === null? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>
+                  <Nav.Link style={{display: isAdmin === true || isAdmin === null || unValidate === true ? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}
                   <NavDropdown

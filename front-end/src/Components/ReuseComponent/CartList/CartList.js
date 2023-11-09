@@ -7,6 +7,7 @@ import {RxUpdate} from 'react-icons/rx'
 //bootstrap import
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/esm/Table'
+import Modal from 'react-bootstrap/Modal';
 
 const CartList = () => {
     let [productId, productIdFunc] = useState()
@@ -15,6 +16,12 @@ const CartList = () => {
     let [price, priceFunc] = useState()
     let [backendResponse, backendResponseFunc] = useState()
     const [CartAvailable, CartAvailableFunc] = useState(0)
+    let [totalAmount, totalAmountFunc] = useState()
+
+    
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
     const cart = async () =>{
@@ -34,6 +41,7 @@ const CartList = () => {
           CartAvailableFunc(result.products)
         // backendDataFunc(result)
         backendResponseFunc( (result.products || null).map((item, index) =>{
+          totalAmountFunc(totalAmount + (item.price * item.quantity))
             return(
                 <tr>
                     <td>
@@ -58,7 +66,7 @@ const CartList = () => {
             )
         })
         )
-
+// 7b4313119ad3
         
         function update(data, index){
             quantityFunc(data)
@@ -136,7 +144,7 @@ const CartList = () => {
         <div className="head">
             <h3>Product Cart</h3>
             <h3>{CartAvailable.length} Item{CartAvailable <= 1 ? '' : 's'}</h3>
-            <Button variant="success">Check Out <MdShoppingCartCheckout fontSize={23} /> </Button>
+            <Button variant="success" onClick={handleShow}>Check Out <MdShoppingCartCheckout fontSize={23} /> </Button>
         </div>
         <Table>
             <thead>
@@ -152,6 +160,29 @@ const CartList = () => {
                 {backendResponse === null? 'nothing in your cart' : backendResponse}
             </tbody>
         </Table>
+
+
+        <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+        >
+            <Modal.Header closeButton>
+            <Modal.Title>Payment Check Out</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Total cost: ₦{totalAmount}  <br />
+                click "MAKE PAYMENT" to proceed.
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <a href='https://sandbox-flw-web-v3.herokuapp.com/pay/zaow3swsit8g'><Button variant="primary">Make payment</Button></a>
+            
+            </Modal.Footer>
+        </Modal>
     </div>
   )
 }

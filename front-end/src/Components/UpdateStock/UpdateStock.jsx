@@ -36,8 +36,8 @@ const UpdateStock = () => {
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
-  const stockId = useLocation()
-  console.log(stockId.useState);
+  let stockId = useLocation()
+  console.log(stockId.state);
 
 
 
@@ -45,7 +45,7 @@ const UpdateStock = () => {
     e.preventDefault();
     console.log(stockVerccineName);
     let result = await fetch(
-      `http://localhost:5001/api/stock/${stockId.state}`,
+      `http://localhost:5001/api/stock/${stockId.state._id}`,
       {
         method: "put",
         credencials: "include",

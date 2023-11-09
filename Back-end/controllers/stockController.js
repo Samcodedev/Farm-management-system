@@ -1,25 +1,28 @@
 const asyncHandler = require('express-async-handler')
 const stockModel = require('../Models/stockModels')
 const userModels = require('../Models/userModels')
+const cloudinary = require('../utils/cloudinary')
 
 
 // Register a new stock
 // Method: POST
 // access: private
 const registerStock = asyncHandler( async (req, res) =>{
+    const file = req.file
+    console.log(req.body, file);
     const {
-            stockCategories,
-            stockBreed,
-            stockGroup,
-            stockImage,
-            stockAge,
-            stockHealthStatus,
-            stockHealthPercente,
-            stockGeder,
-            stockWeight,
+        stockCategories,
+        stockBreed,
+        stockGroup,
+        
+        stockAge,
+        stockHealthStatus,
+        stockHealthPercente,
+        stockGeder,
+        stockWeight,
         stockVerccineName,
         stockVerccineDueDate,
-            stockCurrentLocation,
+        stockCurrentLocation,
         stockLastVeterinarianCheck,
         stockLastVeterinarian,
         stockLastDiagnosis,
@@ -27,6 +30,11 @@ const registerStock = asyncHandler( async (req, res) =>{
         stockVeterinarian,
         stockColor,
     } = req.body
+    
+    if(!file){
+        res.status(404)
+        throw new Error('Please upload a file')
+    }
     if(
         !stockCategories ||
         !stockBreed ||
@@ -51,12 +59,25 @@ const registerStock = asyncHandler( async (req, res) =>{
     }
 
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
-        const farmerDetails = await userModels.findById()
+
+        console.log(req.body, file);
+
+        const uploader = async (path) => await cloudinary.uploads(path , 'farm-management-animal-picture')
+    
+        let url;
+        const {path} = file
+        const newPath = await uploader(path)
+        url = newPath.url
+        
+        
+        fs.unlinkSync(path)
+        
+        
         const stock = await stockModel.create({
             stockCategories,
             stockBreed,
             stockGroup,
-            stockImage,
+            stockImage: url.toString(),
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -118,17 +139,53 @@ const updateStock = asyncHandler( async (req, res) =>{
         if(!req.body){
             throw new Error('No data is been updated')
         }
+
+
+        console.log('working');
+        cloudinary.config({ 
+            cloud_name: 'farm-management-system', 
+            api_key: '118842453864288', 
+            api_secret: process.env.FLW_SECRET_KEY,
+            secure: true
+        });
+
+        // Upload an image
+        let response
+        cloudinary.uploader.upload(`${stockImage}`, (error, result) => {
+            if (error) {
+            console.error(error);
+            return;
+            }
+            console.log(result.secure_url);
+            response = result.secure_url
+        });
+
         const updateStock = await stockModel.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            {
+                stockCategories,
+                stockBreed,
+                stockGroup,
+                stockImage: response,
+                stockAge,
+                stockHealthStatus,
+                stockHealthPercente,
+                stockGeder,
+                stockWeight,
+                stockVerccineName,
+                stockVerccineDueDate,
+                stockCurrentLocation,
+                stockLastVeterinarianCheck,
+                stockLastVeterinarian,
+                stockLastDiagnosis,
+
+                stockVeterinarian,
+                stockColor
+            },
             {
                 new: true
             }
         )
-
-        if(updateStock === stock){
-            
-        }
     
         res.status(200).json({updateStock})
     }

@@ -19,6 +19,7 @@ const StockProfile = () => {
     useEffect(()=>{
         const parseJwt = (token) => {
         try {
+          console.log(data);
           return JSON.parse(atob(token.split(".")[1]));
         } catch (e) {
           return null;
@@ -58,8 +59,8 @@ const StockProfile = () => {
                     <div className="text-div">
                         <h4>Farmer: <span>Samuel Obanla</span></h4>
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data._id}><button>Update Stock</button></Link>
-                        <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data._id}><button>List Stock</button></Link>
+                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>Update Stock</button></Link>
+                        <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>List Stock</button></Link>
                     </div>
                 </div>
                 <div className="weather">

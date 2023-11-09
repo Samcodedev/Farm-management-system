@@ -23,7 +23,7 @@ const Login = () => {
   const handleRegister = async (e) =>{
     e.preventDefault();
     let result = await fetch(
-      "http://localhost:5001/api/client/login",
+      "http://localhost:5001/api/admin/login",
       {
         method: "post",
         credencials: "include",

@@ -11,6 +11,7 @@ const port = process.env.PORT
 
 // setting the response format to JSON format
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 // sets of data routes wish are the USER and STOCK
