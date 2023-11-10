@@ -11,14 +11,15 @@ const cloudinary = require("../utils/cloudinary")
 const registerStock = asyncHandler( async (req, res) =>{
  
     const {
-            stockCategories,
-            stockBreed,
-            stockGroup,
-            stockAge,
-            stockHealthStatus,
-            stockHealthPercente,
-            stockGeder,
-            stockWeight,
+        stockCategories,
+        stockBreed,
+        stockGroup,
+        stockImage,
+        stockAge,
+        stockHealthStatus,
+        stockHealthPercente,
+        stockGeder,
+        stockWeight,
         stockVerccineName,
         stockVerccineDueDate,
         stockCurrentLocation,
@@ -29,68 +30,37 @@ const registerStock = asyncHandler( async (req, res) =>{
         stockVeterinarian,
         stockColor,
     } = req.body
-    const file = req.file
-    if(!file){
-        
-        throw new Error('All input field are mandatary') 
+
+    if(
+        !stockCategories ||
+        !stockBreed ||
+        !stockGroup ||
+        !stockImage ||
+        !stockAge ||
+        !stockHealthStatus ||
+        !stockHealthPercente ||
+        !stockGeder ||
+        !stockWeight ||
+        !stockVerccineName ||
+        !stockVerccineDueDate ||
+        !stockCurrentLocation ||
+        !stockLastVeterinarianCheck ||
+        !stockLastVeterinarian ||
+        !stockLastDiagnosis ||
+        !stockVeterinarian ||
+        !stockColor
+    ){
+        res.status(400)
+        throw new Error('All input field are mandatary')
     }
-    // if(
-    //     !stockCategories ||
-    //     !stockBreed ||
-    //     !stockGroup ||
-    //     !stockAge ||
-    //     !stockHealthStatus ||
-    //     !stockHealthPercente ||
-    //     !stockGeder ||
-    //     !stockWeight ||
-    //     !stockVerccineName ||
-    //     !stockVerccineDueDate ||
-    //     !stockCurrentLocation ||
-    //     !stockLastVeterinarianCheck ||
-    //     !stockLastVeterinarian ||
-    //     !stockLastDiagnosis ||
-    //     !stockVeterinarian ||
-    //     !stockColor
-    // ){
-    //     res.status(400)
-    //     throw new Error('All input field are mandatary')
-    // }
-   
-    const uploader = async (path) => await cloudinary.uploads(path , 'coursecontent')
-    
-    let url;
- 
-   
-    
-    const {path} = file
-    
-    const newPath = await uploader(path)
-    
-    url = newPath.url
-    
-    
-    fs.unlinkSync(path)
    
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
-
-        console.log(req.body, file);
-
-        const uploader = async (path) => await cloudinary.uploads(path , 'farm-management-animal-picture')
-    
-        let url;
-        const {path} = file
-        const newPath = await uploader(path)
-        url = newPath.url
-        
-        
-        fs.unlinkSync(path)
-        
         
         const stock = await stockModel.create({
             stockCategories,
             stockBreed,
             stockGroup,
-            stockImage:url.toString(),
+            stockImage,
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -151,51 +121,14 @@ const updateStock = asyncHandler( async (req, res) =>{
             throw new Error('You do not have permission to update this stock')
         }
         if(!req.body){
+            res.status(404)
             throw new Error('No data is been updated')
         }
 
 
-        console.log('working');
-        cloudinary.config({ 
-            cloud_name: 'farm-management-system', 
-            api_key: '118842453864288', 
-            api_secret: process.env.FLW_SECRET_KEY,
-            secure: true
-        });
-
-        // Upload an image
-        let response
-        cloudinary.uploader.upload(`${stockImage}`, (error, result) => {
-            if (error) {
-            console.error(error);
-            return;
-            }
-            console.log(result.secure_url);
-            response = result.secure_url
-        });
-
         const updateStock = await stockModel.findByIdAndUpdate(
             req.params.id,
-            {
-                stockCategories,
-                stockBreed,
-                stockGroup,
-                stockImage: response,
-                stockAge,
-                stockHealthStatus,
-                stockHealthPercente,
-                stockGeder,
-                stockWeight,
-                stockVerccineName,
-                stockVerccineDueDate,
-                stockCurrentLocation,
-                stockLastVeterinarianCheck,
-                stockLastVeterinarian,
-                stockLastDiagnosis,
-
-                stockVeterinarian,
-                stockColor
-            },
+            req.body,
             {
                 new: true
             }

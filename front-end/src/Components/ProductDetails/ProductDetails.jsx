@@ -111,7 +111,7 @@ const ProductDetails = () => {
     <div className='ProductDetails'>
       <div className="sub-ProductDetails">
         <div className="img-div">
-            <img src={img} alt="product" />
+            <img src={stockData.stockImage} alt="product" />
         </div>
         <div className="details">
             <div className="top">

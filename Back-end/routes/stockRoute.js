@@ -9,8 +9,8 @@ const uploadPicture = require('../utils/upload')
 // all endpoint on STOCK route, they are all private endpoint
 router.get('/', getStock)
 router.use(validateToken)
-router.post('/register',uploadPicture.single("image"),registerStock)
-router.put('/:id', updateStock)
+router.post('/register', registerStock)
+router.put('/:id' , updateStock)
 router.get('/:id', stockDetail)
 router.delete('/:id', deleteStock)
 

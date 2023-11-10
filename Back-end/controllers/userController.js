@@ -74,7 +74,7 @@ const loginAdmin = asyncHandler( async (req, res)=>{
             
         },
         process.env.ACCESS_TOKEN_SECERT,
-        {expiresIn: '30min'}
+        // {expiresIn: '30min'}
         )
 
         res.status(200).json({accessToken})

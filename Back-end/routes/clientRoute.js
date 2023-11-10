@@ -7,6 +7,6 @@ const validateToken = require('../middleware/validateToken')
 router.post('/register', registerClient)
 router.post('/login', loginClient)
 router.get('/', validateToken, getClient)
-router.put('/', validateToken, uploadPicture)
+router.put('/:id', validateToken, uploadPicture)
 
 module.exports = router

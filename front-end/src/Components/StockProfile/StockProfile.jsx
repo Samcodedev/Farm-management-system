@@ -3,7 +3,7 @@ import './StockProfile.css'
 import img from '../Assets/dummy.png'
 // import weader from '../../../public/weather/64x64/day/ii3.png'
 // import img2 from '../Assets/weather/64x64/day/'
-import farmer from '../Assets/Farmer.jpg'
+import farmer from '../Assets/download.jpg'
 
 // import Table from 'react-bootstrap/esm/Table'
 import { useLocation, Link } from 'react-router-dom'
@@ -19,7 +19,6 @@ const StockProfile = () => {
     useEffect(()=>{
         const parseJwt = (token) => {
         try {
-          console.log(data);
           return JSON.parse(atob(token.split(".")[1]));
         } catch (e) {
           return null;
@@ -57,9 +56,9 @@ const StockProfile = () => {
                         <img src={farmer} alt="farmer" />
                     </div>
                     <div className="text-div">
-                        <h4>Farmer: <span>Samuel Obanla</span></h4>
+                        {/* <h4>Farmer: <span>Samuel Obanla</span></h4> */}
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>Update Stock</button></Link>
+                        <Link to='/UpdateStock' state={data}><button>Update Stock</button></Link>
                         <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>List Stock</button></Link>
                     </div>
                 </div>
@@ -77,7 +76,7 @@ const StockProfile = () => {
             </div>
             <div className="stock">
                 <div className="img-div">
-                    <img src={img} alt="stock" />
+                    <img src={data.stockImage} alt="stock" />
                 </div>
                 <div className="text-div">
                     <div className="box">

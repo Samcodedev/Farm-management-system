@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 
-const ProductCards = ({data,stockBreed,stockPrice,stockDescription,stockReview}) => {
+const ProductCards = ({data,stockBreed,stockPrice,stockDescription,stockReview, stockImage}) => {
   
   let [star, starFunc] = useState()
   useEffect(()=>{
@@ -74,7 +74,7 @@ const ProductCards = ({data,stockBreed,stockPrice,stockDescription,stockReview})
   return (
     <div className='ProductCards'>
         <div className='img-div'>
-          <img src={img} alt='product'  id='product'/>
+          <img src={stockImage || img} alt='product'  id='product'/>
         </div>
         <div className='details'>
             <h5>{stockBreed}</h5>

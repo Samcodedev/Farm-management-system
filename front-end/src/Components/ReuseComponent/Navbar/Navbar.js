@@ -10,7 +10,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import {Link, useNavigate, withRouter} from 'react-router-dom'
 
 function Navication() {
-  let [unValidate, unValidateFunc] = useState(true)
+  let [unValidate, unValidateFunc] = useState(false)
   let [isAdmin, isAdminFunc] = useState(null)
 
   let token = localStorage.getItem('accessToken')
@@ -94,10 +94,10 @@ function Navication() {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
+                  <Nav.Link style={{display: unValidate === false? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
                   <Nav.Link><Link to='/Categories'>Available Stock</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
+                  <Nav.Link style={{display: unValidate === false && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
+                  <Nav.Link style={{display: unValidate === false && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
                   <Nav.Link style={{display: isAdmin === true || isAdmin === null || unValidate === true ? 'none' : 'block'}} ><Link to='/Cart'>Cart</Link></Nav.Link>
                   {/* <Nav.Link><Link to='/'>About Us</Link></Nav.Link>
                   <Nav.Link href="#action2">Contact Us</Nav.Link> */}

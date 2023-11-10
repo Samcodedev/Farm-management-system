@@ -5,6 +5,7 @@ import { MdAddChart } from 'react-icons/md'
 import { BsListCheck } from 'react-icons/bs'
 import { RiLineChartLine } from 'react-icons/ri'
 import { MdPlaylistRemove } from 'react-icons/md'
+import Axios from 'axios'
 
 import { useLocation } from 'react-router-dom'
 
@@ -25,6 +26,7 @@ let [Name, NameFunc] = useState()
 let [Email, EmailFunc] = useState()
 let [Phone, PhoneFunc] = useState()
 let [Role, RoleFunc] = useState()
+let [id, idFunc] = useState()
 const [stockCreated, stockCreatedFunc] = useState()
 const [stockListed, stockListedFunc] = useState()
 const [createdStock, createdStockFunc] = useState()
@@ -35,6 +37,7 @@ let [addQuality, addQualityFunc] = useState(0)
 let [addPrice, addPriceFunc] = useState(0)
 let [profileImage, profileImageFunc] = useState()
 let [display, displayFunc] = useState()
+let [profile, profileFunc] = useState()
 
 const handleProfile = async () =>{
 
@@ -74,11 +77,12 @@ const handleProfile = async () =>{
         }
       );
       result = await result.json();
-      let {Name, Email, Phone, role, stockCreated, listedStock } = result
+      let {Name, Email, Phone, role, stockCreated, listedStock, _id } = result
       NameFunc(Name)
       EmailFunc(Email)
       PhoneFunc(Phone)
       RoleFunc(role)
+      idFunc(_id)
       stockCreatedFunc(stockCreated.totalStock)
       stockListedFunc(listedStock.totalListedStock)
       createdStockFunc(stockCreated.stocksId)
@@ -111,35 +115,51 @@ const handleProfile = async () =>{
     }
   }
 
-}
+  }
 
-const upload = async () =>{
-  console.log('working');
-  let result = await fetch(
-    "http://localhost:5001/api/client/",
-    {
-      method: "put",
-      credencials: "include",
-      mode: "cors",
-      body: JSON.stringify({ image: profileImage }),
-      headers: {
-        "content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem('accessToken'),
-      },
-    }
-  );
-  result = await result.json();
-  console.log(result);
-  displayFunc(result.image)
-}
+  const upload = async () =>{
 
-function call(url){
-  profileImageFunc(url)
-}
+    
+    const formData = new FormData()
+    formData.append('file', profile)
+    formData.append('upload_preset', 'simephum')
 
-useEffect(()=>{
-  handleProfile()
-}, [])
+    Axios.post('https://api.cloudinary.com/v1_1/farm-management-system/image/upload', formData).then((response)=>{
+      console.log(response);
+      profileImageFunc(response.data.url)
+    })
+    // console.log('link:', cloudinary);
+
+
+    console.log('working');
+    let result = await fetch(
+      `http://localhost:5001/api/client/${id}`,
+      {
+        method: "put",
+        credencials: "include",
+        mode: "cors",
+        body: JSON.stringify({ image: profileImage }),
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem('accessToken'),
+        },
+      }
+    );
+    result = await result.json();
+    console.log(result);
+    displayFunc(result.image)
+    handleProfile()
+  }
+
+  // function call(profileFunc){
+  //   profileImageFunc(profileFunc)
+  // }
+
+
+
+  useEffect(()=>{
+    handleProfile()
+  }, [])
 
   return (
     <div className='AdminProfile'>
@@ -151,7 +171,7 @@ useEffect(()=>{
               <h5>{Email}</h5>
               <h5>{Phone}</h5>
               <h5 onClick={upload}>{Role}</h5>
-              <input type="file" onChange={(e)=> call(URL.createObjectURL(e.target.files[0])) } />
+              <input type="file" onChange={(e)=> profileFunc(e.target.files[0]) } />
             </div>
             <div className="img-div">
               <img src={display} alt="" />

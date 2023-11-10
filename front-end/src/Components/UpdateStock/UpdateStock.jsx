@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Data from './Data.json'
 import Input from '../ReuseComponent/Input'
 import './UpdateStock.css'
+import Axios from 'axios'
 
 import { useLocation } from 'react-router-dom'
 
@@ -36,60 +37,80 @@ const UpdateStock = () => {
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
+  // let [cloudinary, cloudinaryFunc] = useState(null)
   let stockId = useLocation()
-  console.log(stockId.state);
 
 
 
   const handleRegisterStock = async (e) =>{
-    e.preventDefault();
-    console.log(stockVerccineName);
-    let result = await fetch(
-      `http://localhost:5001/api/stock/${stockId.state._id}`,
-      {
-        method: "put",
-        credencials: "include",
-        mode: "cors",
-        body: JSON.stringify({
-          stockGroup,
-          stockImage,
-          stockAge,
-          stockHealthStatus,
-          stockHealthPercente,
-          stockWeight,
-          stockCurrentLocation,
-          stockVeterinarian,
-          stockColor,
 
-          stockVerccineName,
-          stockVerccineDueDate,
-          stockLastVeterinarianCheck,
-          stockLastVeterinarian,
-          stockLastDiagnosis
-        }),
-        headers: {
-          "content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem('accessToken'),
-        },
+    // const formData = new FormData()
+    // formData.append('file', stockImage)
+    // formData.append('upload_preset', 'simephum')
+
+    // if(stockImage){
+    //   Axios.post('https://api.cloudinary.com/v1_1/farm-management-system/image/upload', 
+    //   formData
+    //   ).then((response)=>{
+    //     console.log(response);
+    //     cloudinaryFunc(response.data.url)
+    //   })
+    // console.log(cloudinary);
+    // }
+    //   // how can i get the value of cloudinary here
+    // console.log(cloudinary);
+
+    // if(cloudinary){
+      e.preventDefault();
+      console.log(stockVerccineName);
+      let result = await fetch(
+        `http://localhost:5001/api/stock/${stockId.state._id}`,
+        {
+          method: "put",
+          credencials: "include",
+          mode: "cors",
+          body: JSON.stringify({
+            stockGroup,
+            stockImage,
+            stockAge,
+            stockHealthStatus,
+            stockHealthPercente,
+            stockWeight,
+            stockCurrentLocation,
+            stockVeterinarian,
+            stockColor,
+
+            stockVerccineName,
+            stockVerccineDueDate,
+            stockLastVeterinarianCheck,
+            stockLastVeterinarian,
+            stockLastDiagnosis
+          }),
+          headers: {
+            "content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem('accessToken'),
+          },
+        }
+      );
+      result = await result.json();
+      if(result.message){
+        backendResponseFunc(result.message)
+        alertFunc(false)
       }
-    );
-    result = await result.json();
-    if(result.message){
-      backendResponseFunc(result.message)
-      alertFunc(false)
-    }
-    if(result.updateStock){
-      backendResponseFunc(result.updateStock)
-      alertFunc(true)
-      // loading stop
-      setTimeout(() => {
-        loadinfFunc(false)
-        pupupFunc(true)
-      }, 5000);
-      pupupFunc(false)
-    }
-    console.log(result);
-    console.log(backendResponse);
+      if(result.updateStock){
+        backendResponseFunc(result.updateStock)
+        alertFunc(true)
+        // loading stop
+        setTimeout(() => {
+          loadinfFunc(false)
+          pupupFunc(true)
+        }, 5000);
+        pupupFunc(false)
+      }
+      console.log(result);
+      console.log(backendResponse);
+    // }
+
   }
   
     const inputs = Data.map((item) =>{
@@ -100,7 +121,7 @@ const UpdateStock = () => {
                   aria-describedby={item.aria_describedby}
                   placeholder={item.placeholder}
                   type={item.type}
-                  onChange={(e) => onChangeFunc((item.type === 'file'? URL.createObjectURL(e.target.files[0]) : e.target.value), item.onChange)}
+                  onChange={(e) => onChangeFunc((item.type === 'file'? e.target.files[0] : e.target.value), item.onChange)}
               />
             </Col>
         )

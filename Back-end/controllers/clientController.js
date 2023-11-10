@@ -65,8 +65,7 @@ const loginClient = asyncHandler( async (req, res) =>{
                 image: client.image
             }
         },
-        process.env.ACCESS_TOKEN_SECERT,
-        {expiresIn: '30min'}
+        process.env.ACCESS_TOKEN_SECERT
         )
 
         res.status(200).json({accessToken})
@@ -79,32 +78,16 @@ const loginClient = asyncHandler( async (req, res) =>{
 
 
 const uploadPicture = asyncHandler(async (req, res) => {
-    const { image } = req.body;
-
     const user = await clientModels.findById(req.user._id);
-
+    
     if (!user) {
         res.status(404);
         throw new Error('Unauthorized user')
     }
-
-    cloudinary.config({ 
-        cloud_name: 'farm-management-system', 
-        api_key: '118842453864288', 
-        api_secret: 'UBUdMMicO5qGilobsj4Res5JGFM',
-        secure: true
-    });
-
-    // Upload an image
-    let response
-    cloudinary.uploader.upload(`${image}`, (error, result) => {
-        if (error) {
-        console.error(error);
-        return;
-        }
-        console.log(result.secure_url);
-        response = result.secure_url
-    });
+    if(toString(req.user._id) !==  req.params.id){
+        res.status(400)
+        throw new Error("something sent wrong")
+    }
     const updateUser = await clientModels.findByIdAndUpdate(
         req.user._id,
         req.body,
