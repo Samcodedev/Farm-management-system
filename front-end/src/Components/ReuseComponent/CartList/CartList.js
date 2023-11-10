@@ -16,7 +16,7 @@ const CartList = () => {
     let [price, priceFunc] = useState()
     let [backendResponse, backendResponseFunc] = useState()
     const [CartAvailable, CartAvailableFunc] = useState(0)
-    let [totalAmount, totalAmountFunc] = useState()
+    let [totalAmount, totalAmountFunc] = useState(0)
 
     
   const [show, setShow] = useState(false);

@@ -94,7 +94,7 @@ function Navication() {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link><Link to='/'>Home</Link></Nav.Link>
-                  <Nav.Link style={{display: unValidate? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
+                  <Nav.Link style={{display: token? 'block' : 'none'}} onClick={profileRoute}>Dashboard</Nav.Link>
                   <Nav.Link><Link to='/Categories'>Available Stock</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate === false && isAdmin? 'block' : 'none'}} ><Link to='/DataTable'>Stock Data Table</Link></Nav.Link>
                   <Nav.Link style={{display: unValidate === false && isAdmin? 'block' : 'none'}} onClick={CreateStockRoute}>Create Stock</Nav.Link>
