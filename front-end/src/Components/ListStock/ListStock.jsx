@@ -10,6 +10,9 @@ import Alert from 'react-bootstrap/Alert'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+
+import {useNavigate} from 'react-router-dom'
+
 const ListStock = () => {
     const [loading, loadinfFunc] = useState(false)
     const [alert, alertFunc] = useState(NaN)
@@ -21,13 +24,15 @@ const ListStock = () => {
     const [stockReview, stockReviewFunc] = useState()
 
     const stockId = useLocation()
+    const navigate = useNavigate()
 
-    console.log(stockId);
+    // console.log(stockId);
 
     const ListStock = async (e) =>{
         e.preventDefault();
+        console.log(stockId.state);
         let result = await fetch(
-            `http://localhost:5001/api/sale/${stockId.state}`,
+            `http://localhost:5001/api/sale/${stockId.state._id}`,
             {
                 method: "post",
                 credencials: "include",
@@ -53,6 +58,7 @@ const ListStock = () => {
         if(result.success){
             backendResponseFunc(result.success)
             alertFunc(true)
+            navigate('/Categories')
             // loading stop
             setTimeout(() => {
               loadinfFunc(false)

@@ -56,7 +56,7 @@ const Login = () => {
       else if(parseJwt(result.accessToken).user.role === 'client'){
         userFunc('client')
       }
-        navigate('/AdminProfile', {state: users} )
+        navigate('/AdminProfile', {state: users})
 
       }
     if(result){

@@ -11,7 +11,8 @@ const DataTable = ({data}) => {
   setTimeout(() => {
     // const obj = Object.values(Object.keys(data))
     stockFunc(
-     (data? data : JSON.parse(savedData)).map((item) =>{
+     (data? data : JSON.parse(savedData)).slice(0)
+     .reverse().map((item) =>{
         return(
           <tr>
               <td>
@@ -23,7 +24,7 @@ const DataTable = ({data}) => {
               <td>{item.stockBreed}</td>
               <td>{item.stockGeder}</td>
               <td>{item.stockGroup}</td>
-              <td>{item.stockWeight}</td>
+              <td>{item.stockWeight}kg</td>
               <td>{item.stockCurrentLocation}</td>
               <td>{(item.updatedAt).split(':')[0]}</td>
               <td>{item.stockAge}</td>

@@ -25,12 +25,12 @@ const StockProfile = () => {
         }
       };
     //   console.log(parseJwt(token || validationToken));
-      if(parseJwt(token || validationToken).exp * 1000 > Date.now()){
-        userFunc(parseJwt(token || validationToken).user._id)
+      if(parseJwt(token).exp * 1000 > Date.now()){
+        userFunc(parseJwt(token).user._id)
         console.log('djdjdjjd');
       }
       else{
-        userFunc('invalidUser')
+        userFunc(parseJwt(token).user._id)
       }
     })
 
@@ -47,6 +47,9 @@ const StockProfile = () => {
         secondsFunc(time.getSeconds())
     }, 1000);
 
+    // console.log(data.userId, user);
+    // console.log(data.userId, user);
+
   return (
     <div className='StockProfile'>
         <div className="sub-StockProfile">
@@ -58,7 +61,7 @@ const StockProfile = () => {
                     <div className="text-div">
                         {/* <h4>Farmer: <span>Samuel Obanla</span></h4> */}
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                        <Link to='/UpdateStock' state={data}><button>Update Stock</button></Link>
+                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>Update Stock</button></Link>
                         <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>List Stock</button></Link>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import Alert from 'react-bootstrap/Alert'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // import { BsNutFill } from 'react-icons/bs';
+import {useNavigate} from 'react-router-dom'
 
 const CreateStock = () => {
   const [stockImage, stockimageFunc] = useState()
@@ -39,6 +40,7 @@ const CreateStock = () => {
   const [cloudinary, cloudinaryFunc] = useState()
 
 
+  const navigate = useNavigate()
 
 
 
@@ -99,6 +101,7 @@ const CreateStock = () => {
       if(result.stockImage){
         backendResponseFunc(result)
         alertFunc(true)
+        navigate('/AdminProfile')
         // loading stop
         setTimeout(() => {
           loadinfFunc(false)

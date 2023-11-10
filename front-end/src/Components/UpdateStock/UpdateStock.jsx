@@ -12,6 +12,9 @@ import Alert from 'react-bootstrap/Alert'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+
+import {useNavigate} from 'react-router-dom'
+
 const UpdateStock = () => {
   const [stockImage, stockimageFunc] = useState()
   // const [stockCategories, stockcategoriesFunc] = useState()
@@ -39,6 +42,7 @@ const UpdateStock = () => {
   const [backendResponse, backendResponseFunc] = useState()
   // let [cloudinary, cloudinaryFunc] = useState(null)
   let stockId = useLocation()
+  const navigate = useNavigate()
 
 
 
@@ -100,6 +104,7 @@ const UpdateStock = () => {
       if(result.updateStock){
         backendResponseFunc(result.updateStock)
         alertFunc(true)
+        navigate('/AdminProfile')
         // loading stop
         setTimeout(() => {
           loadinfFunc(false)
