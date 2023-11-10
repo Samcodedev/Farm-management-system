@@ -22,3 +22,10 @@
 .Check form .gap-2{
     margin: 10px 0 20px 0;
 }
+.Check form .user{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

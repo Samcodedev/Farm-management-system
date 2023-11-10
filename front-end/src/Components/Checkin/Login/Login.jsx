@@ -17,13 +17,25 @@ const Login = () => {
   const [pupup, pupupFunc] = useState(false)
   const [backendResponse, backendResponseFunc] = useState()
   const [users, userFunc] = useState()
+  const [login, loginFunc] = useState(null)
 
   const navigate = useNavigate()
+
+
+  function clickAdmin(){
+    loginFunc('admin')
+    console.log(login);
+  }
+
+  function clickClient(){
+    loginFunc('client')
+      console.log(login);
+  }
 
   const handleRegister = async (e) =>{
     e.preventDefault();
     let result = await fetch(
-      "http://localhost:5001/api/admin/login",
+      `http://localhost:5001/api/${login}/login`,
       {
         method: "post",
         credencials: "include",
@@ -110,6 +122,14 @@ const Login = () => {
     <div className='Check'>
       <form action='' onSubmit={handleRegister}>
         <h4>Farm management system</h4>
+        <div className="user">
+          <Button 
+          onClick={clickAdmin}
+          >Login as Admin</Button>
+          <Button 
+          onClick={clickClient}
+          >Login as User</Button>
+        </div>
         {inputs}
         <Link to='/ForgetPassword'>Forget Password</Link>
         <div className='d-grid gap-2'>
@@ -118,6 +138,7 @@ const Login = () => {
             size='lg' 
             onClick={loading_function}
             type='submit'
+            style={{display: login === null? 'none' : 'block'}}
           >
               {loading? 'Loading...': 'Login'}
           </Button>
