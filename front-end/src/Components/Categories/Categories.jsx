@@ -8,7 +8,7 @@ const Categories = () => {
 
   const handleRegister = async () =>{
     let result = await fetch(
-      "http://localhost:5001/api/stock/",
+      "http://localhost:5001/api/sale/",
       {
         method: "get",
         credencials: "include",

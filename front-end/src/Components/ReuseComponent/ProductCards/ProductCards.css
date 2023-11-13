@@ -1,7 +1,8 @@
 .ProductCards{
     width: 320px;
-    height: 490px;
+    height: 550px;
     border-radius: 10px;
+    margin-right: 20px;
     /* background-color: red; */
     /* border: 2.2px solid var(--gray); */
     cursor: pointer;
@@ -33,7 +34,7 @@
     position: relative;
     bottom: 0;
     left: 0;
-    padding: 15px 10px;
+    padding: 20px 20px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -61,7 +62,7 @@
 .ProductCards .details h5{
     color: var(--brandcolor);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 .ProductCards .details p{
     font-size: 13px;
@@ -73,7 +74,7 @@
     text-transform: capitalize;
 }
 .ProductCards .details h4{
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: rgb(212, 184, 1);
 }
 .ProductCards .details h4 s{

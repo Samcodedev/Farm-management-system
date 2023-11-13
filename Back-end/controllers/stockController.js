@@ -55,6 +55,11 @@ const registerStock = asyncHandler( async (req, res) =>{
     }
    
     if(req.user.role === 'farmer' || req.user.role === 'admin'){
+        const {
+            Name,
+            Email,
+            Phone
+        } = req.user
         
         const stock = await stockModel.create({
             stockCategories,
@@ -75,6 +80,11 @@ const registerStock = asyncHandler( async (req, res) =>{
 
             stockVeterinarian,
             stockColor,
+
+            farmerName: Name,
+            farmerEmail: Email,
+            farmerPhone: Phone,
+
             userId: req.user
         })
     

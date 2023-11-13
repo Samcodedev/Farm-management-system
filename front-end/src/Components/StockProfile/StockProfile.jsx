@@ -59,7 +59,7 @@ const StockProfile = () => {
                         <img src={farmer} alt="farmer" />
                     </div>
                     <div className="text-div">
-                        {/* <h4>Farmer: <span>Samuel Obanla</span></h4> */}
+                        <h4>Farmer: <span>{data.farmerName}</span></h4>
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
                         <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>Update Stock</button></Link>
                         <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>List Stock</button></Link>

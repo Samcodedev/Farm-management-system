@@ -105,12 +105,12 @@ function Navication() {
                     title="More options"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
-                    <NavDropdown.Item><Link to="/Login">LogIn</Link></NavDropdown.Item>
-                    <NavDropdown.Item to="#action4">
+                    <NavDropdown.Item style={{display: token? 'none' : 'block'}}><Link to="/Login">LogIn</Link></NavDropdown.Item>
+                    <NavDropdown.Item to="#action4" style={{display: token? 'none' : 'block'}}>
                       <Link to='/Register'>Register</Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Divider style={{display: unValidate? 'block' : 'none'}} />
-                    <NavDropdown.Item style={{display: unValidate? 'block' : 'none'}} href="#action5" onClick={logout}>
+                    <NavDropdown.Divider style={{display: token? 'block' : 'none'}} />
+                    <NavDropdown.Item style={{display: token? 'block' : 'none'}} href="#action5" onClick={logout}>
                       LogOut
                     </NavDropdown.Item>
                   </NavDropdown>

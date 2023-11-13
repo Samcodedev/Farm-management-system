@@ -1,41 +1,21 @@
 import React, {useEffect, useState} from 'react'
 import './CategoriesList.css'
 import ProductCards from '../../ReuseComponent/ProductCards/ProductCards'
-import Carousel from 'react-bootstrap/Carousel';
+import { ScrollingCarousel } from '@trendyol-js/react-carousel';
 
-const CategoriesList = () => {
+const CategoriesList = ({data}) => {
 
   const [backendResponse, backendResponseFunc] = useState()
   const [listedProduct, listedProductFunc] = useState()
   const savedStock = localStorage.getItem('listedstocks')
 
-  const handleRegister = async () =>{
-    let result = await fetch(
-      "http://localhost:5001/api/sale/",
-      {
-        method: "get",
-        credencials: "include",
-        mode: "cors",
-        headers: {
-          "content-Type": "application/json",
-        },
-      }
-    );
-    result = await result.json();
-    backendResponseFunc(result)
-    console.log(result)
-    console.log(backendResponse);
-  }
-
-  useEffect(()=>{
-    handleRegister()
-  },[])
 
   setTimeout(() => {
     listedProductFunc(
-      (backendResponse? backendResponse : JSON.parse(savedStock)).map((item)=>{
+      (data? data : JSON.parse(savedStock)).map((item)=>{
         return(
                   <ProductCards 
+                    key={item}
                     stockCategories={item.stockCategories}
                     stockBreed={item.stockBreed}
                     stockGroup={item.stockGroup}
@@ -60,17 +40,11 @@ const CategoriesList = () => {
   }, 1000);
 
   return (
-    <div className='CategoriesList'>
+    <div className='CategoriesList'  data-carousel>
       <div className="Categories-grouping">
-        <div className="Categories-cards">
-            {/* <Carousel controls={false}>
-              <Carousel.Item bsPrefix='carousel-item'> */}
-                <div className="scroll">
-                  {listedProduct}
-                </div>
-              {/* </Carousel.Item>
-            </Carousel> */}
-        </div>
+          <ScrollingCarousel show={2} slide={2} transition={0.5} useArrowKeys={true}>
+            {listedProduct}
+          </ScrollingCarousel>
       </div>
     </div>
   )

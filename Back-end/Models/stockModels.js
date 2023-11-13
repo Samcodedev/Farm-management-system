@@ -73,6 +73,18 @@ const Schema = mongoose.Schema({
     stockColor:{
         type: String,
         require: [true, 'Please add Stock stock color']
+    },
+    farmerName:{
+        type: String,
+        require: [true, 'please add farmer Name']
+    },
+    farmerEmail:{
+        type: String,
+        require: [true, 'please add farmer Email']
+    },
+    farmerPhone:{
+        type: Number,
+        require: [true, 'please add farmer Phone']
     }
 },
 {
