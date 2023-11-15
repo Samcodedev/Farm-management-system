@@ -15,7 +15,6 @@ const CategoriesList = ({data}) => {
       (data? data : JSON.parse(savedStock)).map((item)=>{
         return(
                   <ProductCards 
-                    key={item}
                     stockCategories={item.stockCategories}
                     stockBreed={item.stockBreed}
                     stockGroup={item.stockGroup}

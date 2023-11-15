@@ -20,6 +20,7 @@ app.use('/api/stock', require('./routes/stockRoute'))
 app.use('/api/sale', require('./routes/saleRoute'))
 app.use('/api/client', require('./routes/clientRoute'))
 app.use('/api/cart', require('./routes/cartRoute'))
+app.use('/api/picture', require('./routes/profileRouter'))
 app.use(handleError)
 
 app.listen(port, ()=>{

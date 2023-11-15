@@ -20,7 +20,7 @@
 .AdminProfile .sub-AdminProfile .details .profile{
     background-color: var(--brandcolor-light);
     width: 100%;
-    max-height: 200px;
+    max-height: 250px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -38,6 +38,29 @@
 }
 .AdminProfile .sub-AdminProfile .details .profile h5{
     font-size: 1rem;
+}
+.AdminProfile .sub-AdminProfile .details .profile .content form{
+    border: 1.5px solid var(--brandcolor-dark);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+}
+.AdminProfile .sub-AdminProfile .details .profile .content form .contain{
+    width: 100px;
+    height: 35px;
+    background-color: #fff;
+    overflow: hidden;
+    background-color: var(--brandcolor-light);
+    
+}
+.AdminProfile .sub-AdminProfile .details .profile .content form button{
+    background-color: var(--brandcolor-dark);
+    color: var(--brandcolor-light);
+    border: var(--brandcolor-dark);
+    padding: 5px 15px;
+    border-radius: 5px;
 }
 .AdminProfile .sub-AdminProfile .details .profile .img-div{
     width: 200px;
@@ -132,8 +155,13 @@
     }
     .AdminProfile .sub-AdminProfile .details .profile .content{
         text-align: center;
+        display: contents;
+        justify-content: center;
         width: 80%;
         margin-left: 0;
+    }
+    .AdminProfile .sub-AdminProfile .details .profile .content form{
+        align-items: center;
     }
     .AdminProfile .sub-AdminProfile .details .profile .img-div{
         margin-top: 20px;

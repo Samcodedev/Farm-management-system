@@ -11,24 +11,20 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const LineCharts = ({listed, create, amount, unlisted}) => {
+const LineCharts = ({listed, create, unlisted, cart, addQuality}) => {
 
   const data = [
       {
-        name: 'Listed stock',
-        Amount: listed,
+        name: `${create? 'Stock Created' : 'Total Quantity'}`,
+        Amount: `${create? create : addQuality}`,
       },
       {
-        name: 'Stock Created',
-        Amount: create,
+        name: `${listed? 'Listed stock' : 'Cart'}`,
+        Amount: `${listed? listed : cart}`,
       },
       {
-        name: 'Total Earned',
-        Amount: amount,
-      },
-      {
-        name: 'Listed Stock',
-        Amount: unlisted,
+        name: `${unlisted? 'Unlisted Stock' : 'Mean Quantity'}`,
+        Amount: `${unlisted? unlisted : addQuality/cart}`,
       }
     ];
 

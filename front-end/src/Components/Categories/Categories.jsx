@@ -33,7 +33,7 @@ const Categories = () => {
 
   useEffect(()=>{
     handleRegister()
-    console.log(backendResponse);
+    // console.log(backendResponse);
   },[])
 
   return (

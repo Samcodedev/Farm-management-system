@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useRef } from 'react'
 import './AdminProfile.css'
 import img from '../Assets/Farmer.jpg'
 import { MdAddChart } from 'react-icons/md'
 import { BsListCheck } from 'react-icons/bs'
 import { RiLineChartLine } from 'react-icons/ri'
-import { MdPlaylistRemove } from 'react-icons/md'
+import { MdPlaylistRemove, MdOutlineFileUpload } from 'react-icons/md'
 import Axios from 'axios'
 
 import { useLocation } from 'react-router-dom'
@@ -25,8 +25,8 @@ const [chartActive, chartActiveFunc] = useState(0)
 let [Name, NameFunc] = useState()
 let [Email, EmailFunc] = useState()
 let [Phone, PhoneFunc] = useState()
-let [Role, RoleFunc] = useState()
-let [id, idFunc] = useState()
+let [Role, RoleFunc] = useState({})
+let [ids, idFunc] = useState()
 const [stockCreated, stockCreatedFunc] = useState()
 const [stockListed, stockListedFunc] = useState()
 const [createdStock, createdStockFunc] = useState()
@@ -38,6 +38,26 @@ let [addPrice, addPriceFunc] = useState(0)
 let [profileImage, profileImageFunc] = useState()
 let [display, displayFunc] = useState()
 let [profile, profileFunc] = useState()
+const [postImage, setPostImage] = useState('')
+const inputRef = useRef(null);
+
+const profilePicture = async () =>{
+  let result = await fetch(
+    'http://localhost:5001/api/picture/',
+    {
+      method: "get",
+      credencials: "include",
+      mode: "cors",
+      headers: {
+        "content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem('accessToken'),
+      },
+    }
+  );
+  result = await result.json();
+  displayFunc(result.image)
+  console.log(result);
+}
 
 const handleProfile = async () =>{
 
@@ -77,18 +97,25 @@ const handleProfile = async () =>{
         }
       );
       result = await result.json();
-      let {Name, Email, Phone, role, stockCreated, listedStock, _id } = result
+      let {Name, Email, Phone, stockCreated, listedStock, _id } = result
       NameFunc(Name)
+      idFunc(_id)
       EmailFunc(Email)
       PhoneFunc(Phone)
-      RoleFunc(role)
-      idFunc(_id)
-      stockCreatedFunc(stockCreated.totalStock)
-      stockListedFunc(listedStock.totalListedStock)
-      createdStockFunc(stockCreated.stocksId)
+      RoleFunc(result)
+      if(stockCreated){
+        stockCreatedFunc(stockCreated.totalStock)
+        createdStockFunc(stockCreated.stocksId)
+      }
+      if(listedStock){
+        stockListedFunc(listedStock.totalListedStock)
+      }
+      
       console.log(result)
+      profilePicture()
     }
     else if(parseJwt(getToken).user.role === 'client'){
+      console.log('working');
       let result = await fetch(
         `http://localhost:5001/api/client/`,
         {
@@ -103,42 +130,78 @@ const handleProfile = async () =>{
       );
       result = await result.json();
       console.log(result);
-      let {Name, Email, Phone, role, cart, image } = result
+      let {Name, Email, Phone, cart, image } = result
       // quantityFunc(cart.cart.products)
       NameFunc(Name)
       EmailFunc(Email)
       PhoneFunc(Phone)
-      RoleFunc(role)
-      cartFunc(cart.cart.products.length)
-      add(cart.cart.products)
-      displayFunc(image)
+      RoleFunc(result)
+      if(cart.cart){
+        cartFunc(cart.cart.products.length)
+        add(cart.cart.products)
+      }
+      profilePicture()
     }
   }
 
   }
 
-  const upload = async () =>{
+  
 
-    
-    const formData = new FormData()
-    formData.append('file', profile)
-    formData.append('upload_preset', 'simephum')
+  const compressImage = () => {
+    const input = inputRef.current;
+    const originalImage = document.getElementById('originalImage');
+    const compressedImage = document.getElementById('compressedImage');
 
-    Axios.post('https://api.cloudinary.com/v1_1/farm-management-system/image/upload', formData).then((response)=>{
-      console.log(response);
-      profileImageFunc(response.data.url)
-    })
-    // console.log('link:', cloudinary);
+    const file = input.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          // Set the canvas size to the image size
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          // Draw the image onto the canvas
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+
+          // Get the compressed image as a data URL
+          const compressedDataURL = canvas.toDataURL('image/jpeg', 0.02); // Adjust quality as needed
+
+          // Display the original and compressed images
+          originalImage.src = e.target.result;
+          compressedImage.src = compressedDataURL;
+          setPostImage(compressedDataURL)
+          console.log(compressedDataURL);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
 
 
-    console.log('working');
+
+
+
+
+  const upload = async (e) =>{
+    e.preventDefault();
     let result = await fetch(
-      `http://localhost:5001/api/client/${id}`,
+      `http://localhost:5001/api/picture/${Role._id}`,
       {
-        method: "put",
+        method: "post",
         credencials: "include",
         mode: "cors",
-        body: JSON.stringify({ image: profileImage }),
+        body: JSON.stringify({ image: postImage}),
         headers: {
           "content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem('accessToken'),
@@ -151,15 +214,13 @@ const handleProfile = async () =>{
     handleProfile()
   }
 
-  // function call(profileFunc){
-  //   profileImageFunc(profileFunc)
-  // }
 
 
 
   useEffect(()=>{
     handleProfile()
   }, [])
+    console.log(Email);
 
   return (
     <div className='AdminProfile'>
@@ -170,8 +231,20 @@ const handleProfile = async () =>{
               <h2>{Name}</h2>
               <h5>{Email}</h5>
               <h5>{Phone}</h5>
-              <h5 onClick={upload}>{Role}</h5>
-              <input type="file" onChange={(e)=> profileFunc(e.target.files[0]) } />
+              <h5>{Role.role}</h5>
+              <form 
+                onSubmit={upload}
+              >
+                <div className="contain">
+                  <input 
+                     type="file" 
+                     accept="image/*" 
+                     ref={inputRef} 
+                     onChange={compressImage}
+                  />
+                </div>
+                <button type='submit'>Upload Image <MdOutlineFileUpload fontSize={25} /></button>
+              </form>
             </div>
             <div className="img-div">
               <img src={display} alt="" />
@@ -207,24 +280,16 @@ const handleProfile = async () =>{
                 backgroundColor: chartActive === 2? '#6bbb96' : 'var(--subBrand)'
               }}>
               <div className="icon">
-                <RiLineChartLine />
+                {
+                  addPrice?
+                  <RiLineChartLine />
+                  :
+                  <MdPlaylistRemove />
+                }
               </div>
               <div className="text">
-                <h5>₦{addPrice * addQuality}</h5>
-                <p>{addPrice? 'total cost' : 'Amount Earned'}</p>
-              </div>
-            </Col>
-            <Col className="cards" onClick={()=> chartActiveFunc(3)}
-              style={{
-                backgroundColor: chartActive === 3? '#6bbb96' : 'var(--subBrand)',
-                display: 'none'
-              }}>
-              <div className="icon">
-                <MdPlaylistRemove />
-              </div>
-              <div className="text">
-                <h5>5</h5>
-                <p>Stock motality</p>
+                <h5>{addPrice? `₦${addPrice * addQuality}` : stockCreated - stockListed}</h5>
+                <p>{addPrice? 'Total Cost' : 'Unlisted Stock'}</p>
               </div>
             </Col>
           </Row>
@@ -234,13 +299,24 @@ const handleProfile = async () =>{
             />
           </div>
         </div>
+        
+        <div>
+          {/* <input type="file" accept="image/*" ref={inputRef} onChange={compressImage} />
+          <br /> */}
+          <img id="originalImage" alt="Original Image" style={{ display: 'none' }} />
+          <br />
+          <img id="compressedImage" alt="Compressed Image" style={{ display: 'none' }} />
+        </div>
         <div className="chat">
-              <LineCharts 
-                listed={stockListed}
-                create={stockCreated}
-                amount={addPrice * addQuality}
-                unlisted={stockCreated - stockListed}
-              />
+          <LineCharts 
+            listed={stockListed}
+            create={stockCreated}
+            unlisted={stockCreated - stockListed}
+
+            cart={cart}
+            addQuality={addQuality}
+          /> 
+              
         </div>
       </div>
     </div>

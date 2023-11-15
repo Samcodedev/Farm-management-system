@@ -78,16 +78,19 @@ const loginClient = asyncHandler( async (req, res) =>{
 
 
 const uploadPicture = asyncHandler(async (req, res) => {
-    const user = await clientModels.findById(req.user._id);
+    const user = await clientModels.findById(req.params.id);
+    console.log('working 1');
     
     if (!user) {
         res.status(404);
         throw new Error('Unauthorized user')
     }
-    if(toString(req.user._id) !==  req.params.id){
+    console.log('working 2');
+    if(req.user._id.toString() !==  req.params.id){
         res.status(400)
-        throw new Error("something sent wrong")
+        throw new Error("something went wrong")
     }
+    console.log('working 3');
     const updateUser = await clientModels.findByIdAndUpdate(
         req.user._id,
         req.body,
@@ -117,8 +120,8 @@ const getClient = asyncHandler( async (req, res) =>{
             role,
             image,
             cart: {
-                totalCart: cart.length,
-                cart: cart
+                totalCart: cart? cart.length : 0,
+                cart: cart? cart : null
             }
         })
     }
