@@ -8,15 +8,18 @@ import {RxUpdate} from 'react-icons/rx'
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/esm/Table'
 import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 
 const CartList = () => {
     let [productId, productIdFunc] = useState()
     let [quantity, quantityFunc] = useState()
     let [name, nameFunc] = useState()
     let [price, priceFunc] = useState()
-    let [backendResponse, backendResponseFunc] = useState()
+    let [backendResponse, backendResponseFunc] = useState(0)
     const [CartAvailable, CartAvailableFunc] = useState(0)
     let [totalAmount, totalAmountFunc] = useState(0)
+    const [alertShow, alertSetShow] = useState(null)
+    let [alertMessage, alertMessageFunc] = useState(false)
 
     
   const [show, setShow] = useState(false);
@@ -39,14 +42,15 @@ const CartList = () => {
           );
           result = await result.json();
           CartAvailableFunc(result.products)
-        // backendDataFunc(result)
+        result.products.map((item)=>{
+            totalAmountFunc(totalAmount + item.price)
+        })
         backendResponseFunc( (result.products || null).map((item, index) =>{
-          totalAmountFunc(totalAmount + (item.price * item.quantity))
             return(
                 <tr>
                     <td>
                         <div className='flex'>
-                            <img src={img} alt='product-img' />
+                            {/* <img src={img} alt='product-img' /> */}
                             <div className='details'>
                                 <h4>{item.name}</h4>
                                 <h5>{index}</h5>
@@ -56,8 +60,8 @@ const CartList = () => {
                     <td>
                         <input type='number' placeholder={item.quantity} onChange={(e) => update((e.target.value), index)} />
                     </td>
-                    <td><p>${item.price}</p></td>
-                    <td><p>${item.price * item.quantity}</p></td>
+                    <td><p>₦{item.price}</p></td>
+                    <td><p>₦{item.price * item.quantity}</p></td>
                     <td>
                         <Button variant="danger" onClick={delCart}>remove <MdOutlineDeleteForever fontSize={23} /> </Button><br/>
                         <Button variant="warning" onClick={addCart}>update <RxUpdate fontSize={23} /> </Button>
@@ -102,6 +106,8 @@ const CartList = () => {
         )
         result = await result.json()
         console.log(result);
+        alertSetShow(true)
+        alertMessageFunc(true)
         cart()
     }
 
@@ -123,6 +129,8 @@ const CartList = () => {
         )
         result = await result.json()
         console.log(result);
+        alertSetShow(false)
+        alertMessageFunc(true)
         cart()
     }
     
@@ -160,6 +168,12 @@ const CartList = () => {
                 {backendResponse === null? 'nothing in your cart' : backendResponse}
             </tbody>
         </Table>
+        <Alert style={{display: alertMessage? 'block' : 'none'}} variant='success' onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Hello </Alert.Heading>
+            <p>
+            {alertShow? 'stock quality as been updated successfully' : 'stock as been successfully deleted from cart'}
+            </p>
+        </Alert>
 
 
         <Modal

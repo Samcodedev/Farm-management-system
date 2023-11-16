@@ -27,6 +27,7 @@ const StockProfile = () => {
     const [stockReview, stockReviewFunc] = useState()
     const [backendResponse, backendResponseFunc] = useState({})
     const [pupUp, pupUpFunc] = useState(false)
+    const [farmerImage, farmerImageFunc] = useState()
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -61,6 +62,31 @@ const StockProfile = () => {
         minutesFunc(time.getMinutes())
         secondsFunc(time.getSeconds())
     }, 1000);
+
+
+
+
+    const farmerPicture = async (e) =>{
+        let result = await fetch(
+            `http://localhost:5001/api/picture`,
+            {
+                method: "get",
+                credencials: "include",
+                mode: "cors",
+                headers: {
+                    "content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem('accessToken'),
+                },
+            }
+        )
+        result = await result.json()
+        farmerImageFunc(result.image)
+    }
+
+
+    useEffect(()=>{
+        farmerPicture()
+    })
 
 
 
@@ -104,7 +130,7 @@ const StockProfile = () => {
             <div className="farmer">
                 <div className="details">
                     <div className="img-div">
-                        <img src={farmer} alt="farmer" />
+                        <img src={farmerImage || farmer} alt="farmer" />
                     </div>
                     <div className="text-div">
                         
@@ -113,8 +139,8 @@ const StockProfile = () => {
                 </Button> */}
                         <h4>Farmer: <span>{data.farmerName}</span></h4>
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><Button  variant="primary">Update Stock</Button></Link>
-                        <Button style={{display: data.userId === user? 'block' : 'none' }} onClick={handleShow}>List Stock</Button>
+                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><Button style={{color: 'var(--brandcolor-dark)'}}  variant="primary">Update Stock</Button></Link>
+                        <Button style={{display: data.userId === user? 'block' : 'none', color: 'var(--brandcolor-dark)' }} onClick={handleShow}>List Stock</Button>
                     </div>
                 </div>
                 <div className="weather">
@@ -131,7 +157,7 @@ const StockProfile = () => {
             </div>
             <div className="stock">
                 <div className="img-div">
-                    <img src={data.stockImage} alt="stock" />
+                    <img src={data.image || data.stockImage} alt="stock" />
                 </div>
                 <div className="text-div">
                     <div className="box">

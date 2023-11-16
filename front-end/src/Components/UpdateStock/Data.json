@@ -2,13 +2,6 @@
     {
         "area_label": "Default",
         "aria_describedby": "inputGroup-sizing-default",
-        "placeholder": "upload stock image",
-        "type": "file",
-        "onChange": "stockimage"
-    },
-    {
-        "area_label": "Default",
-        "aria_describedby": "inputGroup-sizing-default",
         "placeholder": "Stock group",
         "type": "text",
         "onChange": "stockgroup"

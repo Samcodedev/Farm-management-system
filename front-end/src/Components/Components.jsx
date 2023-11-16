@@ -15,6 +15,7 @@ import AdminProfile from './AdminProfile/AdminProfile'
 import StockDataPage from './StockDataPage/StockDataPage'
 import StockProfile from './StockProfile/StockProfile'
 import ListStock from './ListStock/ListStock'
+import FarmRegister from './Checkin/Admin/FarmRegister'
 
 const Components = () => {
   return (
@@ -35,6 +36,7 @@ const Components = () => {
             <Route path='/DataTable' element={<StockDataPage />} />
             <Route path='/StockProfile' element={<StockProfile />} />
             <Route path='/ListStock' element={<ListStock />} />
+            <Route path='/1234567890' element={<FarmRegister />} />
         </Routes>
     </Router>
   )

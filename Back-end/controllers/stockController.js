@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const stockModel = require('../Models/stockModels')
 const userModels = require('../Models/userModels')
 const fs = require("fs")
+const stockProfileModel = require('../Models/stockProfileModel')
 
 
 // Register a new stock
@@ -13,6 +14,7 @@ const registerStock = asyncHandler( async (req, res) =>{
         stockCategories,
         stockBreed,
         stockGroup,
+        stockImage,
         stockAge,
         stockHealthStatus,
         stockHealthPercente,
@@ -33,6 +35,7 @@ const registerStock = asyncHandler( async (req, res) =>{
         !stockCategories ||
         !stockBreed ||
         !stockGroup ||
+        !stockImage||
         !stockAge ||
         !stockHealthStatus ||
         !stockHealthPercente ||
@@ -62,6 +65,7 @@ const registerStock = asyncHandler( async (req, res) =>{
             stockCategories,
             stockBreed,
             stockGroup,
+            stockImage,
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -83,6 +87,8 @@ const registerStock = asyncHandler( async (req, res) =>{
 
             userId: req.user
         })
+
+        const image = await stockProfileModel.findOne({stockId: stock._id})
     
         if(stock){
             res.status(200).json({
