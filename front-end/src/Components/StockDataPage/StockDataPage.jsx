@@ -8,6 +8,25 @@ const StockDataPage = () => {
   let [lists, listsFunc] = useState()
 
   const [backendResponse, backendResponseFunc] = useState()
+  let [display, displayFunc] = useState()
+
+  const profilePicture = async () =>{
+    let result = await fetch(
+      `http://localhost:5001/api/picture/`,
+      {
+        method: "get",
+        credencials: "include",
+        mode: "cors",
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem('accessToken'),
+        },
+      }
+    );
+    result = await result.json();
+    displayFunc(result.image)
+    console.log(result);
+  }
 
   const handleRegister = async () =>{
     let result = await fetch(
@@ -36,6 +55,7 @@ const StockDataPage = () => {
 
   useEffect(()=>{
     handleRegister()
+    profilePicture()
   },[])
 
   return (

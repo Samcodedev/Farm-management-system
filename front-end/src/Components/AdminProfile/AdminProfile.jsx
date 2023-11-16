@@ -35,9 +35,9 @@ let getToken = localStorage.getItem('accessToken')
 // let [quantity, quantityFunc] = useState()
 let [addQuality, addQualityFunc] = useState(0)
 let [addPrice, addPriceFunc] = useState(0)
-let [profileImage, profileImageFunc] = useState()
+// let [profileImage, profileImageFunc] = useState()
 let [display, displayFunc] = useState()
-let [profile, profileFunc] = useState()
+// let [profile, profileFunc] = useState()
 const [postImage, setPostImage] = useState('')
 const inputRef = useRef(null);
 
@@ -220,7 +220,6 @@ const handleProfile = async () =>{
   useEffect(()=>{
     handleProfile()
   }, [])
-    console.log(Email);
 
   return (
     <div className='AdminProfile'>
@@ -242,6 +241,7 @@ const handleProfile = async () =>{
                      ref={inputRef} 
                      onChange={compressImage}
                   />
+                  
                 </div>
                 <button type='submit'>Upload Image <MdOutlineFileUpload fontSize={25} /></button>
               </form>

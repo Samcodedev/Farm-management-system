@@ -7,6 +7,10 @@ import farmer from '../Assets/download.jpg'
 
 // import Table from 'react-bootstrap/esm/Table'
 import { useLocation, Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 
 const StockProfile = () => {
     const data = useLocation().state
@@ -15,6 +19,17 @@ const StockProfile = () => {
     let token = localStorage.getItem('accessToken')
     let validationToken = localStorage.getItem('validationToken')
     let [user, userFunc] = useState()
+    const [show, setShow] = useState(false);
+
+    
+    const [stockPrice, stockPriceFunc] = useState()
+    const [stockDescription, stockDescriptionFunc] = useState()
+    const [stockReview, stockReviewFunc] = useState()
+    const [backendResponse, backendResponseFunc] = useState({})
+    const [pupUp, pupUpFunc] = useState(false)
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(()=>{
         const parseJwt = (token) => {
@@ -47,6 +62,39 @@ const StockProfile = () => {
         secondsFunc(time.getSeconds())
     }, 1000);
 
+
+
+    
+    const ListStock = async (e) =>{
+        e.preventDefault();
+        let result = await fetch(
+            `http://localhost:5001/api/sale/${data._id}`,
+            {
+                method: "post",
+                credencials: "include",
+                mode: "cors",
+                body: JSON.stringify({
+                    stockPrice,
+                    stockReview,
+                    stockDescription
+                }),
+                headers: {
+                  "content-Type": "application/json",
+                  Authorization: "Bearer " + localStorage.getItem('accessToken'),
+                }
+            }
+        )
+        result = await result.json()
+        if(result.success){
+            backendResponseFunc(result)
+            pupUpFunc(true)
+        }
+        else{
+            backendResponseFunc(result)
+            pupUpFunc(true)
+        }
+    }
+
     // console.log(data.userId, user);
     // console.log(data.userId, user);
 
@@ -59,10 +107,14 @@ const StockProfile = () => {
                         <img src={farmer} alt="farmer" />
                     </div>
                     <div className="text-div">
+                        
+                {/* <Button variant="primary" onClick={handleShow}>
+                    Launch demo modal
+                </Button> */}
                         <h4>Farmer: <span>{data.farmerName}</span></h4>
                         <h4>Veterinarian: <span>{data.stockVeterinarian}</span></h4>
-                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>Update Stock</button></Link>
-                        <Link to='/ListStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><button>List Stock</button></Link>
+                        <Link to='/UpdateStock' style={{display: data.userId === user? 'block' : 'none' }} state={data}><Button  variant="primary">Update Stock</Button></Link>
+                        <Button style={{display: data.userId === user? 'block' : 'none' }} onClick={handleShow}>List Stock</Button>
                     </div>
                 </div>
                 <div className="weather">
@@ -128,6 +180,55 @@ const StockProfile = () => {
                     </div>
                 </div>
             </div>
+
+            <>
+                <Modal show={show} onHide={handleClose} centered size="lg">
+                    <Modal.Header closeButton>
+                    <Modal.Title>List stock for sale</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form onSubmit={ListStock}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Listed price</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="Price in ₦"
+                            autoFocus
+                            onChange={(e) => stockPriceFunc(e.target.value)}
+                        />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                        <Form.Label>Rating</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="rating 0 - 5"
+                            onChange={(e) => stockReviewFunc(e.target.value)}
+                        />
+                        </Form.Group>
+                        <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                        onChange={(e) => stockDescriptionFunc(e.target.value)}
+                        >
+                        <Form.Label>Stock description</Form.Label>
+                        <Form.Control as="textarea" rows={3} />
+                        </Form.Group>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="success" type='submit'>
+                                Confirm
+                            </Button>
+                        </Modal.Footer>
+                    </Form>
+                    <Alert style={{display: pupUp? 'block' : 'none'}} variant={backendResponse.success? 'success' : 'warning'}>
+                        Stock listed successfully
+                        {backendResponse? 'stock listed successfully' : `${backendResponse.message}`}
+                    </Alert>
+                </Modal.Body>
+            </Modal>
+            </>
         </div>
     </div>
   )

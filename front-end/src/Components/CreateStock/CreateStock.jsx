@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useRef } from 'react'
 import Data from './Data.json'
 import Input from '../ReuseComponent/Input'
 import './CreateStock.css'
-import Axios from 'axios'
 
 //bootstrap import
 import Button from 'react-bootstrap/Button';
@@ -36,29 +35,80 @@ const CreateStock = () => {
   const [loading, loadinfFunc] = useState(false)
   const [alert, alertFunc] = useState(NaN)
   const [pupup, pupupFunc] = useState(false)
-  const [backendResponse, backendResponseFunc] = useState()
-  const [cloudinary, cloudinaryFunc] = useState()
+  const [backendResponse, backendResponseFunc] = useState({})
+  const inputRef = useRef(null);
+  const [postImage, setPostImage] = useState('')
 
 
   const navigate = useNavigate()
+  
+
+    const compressImage = () => {
+      const input = inputRef.current;
+      const originalImage = document.getElementById('originalImage');
+      const compressedImage = document.getElementById('compressedImage');
+  
+      const file = input.files[0];
+  
+      if (file) {
+        const reader = new FileReader();
+  
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target.result;
+  
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+  
+            // Set the canvas size to the image size
+            canvas.width = img.width;
+            canvas.height = img.height;
+  
+            // Draw the image onto the canvas
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+  
+            // Get the compressed image as a data URL
+            const compressedDataURL = canvas.toDataURL('image/jpeg', 0.1); // Adjust quality as needed
+  
+            // Display the original and compressed images
+            originalImage.src = e.target.result;
+            compressedImage.src = compressedDataURL;
+            setPostImage(compressedDataURL)
+            console.log(compressedDataURL);
+          };
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    };
+  
+  
+  
+    const upload = async (e) =>{
+      // console.log(backendResponse._id);
+      let result = await fetch(
+        `http://localhost:5001/api/stockPicture/654de9b9cb28b2cf3cec20a5`,
+        {
+          method: "post",
+          credencials: "include",
+          mode: "cors",
+          body: JSON.stringify({ image: postImage}),
+          headers: {
+            "content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem('accessToken'),
+          },
+        }
+      );
+      result = await result.json();
+      console.log(result);
+      // displayFunc(result.image)
+      handleProfile()
+    }
 
 
 
-  const handleRegisterStock = async (e) =>{
-    e.preventDefault();
-    console.log(stockImage);
-
-    const formData = new FormData()
-    formData.append('file', stockImage)
-    formData.append('upload_preset', 'simephum')
-
-    Axios.post('https://api.cloudinary.com/v1_1/farm-management-system/image/upload', formData).then((response)=>{
-      console.log(response);
-      cloudinaryFunc(response.data.url)
-    })
-    console.log('link:', cloudinary);
-
-    if(cloudinary){
+    const handleRegisterStock = async (e) =>{
       e.preventDefault();
       console.log(stockVerccineName);
       let result = await fetch(
@@ -71,7 +121,6 @@ const CreateStock = () => {
             stockCategories,
             stockBreed,
             stockGroup,
-            stockImage: cloudinary,
             stockAge,
             stockHealthStatus,
             stockHealthPercente,
@@ -111,8 +160,6 @@ const CreateStock = () => {
       }
       console.log(result);
     }
-
-  }
   
     const inputs = Data.map((item) =>{
         return(
@@ -205,9 +252,20 @@ const CreateStock = () => {
     <div className='CreateStock'>
       <div className="sub-CreateStock">
         <form action="" className='g-col-2' onSubmit={handleRegisterStock} >
-          <h4>create stock</h4>
+          <h4 onClick={upload}>create stock</h4>
             <img src={stockImage} alt="" style={{display: stockImage? 'block' : 'none'}} />
             <Row>
+              <Col xs={6} md={4}>
+                <input 
+                    // aria-label='Default'
+                    // aria-describedby="inputGroup-sizing-default"
+                    // placeholder="upload stock image"
+                    type="file"
+                    accept="image/*"
+                    ref={inputRef} 
+                    onChange={compressImage}
+                />
+              </Col>
               {inputs}
             </Row>
             <div className='d-grid gap-2'>
@@ -237,6 +295,13 @@ const CreateStock = () => {
         }
         </form>
       </div>
+        <div>
+          {/* <input type="file" accept="image/*" ref={inputRef} onChange={compressImage} />
+          <br /> */}
+          <img id="originalImage" alt="Original Image" style={{ display: 'none' }} />
+          <br />
+          <img id="compressedImage" alt="Compressed Image" style={{ display: 'none' }} />
+        </div>
     </div>
   )
 }
