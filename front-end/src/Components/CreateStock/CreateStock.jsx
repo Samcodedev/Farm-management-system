@@ -85,8 +85,6 @@ const CreateStock = () => {
       }
     };
   
-  
-  
     // const upload = async (e) =>{
     //   // console.log(backendResponse._id);
     //   let result = await fetch(
@@ -107,7 +105,6 @@ const CreateStock = () => {
     //   // displayFunc(result.image)
     //   handleProfile()
     // }
-
 
     const handleRegisterStock = async (e) =>{
       e.preventDefault();

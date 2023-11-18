@@ -32,6 +32,50 @@
     width: 50%;
     margin-left: 50px;
 }
+  
+  .AdminProfile .sub-AdminProfile .details .profile .content .drop-container:hover .drop-title,
+  .AdminProfile .sub-AdminProfile .details .profile .content .drop-container.drag-active .drop-title {
+    color: #222;
+  }
+  
+  .AdminProfile .sub-AdminProfile .details .profile .content .drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+  }
+  
+  .AdminProfile .sub-AdminProfile .details .profile .content input[type=file] {
+    width: 300px;
+    max-width: 100%;
+    color: var(--brandcolor-dark);
+    padding: 5px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--brandcolor-dark);
+    cursor: pointer;
+  }
+  
+  .AdminProfile .sub-AdminProfile .details .profile .content input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--brandcolor-dark);
+    padding: 2px 20px;
+    border-radius: 10px;
+    color: var(--brandcolor-light);
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    height: 45px;
+  }
+  
+  .AdminProfile .sub-AdminProfile .details .profile .content input[type=file]::file-selector-button:hover {
+    background: var(--brandcolor-dark);
+  }
+
+
+
+
 .AdminProfile .sub-AdminProfile .details .profile h2{
     font-size: 2rem;
     font-weight: 700;
@@ -40,10 +84,7 @@
     font-size: 1rem;
 }
 .AdminProfile .sub-AdminProfile .details .profile .content form{
-    border: 1.5px solid var(--brandcolor-dark);
     width: fit-content;
-    padding: 10px;
-    border-radius: 5px;
     display: flex;
     gap: 10px;
 }
@@ -59,7 +100,7 @@
     background-color: var(--brandcolor-dark);
     color: var(--brandcolor-light);
     border: var(--brandcolor-dark);
-    padding: 5px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
 }
 .AdminProfile .sub-AdminProfile .details .profile .img-div{
@@ -71,7 +112,7 @@
     background-color: aqua;
     border: 5px solid var(--brandcolor-dark);
     border-radius: 10px;
-    margin-top: 120px;
+    margin-top: 150px;
     margin-right: 50px;
     overflow: hidden;
     z-index: 3;

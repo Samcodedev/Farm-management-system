@@ -186,14 +186,14 @@ const CartList = () => {
             <Modal.Title>Payment Check Out</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Total cost: ₦{totalAmount}  <br />
+            Total lists: {(CartAvailable || [1,2]).map((item) => {return  <small>₦{item.price * item.quantity}, </small>})}  <br />
                 click "MAKE PAYMENT" to proceed.
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
                 Close
             </Button>
-            <a href='https://sandbox-flw-web-v3.herokuapp.com/pay/zaow3swsit8g'><Button variant="primary">Make payment</Button></a>
+            <a href='https://sandbox-flw-web-v3.herokuapp.com/pay/e8iuzkfgn9qx'><Button variant="primary">Make payment</Button></a>
             
             </Modal.Footer>
         </Modal>

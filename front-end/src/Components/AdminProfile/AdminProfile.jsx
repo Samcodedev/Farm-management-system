@@ -32,14 +32,12 @@ const [stockListed, stockListedFunc] = useState()
 const [createdStock, createdStockFunc] = useState()
 const [cart, cartFunc] = useState()
 let getToken = localStorage.getItem('accessToken')
-// let [quantity, quantityFunc] = useState()
 let [addQuality, addQualityFunc] = useState(0)
 let [addPrice, addPriceFunc] = useState(0)
-// let [profileImage, profileImageFunc] = useState()
 let [display, displayFunc] = useState()
-// let [profile, profileFunc] = useState()
 const [postImage, setPostImage] = useState('')
 const inputRef = useRef(null);
+let [getInput, getInputFunc] = useState(true)
 
 const profilePicture = async () =>{
   let result = await fetch(
@@ -156,6 +154,7 @@ const handleProfile = async () =>{
     const file = input.files[0];
 
     if (file) {
+      getInputFunc(false)
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -212,6 +211,7 @@ const handleProfile = async () =>{
     console.log(result);
     displayFunc(result.image)
     handleProfile()
+    getInputFunc(true)
   }
 
 
@@ -234,16 +234,17 @@ const handleProfile = async () =>{
               <form 
                 onSubmit={upload}
               >
-                <div className="contain">
+                <label for="images" class="drop-container" id="dropcontainer" style={{display: getInput? 'block' : 'none'}}>
                   <input 
-                     type="file" 
-                     accept="image/*" 
-                     ref={inputRef} 
-                     onChange={compressImage}
+                    type="file" 
+                    id="images" 
+                    accept="image/*" 
+                    ref={inputRef} 
+                    onChange={compressImage}
+                    required 
                   />
-                  
-                </div>
-                <button type='submit'>Upload Image <MdOutlineFileUpload fontSize={25} /></button>
+                </label>
+                <button style={{display: getInput? 'none' : 'block'}} type='submit'>Upload Image <MdOutlineFileUpload fontSize={25} /></button>
               </form>
             </div>
             <div className="img-div">
