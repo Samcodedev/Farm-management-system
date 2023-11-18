@@ -6,6 +6,9 @@ const ProfileModel = require('../Models/ProfileModel')
 const savePicture = asyncHandler( async (req, res) =>{
     const client = await clientModels.findById(req.params.id)
     const user = await userModels.findById(req.params.id)
+    const {
+        image
+    } = req.body
 
     console.log('working 1');
     if(!client && !user){
@@ -14,8 +17,15 @@ const savePicture = asyncHandler( async (req, res) =>{
     }
     const checkUser = await ProfileModel.findOne({userId: req.user._id})
     if(checkUser){
-        res.status(404)
-        throw new Error('You already have a profile picture')
+        const updateImage = await ProfileModel.findOneAndUpdate(
+            {userId: req.user._id},
+            req.body,
+            {
+                new: true
+            }
+        )
+        res.status(200).json(updateImage)
+        // throw new Error('You already have a profile picture')
     }
     console.log('working 2');
     if(req.user._id.toString() !==  req.params.id){
@@ -23,9 +33,6 @@ const savePicture = asyncHandler( async (req, res) =>{
         throw new Error("something sent wrong")
     }
     console.log('working 3');
-    const {
-        image
-    } = req.body
     
     
     console.log('working 4');
